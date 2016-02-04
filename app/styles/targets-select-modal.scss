@@ -1,0 +1,19 @@
+.modal-body-container {
+  max-height: 500px;
+  overflow: scroll;
+}
+.target-display {
+  display: table-cell;
+  /*float: none;*/
+  margin-bottom: 20px;
+  border-left: 1px solid #ddd;
+}
+.target-desc {
+  font-weight: normal;
+  /*line-height: 1;*/
+  /*color: #a9a9a9;*/
+}
+.target-id {
+  color: #a9a9a9;
+  float: right !important;
+}

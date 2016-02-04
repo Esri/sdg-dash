@@ -1,0 +1,26 @@
+<div class="row selector-row" style="background-color:rgba({{model.colorRgb}}, 0.75);">
+  <div class="col-xs-1">
+    <img class="glyph-sdg-logo" src="images/sdg/main-logo-white40x40.png">
+  </div>
+  <div class="col-xs-2 country-select-container">
+    {{sdg-select-box model=model changeSdg=(action 'changeSdg') target=this }}
+  </div>
+  <div class="col-xs-1">
+    <span class="glyphicon glyphicon-globe glyph-globe-select" aria-hidden="true"></span>
+  </div>
+  <div class="col-xs-2 country-select-container">
+    {{country-select-box model=model goToCountry="goToCountry"}}
+  </div>
+  <div class="col-xs-1">
+    <span class="glyphicon glyphicon-map-marker glyph-globe-select" aria-hidden="true"></span>
+  </div>
+  <div class="col-xs-2 country-select-container">
+    {{geo-levels-select-box model=model goToGeoLevel="goToGeoLevel" }}
+  </div>
+  <div class="col-xs-1">
+    <span class="glyphicon glyphicon-record glyph-globe-select" aria-hidden="true"></span>
+  </div>
+  <div class="col-xs-2 country-select-container">
+    {{targets-select-button model=model }}
+  </div>
+</div>

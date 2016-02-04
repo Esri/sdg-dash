@@ -1,0 +1,18 @@
+<select id="target-selector-box" class="target-selectpicker" data-live-search="true">
+  {{#each model.targets as |target| }}
+    <option value="">{{ target.title }}</option>
+  {{/each}}
+</select>
+<!-- <div class="dropdown dd-sel clearfix">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Select a Target
+  <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      {{#each model.targets as |target| }}
+        <li>
+          <a href="#">{{ target.title }}</a>
+        </li>
+      {{/each}}
+  </ul>
+</div> -->

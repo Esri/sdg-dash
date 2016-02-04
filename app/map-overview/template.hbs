@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row pad-bottom-20">
+    {{#link-to 'landing' class="btn btn-default btn-xs" tagName="button"}} 
+      <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Back
+    {{/link-to}}
+  </div>
+  <div class="row pad-bottom-20">
+    <div class="col-xs-7 col-xs-offset-3">
+      {{ input class="form-control search-box" placeholder="Search"}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-body no-padding">
+        {{esri-map}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+/* Now we load calcite variables as overrides*/
+@import 'calcite-bootstrap';
+/* set the output folder for fonts */
+$icon-font-path: './fonts/';
+@import 'bootstrap';
+
+/* font awesome */
+$fa-font-path: './fonts/';
+@import 'font-awesome';
+
+@import 'partials/header-nav-right';
+
+@import 'landing';
+@import 'sdg-dash';
+@import 'sdg';
+@import 'country-select-box';
+@import 'sdg-status';
+@import 'sdg-targets-indicators';
+@import 'esri-map';
+@import 'target-select-box';
+@import 'targets-select-modal';
+@import 'geo-levels-select-box';
+@import 'sdg-button-colors-overrides';
+
+[data-ember-action] {
+  cursor: pointer;
+}
+
+hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.no-padding {
+  padding: 0;
+}
+.padding-5 {
+  padding: 5px;
+}
+.pad-top-5 {
+  padding-top: 5px;
+}
+.pad-top-10 {
+  padding-top: 10px;
+}
+.pad-top-20 {
+  padding-top: 20px;
+}
+
+.pad-top-50 {
+  padding-top: 50px;
+}
+.pad-right-50 {
+  padding-right: 50px;
+}
+.pad-left-50 {
+  padding-left: 50px;
+}
+
+.pad-bottom-10 {
+  padding-bottom: 10px;
+}
+.pad-bottom-20 {
+  padding-bottom: 20px;
+}
+
+.marg-bottom-50 {
+  margin-bottom: 50px;
+}
+.vcenter {
+  display: table-cell;
+  vertical-align: middle;
+  float: none;
+}
+
+.master {
+  /*margin-top: 50px;*/
+}
+
+.sign-in {
+  margin-top: 200px;
+}
+
+.map-container {
+
+}
+.esri-map-component {
+  height: 550px;
+}
+
+.neg-space {
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+}
+
+/*nav bar*/
+.top-header {
+ /* height: 80px;
+  padding-top: 10px;*/
+}
+.navbar-brand {
+  padding: 5px 15px;
+}
+.navbar-header {
+  margin-left: -15px;
+}
+.brand-logo {
+  height: 60px;
+  width: 60px;
+}
+
+.sit-on-top {
+  z-index: 1;
+}
+
+.img-dp-shadow {
+  -webkit-filter: drop-shadow(2px 2px 15px #f8f8f8);
+  -moz-filter: drop-shadow(2px 2px 15px #f8f8f8);
+}
+

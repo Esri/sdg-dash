@@ -1,0 +1,18 @@
+.btn-sdg-1 {
+  color: #e5243b;
+  border-color: #e5243b;
+}
+
+.btn-sdg-1:active:hover, 
+.btn-sdg-1:active:focus, 
+.btn-sdg-1:active.focus, 
+.btn-sdg-1.active:hover, 
+.btn-sdg-1.active:focus, 
+.btn-sdg-1.active.focus, 
+.open > .btn-sdg-1.dropdown-toggle:hover, 
+.open > .btn-sdg-1.dropdown-toggle:focus, 
+.open > .btn-sdg-1.dropdown-toggle.focus {
+  background-color: #e5243b !important;
+  color: #ffffff !important;
+  border-color: #e5243b;
+}

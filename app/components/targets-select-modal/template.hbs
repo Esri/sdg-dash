@@ -1,0 +1,36 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Targets</h4>
+      </div>
+      <div class="modal-body modal-body-container">
+        {{#each session.selected_targets as |target|}}
+          <div class="row">
+            <div class="col-xs-1 target-display">
+              <h5 class="target-id">{{target.id}}</h5>
+              <div class="clearfix"></div>
+            </div>
+            <div class="col-xs-11 target-display pad-bottom-20">
+              <div class="target-desc pad-bottom-10">{{target.title}}</div>
+              <button {{action 'setDashboardTarget' target}} class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Dashboard
+              </button>
+              <button class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-flag" aria-hidden="true"></span> Indicators
+              </button>
+              <button class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Datasets
+              </button>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>

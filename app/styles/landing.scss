@@ -1,0 +1,31 @@
+.search-box {
+  width: 400px;
+}
+
+.landing-sdg-img {
+  cursor: pointer;
+  height: 400px;
+  width: 400px;
+  background-image: url(/images/landing/sdg.png);
+  background-repeat: no-repeat;
+  background-size: 400px;
+}
+
+.landing-map-img {
+  cursor: pointer;
+  height: 400px;
+  width: 400px;
+  background-image: url(/images/landing/map.png);
+  background-repeat: no-repeat;
+  /*background-size: 400px;*/
+}
+
+.landing-sdg-img-only {
+  height: 400px;
+  /*width: 400px;*/
+}
+
+.landing-map-img-only {
+  height: 400px;
+  /*width: 400px;*/
+}

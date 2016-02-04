@@ -1,0 +1,14 @@
+<div class="container">
+  <p class="bg-info" style="margin-top: 20px;padding:20px;">Hello! Welcome to a Prototype/POC Dashboard that lets you explore the Sustainable Development Goals. At this point in time, the application is <b>in development</b> and data is sparse so we would recommend using the following link(s) that we'll do our best to keep stable, ok? 
+  <br><br> Thanks &amp; enjoy!
+  <br><br>
+    <ul>
+      <li>{{#link-to 'sdg' '2' (query-params country_code="KE") }}<b>SDG 02 Zero Hunger</b> - Kenya (Target 2.1 only){{/link-to}}</li>
+      <li>{{#link-to 'sdg' '5' (query-params country_code="GLOBAL") }}<b>SDG 05 Gender Equality</b> - Global Progress (Target 5.1 only){{/link-to}}</li>
+      <li>{{#link-to 'video-player' (query-params src='aehin')}}<b>SDG 03 Good Health and Well-Being</b> - Access to Health Care Web Application (video){{/link-to}}</li>
+      <li><a href="http://dtc-sci01.esri.com/MultidimensionalTemplate/index.html?appid=d73011dceb0e41d0af334912355bddd5" target="_blank"><b>SDG 13 Climate Action</b> - World Soil Moisture Application</a></li>
+      <li class="text-muted disabled"><b>SDG 04 - Quality Education</b> for Colombia (coming soon)</li>
+    </ul>
+  </p>
+</div>
+{{ sdg-overview-collage model=model loadSDG="routeToSDG"}}

@@ -1,0 +1,9 @@
+<div id="sdg-dash" class="container">
+  <div class="row">
+    <div class="collage">
+      {{#each model as |goal|}}
+        <img {{action 'loadSDG' goal}} src="images/sdg/TGG_Icon_Color_{{goal.displayNumber}}.png" height="200" width="200" >
+      {{/each}}
+    </div>
+  </div>
+</div>

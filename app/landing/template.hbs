@@ -1,0 +1,28 @@
+<div class="container" id="stage">
+  <!-- <div class="row pad-bottom-20">
+    <div class="col-xs-6 col-xs-offset-3 pad-bottom-20 text-center">
+      <h2 >Just Show Me</h2><h4>(ex: Kenya, SDG4, Education)</h4>
+    </div>
+    <div class="col-xs-7 col-xs-offset-3">
+      {{ input class="form-control search-box"}}
+    </div>
+  </div> -->
+  <div class="row" id="searchByRow">
+    <div class="col-xs-12 pad-bottom-20">
+      <h2 class="text-center">Search By</h2>
+    </div>
+    <div class="col-xs-6">
+      {{#link-to 'sdg-overview'}}
+        <img src="images/landing/sdg.png" class="img-thumbnail landing-sdg-img-only">
+      {{/link-to}}
+      <!-- <img {{ action "loadOverviewSDG" }} src="images/landing/sdg.png" class="img-thumbnail landing-sdg-img-only"> -->
+    </div>
+    <div class="col-xs-6">
+      {{#link-to 'map-overview'}}
+        <img {{ action "loadOverviewMap" }} src="images/landing/map.png" class="img-thumbnail landing-map-img-only">
+      {{/link-to}}
+      <!-- <img {{ action "loadOverviewMap" }} src="images/landing/map.png" class="img-thumbnail landing-map-img-only"> -->
+    </div>
+  </div>
+</div>
+{{outlet}}

@@ -1,0 +1,19 @@
+.targets-indicators-container {
+  border: 1px solid #a9a9a9;
+  border-top: 0;
+}
+
+.glyph-target {
+  padding: 5px;
+}
+
+.glyph-stats {
+  padding: 5px;
+  margin-left: 20px;
+}
+
+.mx-ht {
+  max-height: 300px;
+  min-height: 300px;
+  overflow: scroll;
+}
