@@ -32,5 +32,7 @@ export default Ember.Component.extend({
       'targetHeight' : 200,
       'allowPartialLastRow' : true
     });
+
+    Ember.$('.img-sm').css('opacity', 1);
   }
 });

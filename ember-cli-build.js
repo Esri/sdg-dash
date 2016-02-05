@@ -61,36 +61,6 @@ module.exports = function(defaults) {
   /** bootstrap-select **/
   app.import('./vendor/bootstrap-select/bootstrap-select.min.js');
   app.import('./vendor/bootstrap-select/bootstrap-select.min.css');
-
-  /** gridster **/
-  // app.import('./vendor/gridster/jquery.gridster.min.css');
-  // app.import('./vendor/gridster/jquery.gridster.with-extras.min.js');
-
-  // cedar
-  // app.import(app.bowerDirectory + '/d3/d3.js');
-  // app.import(app.bowerDirectory + '/vega/vega.js');
-  // app.import(app.bowerDirectory + '/cedar/src/cedar.js');
-  // app.import('./vendor/cedar-charts/bar-horizontal.json', {
-  //   destDir: 'assets/charts'
-  // });
-  // app.import('./vendor/cedar-charts/bar.json', {
-  //   destDir: 'assets/charts'
-  // });
-  // app.import('./vendor/cedar-charts/bubble.json', {
-  //   destDir: 'assets/charts'
-  // });
-  // app.import('./vendor/cedar-charts/pie.json', {
-  //   destDir: 'assets/charts'
-  // });
-  // app.import('./vendor/cedar-charts/scatter.json', {
-  //   destDir: 'assets/charts'
-  // });
-  // app.import('./vendor/cedar-charts/sparkline.json', {
-  //   destDir: 'assets/charts'
-  // });
-  // app.import('./vendor/cedar-charts/time.json', {
-  //   destDir: 'assets/charts'
-  // });
   
   return app.toTree([bootstrap_fonts, fa_fonts]);
 };
