@@ -21,6 +21,9 @@ $fa-font-path: './fonts/';
 @import 'targets-select-modal';
 @import 'geo-levels-select-box';
 @import 'sdg-button-colors-overrides';
+@import 'storymap-card';
+@import 'summary-stat-card';
+
 
 [data-ember-action] {
   cursor: pointer;
@@ -64,6 +67,9 @@ hr {
   padding-bottom: 20px;
 }
 
+.marg-top-neg-50 {
+  margin-top: -50px;
+}
 .marg-bottom-50 {
   margin-bottom: 50px;
 }
@@ -81,12 +87,61 @@ hr {
   margin-top: 200px;
 }
 
-.map-container {
-
+.esri-ui-top-left {
+  top: 33px;
+  left: 35px;
+  z-index: 100;
 }
+.esri-compass-container {
+  background: grey;
+}
+
 .esri-map-component {
   height: 550px;
 }
+
+/*landing page
+.landing-sdg-logo {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 99;
+  height: 100px;
+}
+
+.landing-title {
+  top: 15px;
+  left: 135px;
+  position: absolute;
+  z-index: 99;
+  color: #f8f8f8;
+  opacity: 0.55
+}
+
+.landing-map {
+  min-height: 500px;
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(50, 50, 50, 1);
+  -moz-box-shadow:    0px 1px 5px 0px rgba(50, 50, 50, 1);
+  box-shadow:         0px 1px 5px 0px rgba(50, 50, 50, 1);
+}
+
+.full-height {
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.landing-legend {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+}
+
+.landing-legend img {
+  height: 75px;
+}
+
+landing page*/
 
 .neg-space {
   margin-bottom: -99999px;
@@ -123,3 +178,61 @@ hr {
   color: gray;
 }
 
+.vert-center {
+  top: 50%;
+  left: 50%;
+}
+
+.carousel-fade {
+    .carousel-inner {
+        .item {
+            transition-property: opacity;
+        }
+        
+        .item,
+        .active.left,
+        .active.right {
+            opacity: 0;
+        }
+
+        .active,
+        .next.left,
+        .prev.right {
+            opacity: 1;
+        }
+
+        .next,
+        .prev,
+        .active.left,
+        .active.right {
+            left: 0;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .carousel-control {
+        z-index: 2;
+    }
+}
+
+
+
+html, 
+body, 
+.carousel, 
+.carousel-inner, 
+.carousel-inner .item {
+    height: 100%;
+}
+
+.item:nth-child(1) {
+    background: #74C390;
+}
+
+.item:nth-child(2) {
+    background: #51BCE8;
+}
+
+.item:nth-child(3) {
+    background: #E46653;
+}

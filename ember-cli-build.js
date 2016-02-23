@@ -15,6 +15,7 @@ module.exports = function(defaults) {
 
     amd :{
       loader: 'https://js.arcgis.com/3.15/',
+      // loader: 'https://js.arcgis.com/4.0beta3/',
       configPath: 'config/dojo-config.js',
       packages: [
         'esri','dojo','dojox','dijit',
@@ -36,7 +37,7 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  app.import('./bower_components/bootstrap-sass/assets/javascripts/bootstrap.js');
+  app.import('./bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js');
 
   //although app.import can't pull from node_modules, Funnel can
   var bootstrap_fonts = new Funnel('./node_modules/bootstrap-sass/assets/fonts/bootstrap', {

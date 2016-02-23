@@ -1,5 +1,4 @@
 import Ember from 'ember';
-// import ajax from 'ic-ajax';
 
 export default Ember.Route.extend({
   actions: {
@@ -9,8 +8,12 @@ export default Ember.Route.extend({
     }
   },
 
-  model() {
-    return this.store.query('sdg', {});
-  }
+  beforeModel() {
+    console.log('beforeModel');
+  },
 
+  model() {
+    // return this.store.query('sdg', {});
+    return this.store.query('sdg-overview', {});
+  }
 });

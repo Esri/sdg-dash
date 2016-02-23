@@ -20,15 +20,15 @@ export default Ember.Service.extend({
 
   cards: [],
 
-  initialize() {
-   
-  },
-
-  loadDashboardCards(country_code, goal) {
-    this.loadDashboards(country_code, goal)
+  loadDashboardCards(country_code, goal, target_id) {
+    this.loadDashboards(country_code, goal, target_id)
       .then(function (response) {
         console.log(response);
-        var cards = response.data.levels[0].items;
+        let cards = [];
+        if (response.data[0] && response.data[0].items) {
+          cards = response.data[0].items;
+          this.set('available_geo_levels', response.data.map(function (d) { return d.title; }));
+        }
         this.set('cards', cards);
       }.bind(this));
   },
@@ -38,12 +38,13 @@ export default Ember.Service.extend({
       .then(this.reconfigure.bind(this));
   },
 
-  loadDashboards(country_code, goal) {
+  loadDashboards(country_code, goal, target_id) {
     return ajax({
       url: ENV.sdgApi + 'dashboards',
       data: {
         country_code: country_code,
-        goal: goal
+        goal: goal,
+        target_id: target_id
       },
       dataType: 'json'
     })

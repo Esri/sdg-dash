@@ -1,7 +1,7 @@
 export default {
 
   "application" : {
-    "title" : "Sustainable Development Goals",
+    "title" : "The Sustainable Development Goals",
     "header" : {
       "signIn" : "Sign In",
       "signOut" : "Sign Out",

@@ -15,10 +15,10 @@ module.exports = function(environment) {
 
     contentSecurityPolicy: {
       'default-src': "'none'",
-      'script-src': "'self' 'unsafe-eval' 'unsafe-inline' http://*.arcgis.com/ https://*.arcgis.com/ https://apf-koop-sample-app.herokuapp.com https://*.esri.com",
+      'script-src': "'self' http://arcgis-sdgs-385255865.us-east-1.elb.amazonaws.com/ 'unsafe-eval' 'unsafe-inline' http://*.arcgis.com/ https://*.arcgis.com/ https://apf-koop-sample-app.herokuapp.com https://*.esri.com",
       'font-src': "'self' data: *.fonts.net *.arcgis.com/",
-      'connect-src': "'self' http://*.arcgis.com/ http://services.arcgisonline.com/ https://sdg-api.herokuapp.com/ http://localhost:3000 https://*.esri.com",
-      'img-src': "'self' https://*.arcgis.com/ http://*.arcgis.com/ http://*.arcgisonline.com/ https://*.esri.com",
+      'connect-src': "'self' http://arcgis-sdgs-385255865.us-east-1.elb.amazonaws.com/ http://*.arcgis.com/ http://services.arcgisonline.com/ https://sdg-api.herokuapp.com/ http://localhost:3000 https://*.esri.com",
+      'img-src': "'self' http://arcgis-sdgs-385255865.us-east-1.elb.amazonaws.com/ https://*.arcgis.com/ http://*.arcgis.com/ http://*.arcgisonline.com/ https://*.esri.com",
       'style-src': "'self' 'unsafe-inline' https://fast.fonts.net http://*.arcgis.com https://*.arcgis.com",
       'media-src': "'self'"
     },
@@ -47,7 +47,9 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+
+    sdgApi: 'http://localhost:3000/'
   };
 
   if (environment === 'development') {

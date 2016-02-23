@@ -15,5 +15,6 @@ export default Ember.Component.extend({
     var sel = this.get('target');
     this.get('session').set('selected_target', sel.id);
     this.get('session').set('selected_target_description', sel.title);
+    this.sendAction('changeTarget', sel);
   }
 });

@@ -29,7 +29,7 @@ export default Ember.Component.extend({
     console.log('collage-ing');
     Ember.$('.collage').removeWhitespace().collagePlus({
       'effect' : 'effect-2',
-      'targetHeight' : 200,
+      'targetHeight' : 150,
       'allowPartialLastRow' : true
     });
 

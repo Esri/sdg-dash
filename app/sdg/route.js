@@ -1,15 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  actions: {
-    sdgSelectionDidChange: function (sdg) {
-      console.log('sdgSelectionDidChange from sdg route', sdg);
-    },
-    changeSdg: function (sdg) {
-      console.log('changeSdg from sdg route', sdg);
-    }
-  },
-
   model(params, transition) {
     var queryParams = {
       ids: params.goal_id,
@@ -36,10 +27,20 @@ export default Ember.Route.extend({
       sesh.set('selected_geo_level', geo_level);
     }
 
-    let goal = transition.params.sdg.goal_id;
+    // targets
     let targets = sdg.get('targets');
-    let selected_target = targets[0].id;
+    let in_target = transition.queryParams.target_id;
+    let selected_target = null;
+    if (in_target) {
+      selected_target = targets.filter(function (t) { return t.id === in_target; })[0];
+    } else {
+      selected_target = targets[0];
+    }
+    
+    sdg.set('selected_target', selected_target);
 
+    let goal = transition.params.sdg.goal_id;
+    
     sesh.set('selected_country_code', code);
     sesh.set('selected_targets', targets);
     sesh.set('selected_target', selected_target);
@@ -47,8 +48,7 @@ export default Ember.Route.extend({
     sesh.set('selected_sdg', sdg);
     
     let session = this.get('session');
-    session.loadDashboardsAndReconfigure(code, goal);
-    // session.loadDashboardCards(code, goal);
+    session.loadDashboardCards(code, goal, selected_target.id);
   },
 
   // attempt to remove "sticky" query params
@@ -58,6 +58,7 @@ export default Ember.Route.extend({
       // isExiting would be false if only the route's model was changing
       controller.set('country_code', null);
       controller.set('geo_level', null);
+      controller.set('target_id', null);
     }
   }
 });

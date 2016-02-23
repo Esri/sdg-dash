@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import Map from 'esri/map';
-import FeatureLayer from 'esri/layers/FeatureLayer';
-import GraphicsLayer from 'esri/layers/GraphicsLayer';
-import arcgisUtils from 'esri/arcgis/utils';
+// import Map from 'esri/map';
+// import FeatureLayer from 'esri/layers/FeatureLayer';
+// import GraphicsLayer from 'esri/layers/GraphicsLayer';
+// import arcgisUtils from 'esri/arcgis/utils';
 
 export default Ember.Service.extend({
   

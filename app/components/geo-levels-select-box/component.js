@@ -22,8 +22,6 @@ export default Ember.Component.extend({
       this.sendAction('goToGeoLevel', sel);
 
     }.bind(this));
-
-
   },
 
   didUpdate() {

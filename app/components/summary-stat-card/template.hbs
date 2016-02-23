@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="pull-left">
+    {{model.component.settings.title}}
+    </div>
+    <div class="pull-right">
+      {{#if model.component.settings.data_info}}
+        {{data-info-popover model=model.component.settings.data_info}}
+      {{/if}}
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="panel-body stat-body-height text-center">
+    <div>
+      <span class="stat-value {{if model.component.class_names model.component.class_names ''}} ">{{stat_value}}</span> <span class="stat-suffix">{{stat_suffix}}</span>
+    </div>
+  </div>
+</div>

@@ -3,12 +3,26 @@
   <br><br> Thanks &amp; enjoy!
   <br><br>
     <ul>
-      <li>{{#link-to 'sdg' '2' (query-params country_code="KE") }}<b>SDG 02 Zero Hunger</b> - Kenya (Target 2.1 only){{/link-to}}</li>
-      <li>{{#link-to 'sdg' '5' (query-params country_code="GLOBAL") }}<b>SDG 05 Gender Equality</b> - Global Progress (Target 5.1 only){{/link-to}}</li>
-      <li>{{#link-to 'video-player' (query-params src='aehin')}}<b>SDG 03 Good Health and Well-Being</b> - Access to Health Care Web Application (video){{/link-to}}</li>
-      <li><a href="http://dtc-sci01.esri.com/MultidimensionalTemplate/index.html?appid=d73011dceb0e41d0af334912355bddd5" target="_blank"><b>SDG 13 Climate Action</b> - World Soil Moisture Application</a></li>
-      <li class="text-muted disabled"><b>SDG 04 - Quality Education</b> for Colombia (coming soon)</li>
+      <li>{{#link-to 'sdg' '2' (query-params country_code="KE") }}<b>Goal 02 Zero Hunger</b> - Kenya (Target 2.1){{/link-to}}</li>
+      <li>{{#link-to 'sdg' '3' (query-params country_code="GLOBAL" target_id="3.3") }}<b>Goal 03 Good Health &amp; Well-Being</b> - Global (Target 3.3){{/link-to}}</li>
+      <li>{{#link-to 'sdg' '3' (query-params country_code="TH" target_id="3.3") }}<b>Goal 03 Good Health &amp; Well-Being</b> - Thailand (Target 3.3){{/link-to}}</li>
+      <li>{{#link-to 'sdg' '5' (query-params country_code="GLOBAL" target_id=null) }}<b>Goal 05 Gender Equality</b> - Global Progress (Target 5.1){{/link-to}}</li>
+      <li>{{#link-to 'video-player' (query-params src='aehin')}}<b>Goal 03 Good Health and Well-Being</b> - Access to Health Care Web Application (video){{/link-to}}</li>
+      <li><a href="http://dtc-sci01.esri.com/MultidimensionalTemplate/index.html?appid=d73011dceb0e41d0af334912355bddd5" target="_blank"><b>Goal 13 Climate Action</b> - World Soil Moisture Application</a></li>
+      <li class="text-muted disabled"><b>Goal 04 - Quality Education</b> for Colombia (coming soon)</li>
     </ul>
   </p>
 </div>
-{{ sdg-overview-collage model=model loadSDG="routeToSDG"}}
+
+{{ sdg-overview-collage model=model loadSDG="routeToSDG" }}
+
+<!-- <div class="container-fluid no-padding"> -->
+  <!-- SDGs logo -->
+  <!-- <img class="landing-sdg-logo" src='images/landing/sdg-logo-only.png'> -->
+  <!-- <div class="landing-title"><h3>{{t 'application.title'}}</h3><p class="text-success">current sdg index (%)</p></div> -->
+  
+  <!-- {{arcgis-3d-map}} -->
+
+  <!-- {{ sdg-overview-collage model=model loadSDG="routeToSDG" }} -->
+<!-- </div> -->
+

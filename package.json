@@ -27,7 +27,7 @@
     "ember-cli-amd": "0.4.6",
     "ember-cli-app-version": "1.0.0",
     "ember-cli-babel": "^5.1.5",
-    "ember-cli-cedar": "0.1.1",
+    "ember-cli-cedar": "0.2.0",
     "ember-cli-content-security-policy": "0.4.0",
     "ember-cli-dependency-checker": "^1.1.0",
     "ember-cli-deploy": "0.5.1",
@@ -52,6 +52,7 @@
     "ember-export-application-global": "^1.0.4",
     "ember-i18n": "4.2.0",
     "ember-inflector": "1.9.4",
+    "ember-wormhole": "^0.3.5",
     "font-awesome": "^4.5.0",
     "ivy-videojs": "0.6.2",
     "liquid-fire": "0.23.0"
