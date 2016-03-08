@@ -5,9 +5,15 @@ export default Ember.Component.extend({
 
   actions: {
     setDashboardTarget(target) {
-      Ember.$('#myModal').one('hidden.bs.modal', this.modalDidHide.bind(this));
+      this.$('#myModal').one('hidden.bs.modal', this.modalDidHide.bind(this));
       this.set('target', target);
-      Ember.$('#myModal').modal('hide');
+      this.$('#myModal').modal('hide');
+    },
+
+    setToSdgIndex() {
+      this.$('#myModal').one('hidden.bs.modal', this.modalDidHide.bind(this));
+      this.set('target', {id: 'SDG Index'});
+      this.$('#myModal').modal('hide');
     }
   },
 

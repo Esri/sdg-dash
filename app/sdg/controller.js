@@ -1,31 +1,71 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ['country_code','geo_level', 'target_id'],
-  country_code: null,
+  queryParams: ['geo_group', 'geo_value', 'geo_level', 'target_id'],
+  
+  geo_group: null,
+  geo_value: null,
   geo_level: null,
   target_id: null,
 
   actions: {
     changeTarget(target) {
       this.model.set('selected_target', target);
-      this.transitionToRoute({queryParams: {country_code: this.country_code, geo_level: this.geo_level, target_id: target.id }})
+      
+      let params = {
+        queryParams : {
+          geo_group : this.geo_group || 'countries',
+          geo_value : this.geo_value || 'GLOBAL',
+          target_id : target.id
+        }
+      };
+      if (target.id === 'SDG Index') {
+        params.queryParams = {
+          geo_group : 'countries',
+          geo_value : 'GLOBAL',
+          target_id : null
+        };
+      }
+
+      this.transitionToRoute(params)
         .then(function () {
-          this.get('session').loadDashboardCards(this.country_code, this.model.get('id'), target.id);
+          this.get('session').loadDashboardCards(this.geo_group, this.geo_value, this.model.get('id'), target.id);
         }.bind(this));
     },
 
     changeSdg(selected) {
       console.log('changeSdg from controller::sdg', selected);
-      this.transitionToRoute('sdg', selected, {queryParams: {country_code: this.country_code, target_id: null }});
+      const params = {
+        queryParams: { 
+          geo_group : this.geo_group, 
+          geo_value: this.geo_value, 
+          target_id: null }
+      };
+      this.transitionToRoute('sdg', selected, params);
     },
 
-    goToCountry(country_code) {
-      this.set('geo_level', null);
-      let target_id = this.get('session').get('selected_target').id;
-      this.transitionToRoute({queryParams: {country_code: country_code }})
-        .then(function () {
-          this.get('session').loadDashboardCards(country_code, this.model.get('id'), target_id);
+    goToGeography(geography_group, qp_value) {
+      const svc = this.get('session');
+      const selected_target = svc.get('selected_target');
+
+      let target_id = null;
+      if (selected_target.id === 'SDG Index') {
+        selected_target = null;
+      } else {
+        target_id = selected_target.id;
+      }
+
+      const params = {
+        queryParams : {
+          geo_group : geography_group,
+          geo_value : qp_value,
+          target_id : target_id
+        }
+      };
+
+      this.transitionToRoute(params)
+        .then( function(){
+          this.get('session').loadDashboardCards(geography_group, qp_value, this.model.get('id'), target_id);
         }.bind(this));
     },
 

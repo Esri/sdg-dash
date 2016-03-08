@@ -1,6 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  queryParams: {
+    target_id: {
+      refreshModel: true
+    }
+  },
+
   model(params, transition) {
     var queryParams = {
       ids: params.goal_id,
@@ -13,42 +19,43 @@ export default Ember.Route.extend({
 
   afterModel(sdg, transition) {
     console.log(sdg);
-    let sesh = this.get('session');
+    const goal = transition.params.sdg.goal_id;
 
-    sesh.set('selected_sdg', sdg);
+    let svc = this.get('session');
+    svc.set('selected_sdg', sdg);
     
-    let code = transition.queryParams.country_code;
-    if (!code) {
-      code = 'GLOBAL';
-    }
-
-    let geo_level = transition.queryParams.geo_level;
-    if (geo_level) {
-      sesh.set('selected_geo_level', geo_level);
-    }
+    // handle in-bound query params if they exist
+    const geo_group = transition.queryParams.geo_group || 'countries';
+    const geo_value = transition.queryParams.geo_value || 'GLOBAL';    
+    const geo_level = transition.queryParams.geo_level || null;
+    svc.setProperties({
+      selected_geo_group : geo_group,
+      selected_geo_value : geo_value,
+      selected_geo_level : geo_level
+    });
 
     // targets
-    let targets = sdg.get('targets');
-    let in_target = transition.queryParams.target_id;
-    let selected_target = null;
+    const targets = sdg.get('targets');
+    const in_target = transition.queryParams.target_id;
+    let selected_target;
     if (in_target) {
       selected_target = targets.filter(function (t) { return t.id === in_target; })[0];
     } else {
-      selected_target = targets[0];
+      selected_target = {id: 'SDG Index'};
     }
     
+    // keep this in
     sdg.set('selected_target', selected_target);
 
-    let goal = transition.params.sdg.goal_id;
+    svc.setProperties({
+      selected_targets : targets,
+      selected_target : selected_target,
+      selected_target_description : targets[0].title
+    });
     
-    sesh.set('selected_country_code', code);
-    sesh.set('selected_targets', targets);
-    sesh.set('selected_target', selected_target);
-    sesh.set('selected_target_description', targets[0].title);
-    sesh.set('selected_sdg', sdg);
-    
-    let session = this.get('session');
-    session.loadDashboardCards(code, goal, selected_target.id);
+    const t_id = selected_target ? selected_target.id : null;
+
+    svc.loadDashboardCards(geo_group, geo_value, goal, t_id);
   },
 
   // attempt to remove "sticky" query params
@@ -56,7 +63,8 @@ export default Ember.Route.extend({
   resetController(controller, isExiting) {
     if (isExiting) {
       // isExiting would be false if only the route's model was changing
-      controller.set('country_code', null);
+      controller.set('geo_group', null);
+      controller.set('geo_value', null);
       controller.set('geo_level', null);
       controller.set('target_id', null);
     }

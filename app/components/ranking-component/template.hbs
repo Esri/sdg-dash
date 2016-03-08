@@ -1,0 +1,11 @@
+<table class="table table-condensed ranking-table">
+  <tbody>
+    {{#each rows as |row index|}}
+      <tr class="{{if row.is_highlighted 'ranking-view-highlighted' 'ranking-view-highlighted-td'}}">
+        <td>{{row.ranking}}</td>
+        <td class="ranking-label-col">{{row.label}}</td>
+        <td>{{row.value}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

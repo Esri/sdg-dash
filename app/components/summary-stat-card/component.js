@@ -47,11 +47,22 @@ export default Ember.Component.extend({
       let feature = response.features[0];
       let field_name = settings.query.outStatistics[0].outStatisticFieldName;
       let stat_value = feature.attributes[field_name];
-      this.set('stat_value', this._formatAsNumber(parseInt(stat_value)));
       
-      if (settings.stat_suffix) {
-        this.set('stat_suffix', settings.stat_suffix);
+      if (isNaN(stat_value)) {
+        stat_value = parseFloat(stat_value);
       }
+
+      if (settings.display_format) {
+        if (!Ember.isNone(settings.display_format.decimal_places)) {
+          stat_value = this._formatAsNumber( stat_value.toFixed(settings.display_format.decimal_places) );
+        }
+
+        if (settings.display_format.suffix) {
+          this.set('stat_suffix', Ember.String.htmlSafe(settings.display_format.suffix));  
+        }
+      }
+
+      this.set('stat_value', stat_value);
     }
 
   },

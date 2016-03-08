@@ -4,24 +4,29 @@ import ENV from '../config/environment';
 
 export default Ember.Service.extend({
   
-  selected_country_code: 'GLOBAL',
-  selected_country_name: 'Global',
-  selected_target: '',
-  selected_target_description: '',
-  selected_targets: [],
-  selected_country_name: '',
-  dashboard_charts: null,
-  chart_one_title: '',
-  selected_sdg: null,
-  available_geo_levels: [],
+  // selected_country_code: 'GLOBAL',
+  // selected_country_name: 'Global',
+  // selected_target: '',
+  // selected_target_description: '',
+  // selected_targets: [],
+  // selected_country_name: '',
+  // dashboard_charts: null,
+  // chart_one_title: '',
+  // selected_sdg: null,
+  
   available_dashboard_levels: [],
   selected_geo_level: null,
   no_data: true,
 
   cards: [],
+  available_geo_levels: [],
+  
+  selected_geo_group: null,
+  selected_geo_value: null,
+  selected_geo_level: null,
 
-  loadDashboardCards(country_code, goal, target_id) {
-    this.loadDashboards(country_code, goal, target_id)
+  loadDashboardCards(geography_group, geo_value, goal, target_id) {
+    this.loadDashboards(geography_group, geo_value, goal, target_id)
       .then(function (response) {
         console.log(response);
         let cards = [];
@@ -33,19 +38,32 @@ export default Ember.Service.extend({
       }.bind(this));
   },
 
+  loadAvailableGeographies() {
+    return ajax({
+      url: ENV.sdgApi + 'geographiesWithData',
+      dataType: 'json'
+    });
+  },
+
   loadDashboardsAndReconfigure(country_code, goal) {
     this.loadDashboards(country_code, goal)
       .then(this.reconfigure.bind(this));
   },
 
-  loadDashboards(country_code, goal, target_id) {
+  loadDashboards(geography_group, geo_value, goal, target_id) {
+    let data = {
+      geography: geography_group,
+      geo_value: geo_value,
+      goal: goal
+    };
+
+    if (target_id && target_id !== 'SDG Index') {
+      data['target_id'] = target_id;
+    }
+
     return ajax({
       url: ENV.sdgApi + 'dashboards',
-      data: {
-        country_code: country_code,
-        goal: goal,
-        target_id: target_id
-      },
+      data: data,
       dataType: 'json'
     })
       .then(function(response){

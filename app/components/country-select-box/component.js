@@ -4,36 +4,51 @@ export default Ember.Component.extend({
   
   didInsertElement() {
     let elId = '#country-selector';
-    Ember.$(elId).selectpicker({
+    this.$(elId).selectpicker({
       style: 'btn-default country-sel-input',
       selectOnTab: true,
       size: 8,
       width: '300px'
     });
 
-    Ember.$('.dropdown-menu.open').css('max-width', '300px');
+    this.$('.dropdown-menu.open').css('max-width', '300px');
 
     let qp = this.get('container').lookup('router:main').router.state.queryParams;
-    let country_code = 'GLOBAL';
-    let country_name = 'Global Progress';
-    if (qp && qp.country_code){
-      country_code = qp.country_code;
-      Ember.$(elId).selectpicker('val', country_code);
-      let el = Ember.$(elId)[0];
-      country_name = el.options[el.selectedIndex].text;
+    let geo_value = 'Global Progress';
+    if (qp && qp.geo_group && qp.geo_value){
+      geo_value = qp.geo_value;
+
+      this.$(elId).selectpicker('val', geo_value);
+
+      // let el = this.$(elId)[0];
+      // country_name = el.options[el.selectedIndex].text;
     }
 
-    this.get('session').set('selected_country_name', country_name);
+    // this.get('session').set('selected_country_name', country_name);
 
-    Ember.$(elId).change(function (a) {
-      let selected = $(elId).val();
-      let country_name = a.target.options[a.target.selectedIndex].text;
+    this.$(elId).change(function (a) {
+      let selector = this.$(elId);
+      let selected_item = this.$(':selected', selector);
+      let selected_geo_group = selected_item.parent().attr('value');
+      let selected_geo_value = selector.val();
+
+
+      let svc = this.get('session');
+      svc.set('selected_geo_group', selected_geo_group);
+      svc.set('selected_geo_value', selected_geo_value);
+
+      this.get('goToGeography')(selected_geo_group, selected_geo_value);
+
+      // let selected = this.$(elId).val();
+      // let country_name = a.target.options[a.target.selectedIndex].text;
       
-      let sesh = this.get('session');
-      sesh.set('selected_country_code', selected);
-      sesh.set('selected_country_name', country_name);
+      // let sesh = this.get('session');
+      // sesh.set('selected_country_code', selected);
+      // sesh.set('selected_country_name', country_name);
 
-      this.get('goToCountry')(selected);
+      // this.get('goToCountry')(selected);
+
     }.bind(this));
   }
+
 });

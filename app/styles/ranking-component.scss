@@ -1,0 +1,38 @@
+.ranking-view {
+  padding: 10px;
+}
+.ranking-view table {
+  border-collapse: separate;
+  border-spacing: 0 0;
+}
+.ranking-view .table > tbody > tr > td {
+  border: 0;
+  padding: 0 0 3px 0;
+}
+
+.ranking-view .table > tbody > tr > td:nth-child(1) {
+  text-align: center;
+}
+
+.ranking-view .table > tbody > tr:first-child > td {
+  border-bottom: 1px solid #a9a9a9;
+}
+.ranking-view .table > tbody > tr:last-child > td {
+  border-top: 1px solid #a9a9a9;
+}
+.ranking-table {
+  font-size: 14px;
+}
+
+.ranking-view-highlighted-td {
+  color: #a9a9a9;
+}
+
+.ranking-view-highlighted {
+  color: black;
+  font-weight: bold;
+}
+
+.ranking-label-col {
+  padding-left: 30px !important;
+}

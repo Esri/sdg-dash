@@ -1,10 +1,10 @@
 <div class="container-fluid no-padding">
-  <div class="bg-wrapper" style="background-color:{{model.colorHex}};color:white;">
+  <div style="background-color:{{model.colorHex}};color:white;">
     <div class="row">
       <div class="col-xs-3">
         <img class="img-shift" src="images/sdg/TGG_Icon_Only_Color_{{model.displayNumber}}.gif" height="210" width="210">
       </div>
-      <div class="col-xs-7 pad-top-20">
+      <div class="col-xs-7 pad-top-10">
         <div class="row">
           <div class="col-xs-12">
             <h1>Goal {{model.displayNumber}}: {{model.title}}</h1>
@@ -15,19 +15,20 @@
             <p>{{model.description}}</p>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <button class="btn btn-sm btn-default">
-              <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> How can I Contribute?
-            </button>
+        <!-- <div class="row">
+          <div class="col-xs-12 pad-bottom-20">
+            {{contribute-button}}
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
     <div class="row selector-row" style="background-color:rgba({{model.colorRgb}}, 0.75);">
       <div class="col-xs-1">
-        <img class="glyph-sdg-logo" src="images/sdg/main-logo-white40x40.png">
+        <!-- <img class="glyph-sdg-logo" src="images/sdg/main-logo-white40x40.png"> -->
+        {{#link-to 'sdg-overview'}}
+          <img class="glyph-sdg-logo img-dp-shadow" src='images/landing/sdg-logo-only.png'>
+        {{/link-to}}
       </div>
       <div class="col-xs-2 country-select-container">
         {{sdg-select-box model=model changeSdg=(action 'changeSdg') }}
@@ -36,7 +37,8 @@
         <span class="glyphicon glyphicon-globe glyph-globe-select" aria-hidden="true"></span>
       </div>
       <div class="col-xs-2 country-select-container">
-        {{country-select-box model=model goToCountry=(action 'goToCountry')}}
+        {{country-select-box model=model goToGeography=(action 'goToGeography')}}
+        <!-- {{ geography-select-box model=model goToGeography=(action 'goToGeography') }} -->
       </div>
       <div class="col-xs-1">
         <span class="glyphicon glyphicon-map-marker glyph-globe-select" aria-hidden="true"></span>
@@ -55,8 +57,10 @@
   </div>
 </div>
 
-<div class="row marg-bottom-50">  
+<div class="row marg-bottom-50" style="height: 100;">  
   <div class="container status-container">
+    {{#unless (eq model.selected_target.id "SDG Index") }}
+    
     <div class="row">
       <div class="col-xs-2 vcenter target-label-container">
         <span class="target-label">{{model.selected_target.id}}</span>
@@ -66,12 +70,33 @@
       </div>
     </div>
     <hr>
+    {{/unless}}
 
-    {{grid-layout model=model cards=session.cards action="noOp"}}
+    {{#if session.cards.length}}
+      {{grid-layout model=model cards=session.cards action="noOp"}}
+    {{else}}
+      <div class="container text-center" style="min-height: 400px;">
+        <div class="row">
+          <div class="col-xs-12">
+            <h3><strong>No data found</strong></h3>
+          </div>
+          <div class="col-xs-12">
+            <p>This application is in development and data sets are being added. Please check back at a later time.</p>
+          </div>
+        </div>
+        <!-- <div class="text-center pad-top-20">
+          {{contribute-button}}
+        </div> -->
+      </div>
+    {{/if}}
 
   </div>
 </div>
 
 {{#ember-wormhole to="targets-modal-destination"}}
   {{targets-select-modal changeTarget=(action 'changeTarget')}}
+{{/ember-wormhole}}
+
+{{#ember-wormhole to="contribute-modal-destination"}}
+  {{contribute-modal}}
 {{/ember-wormhole}}

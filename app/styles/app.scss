@@ -11,19 +11,33 @@ $fa-font-path: './fonts/';
 @import 'partials/header-nav-right';
 
 @import 'landing';
+@import 'partials/footer';
 @import 'sdg-dash';
 @import 'sdg';
 @import 'country-select-box';
 @import 'sdg-status';
 @import 'sdg-targets-indicators';
-@import 'esri-map';
 @import 'target-select-box';
 @import 'targets-select-modal';
 @import 'geo-levels-select-box';
 @import 'sdg-button-colors-overrides';
 @import 'storymap-card';
 @import 'summary-stat-card';
+@import 'ranking-component';
 
+
+/*html, 
+body {
+  height: 100%;
+}*/
+
+body > .ember-view {
+  height: 100%;
+}
+
+.esriMapContainer {
+  /*height: 20px !important;*/
+}
 
 [data-ember-action] {
   cursor: pointer;
@@ -80,7 +94,8 @@ hr {
 }
 
 .master {
-  /*margin-top: 50px;*/
+  background-color: #eee;
+  height: 100%;
 }
 
 .sign-in {
@@ -93,14 +108,14 @@ hr {
   z-index: 100;
 }
 .esri-compass-container {
-  background: grey;
+  background: gray;
 }
 
 .esri-map-component {
   height: 550px;
 }
 
-/*landing page
+/*landing page*/
 .landing-sdg-logo {
   position: absolute;
   top: 15px;
@@ -141,7 +156,7 @@ hr {
   height: 75px;
 }
 
-landing page*/
+/*landing page*/
 
 .neg-space {
   margin-bottom: -99999px;
@@ -169,8 +184,8 @@ landing page*/
 }
 
 .img-dp-shadow {
-  -webkit-filter: drop-shadow(2px 2px 15px #f8f8f8);
-  -moz-filter: drop-shadow(2px 2px 15px #f8f8f8);
+  -webkit-filter: drop-shadow(2px 2px 5px #f8f8f8);
+  -moz-filter: drop-shadow(2px 2px 5px #f8f8f8);
 }
 
 .img-sep {

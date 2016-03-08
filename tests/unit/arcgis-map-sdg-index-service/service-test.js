@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('service:arcgis-beta4-service', 'Unit | Service | arcgis beta4 service', {
+moduleFor('service:arcgis-map-sdg-index-service', 'Unit | Service | arcgis map sdg index service', {
   // Specify the other units that are required for this test.
   // needs: ['service:foo']
 });

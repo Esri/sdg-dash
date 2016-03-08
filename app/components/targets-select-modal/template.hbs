@@ -6,6 +6,25 @@
         <h4 class="modal-title" id="myModalLabel">Targets</h4>
       </div>
       <div class="modal-body modal-body-container">
+        <div class="row">
+          <div class="col-xs-1 target-display">
+            <!-- <h5 class="target-id">SDG Index</h5> -->
+            <span class="glyphicon glyphicon-list-alt glyph-sdg-index-modal"></span>
+            <div class="clearfix"></div>
+          </div>
+          <div class="col-xs-11 target-display pad-bottom-20">
+            <div class="target-desc pad-bottom-10">SDG Index Score</div>
+            <button {{action 'setToSdgIndex'}} class="btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Dashboard
+            </button>
+           <!--  <button class="btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-flag" aria-hidden="true"></span> Indicators
+            </button>
+            <button class="btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Datasets
+            </button> -->
+          </div>
+        </div>
         {{#each session.selected_targets as |target|}}
           <div class="row">
             <div class="col-xs-1 target-display">
@@ -28,8 +47,15 @@
         {{/each}}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <!-- <div class="pull-left">
+          <button {{action 'setToSdgIndex'}} type="button" class="btn btn-info">
+            <span class="glyphicon glyphicon-list-alt"></span> Set Dashboard to SDG Index Score
+          </button>
+        </div> -->
+        <!-- <div class="pull-right"> -->
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <!-- </div> -->
+        <!-- <div class="clearfix"></div> -->
       </div>
     </div>
   </div>
