@@ -46,7 +46,7 @@ export default Ember.Controller.extend({
 
     goToGeography(geography_group, qp_value) {
       const svc = this.get('session');
-      const selected_target = svc.get('selected_target');
+      let selected_target = svc.get('selected_target');
 
       let target_id = null;
       if (selected_target.id === 'SDG Index') {
