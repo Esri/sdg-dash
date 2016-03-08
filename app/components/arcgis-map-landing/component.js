@@ -11,9 +11,10 @@ export default Ember.Component.extend({
     const webmapId = 'b663c29073f447c98b79c9b4455a4bb8';
     const options = {
       mapOptions: {
-        slider : false,
+        slider : true,
         logo : false,
-        showAttribution : false
+        showAttribution : false,
+        smartNavigation : false
       }
     };
 
@@ -33,7 +34,7 @@ export default Ember.Component.extend({
         this.set('bookmarks', bookmarks);
         this.set('bookmark_counter', 0);
 
-        this._startExtentAnimation(bookmarks);
+        // this._startExtentAnimation(bookmarks);
       });
 
   },

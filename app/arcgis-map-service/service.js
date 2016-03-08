@@ -4,6 +4,12 @@ import esriBasemaps from 'esri/basemaps';
 
 export default Ember.Service.extend({
   createMap(webMap, elem, options) {
+    if (!options) {
+      options = {
+        mapOptions: {}
+      };
+    }
+    options.mapOptions.smartNavigation = false;
     return arcgisUtils.createMap(webMap, elem, options);
   },
 

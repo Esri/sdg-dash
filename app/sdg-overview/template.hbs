@@ -1,7 +1,19 @@
 <div class="container-fluid no-padding">
   <!-- SDGs logo -->
-  <img class="landing-sdg-logo" src='images/landing/sdg-logo-only.png'>
-  <div class="landing-title"><h3>{{t 'application.title'}}</h3><p class="text-success">current sdg index (%)</p></div>
+  <div class="landing-map-top-overlay">
+    <div class="pull-left">
+      <img class="landing-sdg-logo" src='images/landing/sdg-logo-only.png'>
+      <span class="glyphicon glyphicon-info-sign glyph-about" data-toggle="modal" data-target="#aboutModal"></span>
+    </div>
+    <div class="pull-right landing-text-div">
+      <span class="landing-title">
+        <h3>{{t 'application.title'}}</h3>
+        <p class="text-success">current sdg index (% complete)</p>
+        <p class="text-danger">% missing values</p>
+      </span>
+    </div>
+    <div class="clearfix"></div>
+  </div>
   
   {{ arcgis-map-landing class="landing-map" }}
 
@@ -26,3 +38,6 @@
   </p>
 </div>
 
+{{#ember-wormhole to="about-modal-destination"}}
+  {{about-modal}}
+{{/ember-wormhole}}

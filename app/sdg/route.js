@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import colorUtils from 'sdg-dash/utils/colors';
 
 export default Ember.Route.extend({
   queryParams: {
@@ -55,7 +56,18 @@ export default Ember.Route.extend({
     
     const t_id = selected_target ? selected_target.id : null;
 
+    this._themePage(sdg.get('colorHex'));
+
     svc.loadDashboardCards(geo_group, geo_value, goal, t_id);
+  },
+
+  _themePage(dark_color) {
+    const light_color = colorUtils.shadeColor(dark_color, 0.75);
+    console.log('light color', light_color, 'dark_color', dark_color);
+
+    Ember.$('.country-select-container .bootstrap-select > button').css('color', dark_color);
+    // Ember.$('.country-select-container .bootstrap-select > button').css('background-color', dark_color);
+    Ember.$('.country-select-container .bootstrap-select > button').css('border-color', dark_color);
   },
 
   // attempt to remove "sticky" query params

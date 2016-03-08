@@ -12,6 +12,12 @@ import Color from 'esri/Color';
 
 export default Ember.Service.extend({
   createMap(webMap, elem, options) {
+    if (!options) {
+      options = {
+        mapOptions: {}
+      };
+    }
+    options.mapOptions.smartNavigation = false;
     return arcgisUtils.createMap(webMap, elem, options);
   },
 
@@ -31,10 +37,6 @@ export default Ember.Service.extend({
       map = null;
     }
     return map;
-  },
-
-  getBasemapDefinition(basemap) {
-    return esriBasemaps[basemap];
   },
 
   renderSdgLayer(goal, hex_color_to, layer, layer_url) {

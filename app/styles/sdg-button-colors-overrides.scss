@@ -1,6 +1,14 @@
 .btn-sdg-1 {
-  color: #e5243b;
-  border-color: #e5243b;
+  color: #e5243b !important;
+  border-color: #e5243b !important;
+  background-color: #ffffff !important;
+}
+
+.btn-sdg-1:hover, .btn-sdg-1:focus, .btn-sdg-1.focus {
+  background-color: #e5243b !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  border-color: #B71528 !important; /* turn bg hex into HSL and subtract 12 % from L */
 }
 
 .btn-sdg-1:active:hover, 
@@ -14,5 +22,5 @@
 .open > .btn-sdg-1.dropdown-toggle.focus {
   background-color: #e5243b !important;
   color: #ffffff !important;
-  border-color: #e5243b;
+  border-color: #e5243b !important;
 }
