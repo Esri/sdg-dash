@@ -55,6 +55,8 @@
     "ember-wormhole": "^0.3.5",
     "font-awesome": "^4.5.0",
     "ivy-videojs": "0.6.2",
-    "liquid-fire": "0.23.0"
+    "liquid-fire": "0.23.0",
+    "torii": "0.6.1",
+    "torii-provider-arcgis": "git+https://github.com/dbouwman/torii-provider-arcgis.git"
   }
 }

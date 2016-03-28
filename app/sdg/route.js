@@ -2,18 +2,19 @@ import Ember from 'ember';
 import colorUtils from 'sdg-dash/utils/colors';
 
 export default Ember.Route.extend({
+  
   queryParams: {
     target_id: {
       refreshModel: true
     }
   },
 
-  model(params, transition) {
-    var queryParams = {
+  model(params) {
+    const queryParams = {
       ids: params.goal_id,
       targets: true,
       indicators: true,
-      relateIndicatorsToTargets: true
+      includeMetadata: false
     };
     return this.store.queryRecord('sdg', queryParams);
   },
@@ -59,6 +60,7 @@ export default Ember.Route.extend({
     this._themePage(sdg.get('colorHex'));
 
     svc.loadDashboardCards(geo_group, geo_value, goal, t_id);
+
   },
 
   _themePage(dark_color) {
@@ -66,7 +68,6 @@ export default Ember.Route.extend({
     console.log('light color', light_color, 'dark_color', dark_color);
 
     Ember.$('.country-select-container .bootstrap-select > button').css('color', dark_color);
-    // Ember.$('.country-select-container .bootstrap-select > button').css('background-color', dark_color);
     Ember.$('.country-select-container .bootstrap-select > button').css('border-color', dark_color);
   },
 

@@ -4,18 +4,7 @@ import ENV from '../config/environment';
 
 export default Ember.Service.extend({
   
-  // selected_country_code: 'GLOBAL',
-  // selected_country_name: 'Global',
-  // selected_target: '',
-  // selected_target_description: '',
-  // selected_targets: [],
-  // selected_country_name: '',
-  // dashboard_charts: null,
-  // chart_one_title: '',
-  // selected_sdg: null,
-  
   available_dashboard_levels: [],
-  selected_geo_level: null,
   no_data: true,
 
   cards: [],
@@ -28,8 +17,11 @@ export default Ember.Service.extend({
   loadDashboardCards(geography_group, geo_value, goal, target_id) {
     this.loadDashboards(geography_group, geo_value, goal, target_id)
       .then(function (response) {
-        console.log(response);
+        
+        this.set('available_dashboards', response.data);
+        
         let cards = [];
+        
         if (response.data[0] && response.data[0].items) {
           cards = response.data[0].items;
           this.set('available_geo_levels', response.data.map(function (d) { return d.title; }));
@@ -40,7 +32,7 @@ export default Ember.Service.extend({
 
   loadAvailableGeographies() {
     return ajax({
-      url: ENV.sdgApi + 'geographiesWithData',
+      url: ENV.sdgDashboardsApi + 'geographiesWithData',
       dataType: 'json'
     });
   },
@@ -62,7 +54,7 @@ export default Ember.Service.extend({
     }
 
     return ajax({
-      url: ENV.sdgApi + 'dashboards',
+      url: ENV.sdgDashboardsApi + 'dashboards',
       data: data,
       dataType: 'json'
     })
@@ -83,7 +75,7 @@ export default Ember.Service.extend({
       if (!sel_geo_level) {
         dash = response.data[0].levels[0];  
       } else {
-        dash = response.data[0].levels.filter(function (l) { return l.title === sel_geo_level })[0];
+        dash = response.data[0].levels.filter(function (l) { return l.title === sel_geo_level; })[0];
       }
       
       this.set('selected_dashboard', dash);
@@ -96,11 +88,16 @@ export default Ember.Service.extend({
     this.set('no_data', (dash) ? true : false);    
   },
 
-  reconfigureAtGeoLevel() {
-    // let level = this.get('selected_geo_level');
-    let board = this.get('selected_dashboard');
-    // let new_dash = board.levels.filter(function (b) { return b.title === level });
+  reconfigureAtGeoLevel(level) {
+    const dashboards = this.get('available_dashboards');
+    const new_dash = dashboards.filter(
+      function (b) { return b.title === level; }
+    );
 
-    this.set('selected_dashboard', board);
+    if (!new_dash || !new_dash[0]) {
+      return;
+    }
+
+    this.set('cards', new_dash[0].items);
   }
 });

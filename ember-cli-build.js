@@ -8,8 +8,7 @@ module.exports = function(defaults) {
     sassOptions: {
       includePaths: [
         'node_modules/bootstrap-sass/assets/stylesheets',
-        'node_modules/calcite-bootstrap/dist/sass',
-        'node_modules/font-awesome/scss'
+        'node_modules/calcite-bootstrap/dist/sass'
       ]
     },
 
@@ -45,13 +44,6 @@ module.exports = function(defaults) {
     destDir: '/assets/fonts'
   });
 
-  // font-awesome fonts
-  var fa_fonts = new Funnel('./node_modules/font-awesome/fonts', {
-    srcDir: '/',
-    include: ['**.*'],
-    destDir: '/assets/fonts'
-  });
-
   /** jquery collage-Plus (https://ed-lea.github.io/jquery-collagePlus/) **/
   app.import('./vendor/jquery-collagePlus/jquery.collagePlus.min.js');
   app.import('./vendor/jquery-collagePlus/jquery.collageCaption.min.js');
@@ -61,6 +53,10 @@ module.exports = function(defaults) {
   /** bootstrap-select **/
   app.import('./vendor/bootstrap-select/bootstrap-select.min.js');
   app.import('./vendor/bootstrap-select/bootstrap-select.min.css');
+
+  // typeahead
+  app.import('./bower_components/typeahead.js/dist/typeahead.jquery.min.js');
+  app.import('./bower_components/typeahead.js/dist/bloodhound.min.js');
   
-  return app.toTree([bootstrap_fonts, fa_fonts]);
+  return app.toTree([bootstrap_fonts]);
 };

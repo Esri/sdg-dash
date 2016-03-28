@@ -19,12 +19,7 @@ export default Ember.Component.extend({
       geo_value = qp.geo_value;
 
       this.$(elId).selectpicker('val', geo_value);
-
-      // let el = this.$(elId)[0];
-      // country_name = el.options[el.selectedIndex].text;
     }
-
-    // this.get('session').set('selected_country_name', country_name);
 
     this.$(elId).change(function (a) {
       let selector = this.$(elId);
@@ -32,21 +27,11 @@ export default Ember.Component.extend({
       let selected_geo_group = selected_item.parent().attr('value');
       let selected_geo_value = selector.val();
 
-
       let svc = this.get('session');
       svc.set('selected_geo_group', selected_geo_group);
       svc.set('selected_geo_value', selected_geo_value);
 
       this.get('goToGeography')(selected_geo_group, selected_geo_value);
-
-      // let selected = this.$(elId).val();
-      // let country_name = a.target.options[a.target.selectedIndex].text;
-      
-      // let sesh = this.get('session');
-      // sesh.set('selected_country_code', selected);
-      // sesh.set('selected_country_name', country_name);
-
-      // this.get('goToCountry')(selected);
 
     }.bind(this));
   }

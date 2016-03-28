@@ -11,7 +11,7 @@
 }
 
 .ranking-view .table > tbody > tr > td:nth-child(1) {
-  text-align: center;
+  text-align: right;
 }
 
 .ranking-view .table > tbody > tr:first-child > td {
@@ -21,7 +21,7 @@
   border-top: 1px solid #a9a9a9;
 }
 .ranking-table {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .ranking-view-highlighted-td {
@@ -33,6 +33,21 @@
   font-weight: bold;
 }
 
+.ranking-rank {
+  vertical-align: middle !important;
+}
+
 .ranking-label-col {
-  padding-left: 30px !important;
+  padding-left: 10px !important;
+  vertical-align: middle !important;
+}
+
+.bar-ranking {
+  width: 35%;
+  padding: 5px !important;
+}
+
+.bar-rank {
+  background-color: black;
+  height: 10px;
 }

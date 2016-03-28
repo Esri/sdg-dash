@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
   target_id: null,
 
   actions: {
+
     changeTarget(target) {
       this.model.set('selected_target', target);
       
@@ -70,7 +71,13 @@ export default Ember.Controller.extend({
     },
 
     goToGeoLevel(geo_level) {
-       this.transitionToRoute({queryParams: {country_code: this.country_code, geo_level: geo_level }})
+       const params = {
+        queryParams: {
+          geo_level: geo_level
+        }
+       };
+       
+       this.transitionToRoute(params)
         .then(function () {
           this.get('session').reconfigureAtGeoLevel(geo_level);
         }.bind(this));

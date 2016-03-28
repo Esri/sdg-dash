@@ -13,17 +13,25 @@ module.exports = function(environment) {
       }
     },
 
+    torii: {
+      sessionServiceName: 'authSession',
+      providers: {
+        'arcgis-oauth-bearer': {
+          apiKey: 'kNjojNLDhib1UoVH',
+          showSocialLogins: true
+        }
+      }
+    },
+
     contentSecurityPolicy: {
       'default-src': "'none' blob:",
       'script-src': "'self' http://arcgis-sdgs-385255865.us-east-1.elb.amazonaws.com/ 'unsafe-eval' 'unsafe-inline' http://*.arcgis.com/ https://*.arcgis.com/ https://apf-koop-sample-app.herokuapp.com https://*.esri.com",
       'font-src': "'self' data: *.fonts.net *.arcgis.com/",
-      'connect-src': "'self' http://arcgis-sdgs-385255865.us-east-1.elb.amazonaws.com/ http://*.arcgis.com/ http://services.arcgisonline.com/ https://sdg-api.herokuapp.com/ http://localhost:3000 https://*.esri.com",
+      'connect-src': "'self' http://arcgis-sdgs-385255865.us-east-1.elb.amazonaws.com/ http://*.arcgis.com/ http://services.arcgisonline.com/ https://sdg-api.herokuapp.com/ http://localhost:3000 http://localhost:3100 https://*.esri.com",
       'img-src': "'self' blob: http://arcgis-sdgs-385255865.us-east-1.elb.amazonaws.com/ https://*.arcgis.com/ http://*.arcgis.com/ http://*.arcgisonline.com/ https://*.esri.com",
       'style-src': "'self' 'unsafe-inline' https://fast.fonts.net http://*.arcgis.com https://*.arcgis.com",
       'media-src': "'self'"
     },
-
-    appId: '6quGTNGrQmpbKxxs',
 
     apiHost: 'http://www.arcgis.com',
     apiHostSecure: 'https://www.arcgis.com/',
@@ -49,7 +57,8 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    sdgApi: 'http://localhost:3000/'
+    sdgApi: 'http://localhost:3000/',
+    sdgDashboardsApi: 'http://localhost:3100/'
   };
 
   if (environment === 'development') {
@@ -60,6 +69,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     // 
     ENV.sdgApi = 'http://localhost:3000/';
+    ENV.sdgDashboardsApi = 'http://localhost:3100/';
   }
 
   if (environment === 'test') {
@@ -77,10 +87,13 @@ module.exports = function(environment) {
   if (environment === 'staging') {
     ENV.baseURL = '/';
     ENV.sdgApi = 'https://sdg-api.herokuapp.com/';
+    ENV.sdgDashboardsApi = 'https://sdg-dashboard-api.herokuapp.com/';
   }
 
   if (environment === 'production') {
-
+    ENV.baseURL = '/';
+    ENV.sdgApi = 'https://sdg-api.herokuapp.com/';
+    ENV.sdgDashboardsApi = 'https://sdg-dashboard-api.herokuapp.com/';
   }
 
   return ENV;

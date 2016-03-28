@@ -18,9 +18,9 @@
 }
 
 .glyph-globe-select {
-  padding: 10px;
-  font-size: 28px;
-  margin-left: 30px;
+  font-size: 35px;
+  margin: 5px 0 0 35px;
+  position: absolute;
 }
 
 .img-shift {
@@ -31,4 +31,27 @@
   margin: 0;
   color:white;
   border-top:1px solid rgba(248, 248, 248, .55);
+}
+
+.status-container {
+  margin-top: 30px;
+}
+.target-label {
+  /*color: #ddd;*/
+  font-size: 50px;
+}
+.target-label-container {
+  text-align: center;
+  border-right: 1px solid #ddd;
+}
+
+.img-dp-shadow {
+  -webkit-filter: drop-shadow(2px 2px 5px #f8f8f8);
+  -moz-filter: drop-shadow(2px 2px 5px #f8f8f8);
+}
+
+.vcenter {
+  display: table-cell;
+  vertical-align: middle;
+  float: none;
 }

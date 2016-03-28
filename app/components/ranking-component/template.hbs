@@ -2,9 +2,12 @@
   <tbody>
     {{#each rows as |row index|}}
       <tr class="{{if row.is_highlighted 'ranking-view-highlighted' 'ranking-view-highlighted-td'}}">
-        <td>{{row.ranking}}</td>
+        <td class="ranking-rank">{{row.ranking}}</td>
         <td class="ranking-label-col">{{row.label}}</td>
-        <td>{{row.value}}</td>
+        <!-- <td>{{row.value}}</td> -->
+        <td class="bar-ranking">
+          <div class="bar-rank" style={{row.barRankStyle}}></div>
+        </td>
       </tr>
     {{/each}}
   </tbody>

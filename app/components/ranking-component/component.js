@@ -37,7 +37,6 @@ export default Ember.Component.extend({
       const highlight_padding = settings.highlight_padding;
       const value_field = settings.value_field;
 
-     
       let row;
       let i = 1;
       let foundIndex = null;
@@ -92,15 +91,36 @@ export default Ember.Component.extend({
         rows.push({ ranking: features.length, label: features[features.length-1].attributes[highlight_field], value: features[features.length-1].attributes[value_field] });
       }
 
-      // format number values
-      rows.forEach(function (row) {
-        if (row.value !== 0) {
-          row.value = row.value.toFixed(1);
-        }        
+      // get normalized bar values
+      const values = rows.map(function (row) {
+        return row.value;
       });
+
+      const normalized_values = this._normalizeBarValues(Ember.copy(values));
+      const color_hex = this.get('session').get('selected_sdg').get('colorHex');
+      rows.forEach(function (row, i) {
+        const in_string = `width:${normalized_values[i]}%;background-color:${color_hex};`;
+        const safeString = new Ember.Handlebars.SafeString(in_string);
+        row.barRankStyle = safeString;
+      }, this);
 
       this.set('rows', rows);
     }
+  },
+
+  // from : http://stackoverflow.com/questions/13368046/how-to-normalize-a-list-of-positive-numbers-in-javascript
+  // http://jsfiddle.net/XpRR8/4/
+  _normalizeBarValues(numbers) {
+    let ratio = 0,
+        i = numbers.length;
+
+    while ( i-- ) numbers[i] > ratio && ( ratio = numbers[i] );
+
+    ratio /= 100;
+    i = numbers.length;
+
+    while (i--) numbers[i] =  numbers[i] / ratio;
+    return numbers;
   },
 
   _handleQueryError(error) {

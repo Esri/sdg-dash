@@ -4,28 +4,32 @@
 $icon-font-path: './fonts/';
 @import 'bootstrap';
 
-/* font awesome */
-$fa-font-path: './fonts/';
-@import 'font-awesome';
-
-@import 'partials/header-nav-right';
-
+/*routes*/
 @import 'landing';
-@import 'partials/footer';
-@import 'sdg-dash';
 @import 'sdg';
-@import 'country-select-box';
-@import 'sdg-status';
-@import 'sdg-targets-indicators';
-@import 'target-select-box';
-@import 'targets-select-modal';
-@import 'about-modal';
-@import 'geo-levels-select-box';
-@import 'sdg-button-colors-overrides';
-@import 'storymap-card';
-@import 'summary-stat-card';
-@import 'ranking-component';
 
+@import 'header';
+
+/*partials*/
+@import 'partials/header-nav-right';
+@import 'partials/footer';
+
+/*components*/
+@import 'components/arcgis-map-landing';
+@import 'components/arcgis-map';
+@import 'components/sdg-overview-collage';
+@import 'components/about-modal';
+@import 'components/ranking-component';
+@import 'components/storymap-card';
+@import 'components/summary-stat-card';
+@import 'components/geo-levels-select-box';
+@import 'components/country-select-box';
+@import 'components/geography-search-box';
+@import 'components/target-select-box';
+@import 'components/targets-select-modal';
+
+/*other*/
+@import 'sdg-button-colors-overrides';
 
 html, 
 body {
@@ -87,172 +91,12 @@ hr {
   padding-bottom: 20px;
 }
 
+.no-marg-top {
+  margin-top: -0;
+}
 .marg-top-neg-50 {
   margin-top: -50px;
 }
 .marg-bottom-50 {
   margin-bottom: 50px;
-}
-.vcenter {
-  display: table-cell;
-  vertical-align: middle;
-  float: none;
-}
-
-.sign-in {
-  margin-top: 200px;
-}
-
-/* esri map overrides*/
-.calcite .esriSimpleSliderTL {
-  top: 35px;
-  opacity: 0.75;
-}
-
-/*landing page*/
-.landing-map-top-overlay {
-  position: absolute;
-  top: 15px;
-  left: 50px;
-  z-index: 99;
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.75);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.35);
-}
-
-.landing-sdg-logo {
-  margin-top: 5px;
-  height: 70px;
-}
-.landing-text-div {
-  margin-top: -20px;
-  margin-left: 10px;
-}
-.landing-title {
-  color: #323232;
-}
-.landing-title p {
-  margin: 0;
-}
-.landing-title h3 {
-  margin-bottom: 0;
-}
-
-.landing-map {
-  min-height: 500px;
-  -webkit-box-shadow: 0px 1px 5px 0px rgba(50, 50, 50, 1);
-  -moz-box-shadow:    0px 1px 5px 0px rgba(50, 50, 50, 1);
-  box-shadow:         0px 1px 5px 0px rgba(50, 50, 50, 1);
-}
-
-.full-height {
-  min-height: 100%;
-  min-width: 100%;
-}
-
-.landing-legend {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 100;
-}
-
-.landing-legend img {
-  height: 75px;
-}
-
-/*landing page*/
-
-.neg-space {
-  margin-bottom: -99999px;
-  padding-bottom: 99999px;
-}
-
-/*nav bar*/
-.top-header {
- /* height: 80px;
-  padding-top: 10px;*/
-}
-.navbar-brand {
-  padding: 5px 15px;
-}
-.navbar-header {
-  margin-left: -15px;
-}
-.brand-logo {
-  height: 60px;
-  width: 60px;
-}
-
-.sit-on-top {
-  z-index: 1;
-}
-
-.img-dp-shadow {
-  -webkit-filter: drop-shadow(2px 2px 5px #f8f8f8);
-  -moz-filter: drop-shadow(2px 2px 5px #f8f8f8);
-}
-
-.img-sep {
-  margin-bottom: 50%;
-  color: gray;
-}
-
-.vert-center {
-  top: 50%;
-  left: 50%;
-}
-
-.carousel-fade {
-    .carousel-inner {
-        .item {
-            transition-property: opacity;
-        }
-        
-        .item,
-        .active.left,
-        .active.right {
-            opacity: 0;
-        }
-
-        .active,
-        .next.left,
-        .prev.right {
-            opacity: 1;
-        }
-
-        .next,
-        .prev,
-        .active.left,
-        .active.right {
-            left: 0;
-            transform: translate3d(0, 0, 0);
-        }
-    }
-
-    .carousel-control {
-        z-index: 2;
-    }
-}
-
-
-
-html, 
-body, 
-.carousel, 
-.carousel-inner, 
-.carousel-inner .item {
-    height: 100%;
-}
-
-.item:nth-child(1) {
-    background: #74C390;
-}
-
-.item:nth-child(2) {
-    background: #51BCE8;
-}
-
-.item:nth-child(3) {
-    background: #E46653;
 }

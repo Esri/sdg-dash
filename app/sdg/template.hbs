@@ -17,7 +17,11 @@
         </div>
         <!-- <div class="row">
           <div class="col-xs-12 pad-bottom-20">
-            {{contribute-button}}
+            {{#if authSession.isAuthenticated}}
+              <button class="btn btn-default btn-md" {{action 'signout'}}>Sign Out</button>
+            {{else}}
+              <button class="btn btn-default btn-md" {{action 'signin'}}>Sign In</button>
+            {{/if}}
           </div>
         </div> -->
       </div>
@@ -37,8 +41,8 @@
         <span class="glyphicon glyphicon-globe glyph-globe-select" aria-hidden="true"></span>
       </div>
       <div class="col-xs-2 country-select-container">
-        {{country-select-box model=model goToGeography=(action 'goToGeography')}}
-        <!-- {{ geography-select-box model=model goToGeography=(action 'goToGeography') }} -->
+        <!-- {{country-select-box model=model goToGeography=(action 'goToGeography')}} -->
+        {{geography-search-box model=model goToGeography=(action 'goToGeography')}}
       </div>
       <div class="col-xs-1">
         <span class="glyphicon glyphicon-map-marker glyph-globe-select" aria-hidden="true"></span>
@@ -75,19 +79,7 @@
     {{#if session.cards.length}}
       {{grid-layout model=model cards=session.cards action="noOp"}}
     {{else}}
-      <div class="container text-center" style="min-height: 400px;">
-        <div class="row">
-          <div class="col-xs-12">
-            <h3><strong>No data found</strong></h3>
-          </div>
-          <div class="col-xs-12">
-            <p>This application is in development and data sets are being added. Please check back at a later time.</p>
-          </div>
-        </div>
-        <!-- <div class="text-center pad-top-20">
-          {{contribute-button}}
-        </div> -->
-      </div>
+      {{no-data-card}}
     {{/if}}
 
   </div>
