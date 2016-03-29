@@ -91,9 +91,9 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.locationType = 'hash';
+    // ENV.locationType = 'hash';
     ENV.baseURL = '/sdg-dash/';
-    ENV.baseURL = '/';
+    // ENV.baseURL = '/';
     ENV.sdgApi = 'https://sdg-api.herokuapp.com/';
     ENV.sdgDashboardsApi = 'https://sdg-dashboard-api.herokuapp.com/';
   }
