@@ -7790,7 +7790,7 @@ efineday("sdg-dash/sdg-overview/template", ["exports"], function (exports) {
             },
             "end": {
               "line": 33,
-              "column": 178
+              "column": 183
             }
           },
           "moduleName": "sdg-dash/sdg-overview/template.hbs"
@@ -8131,7 +8131,7 @@ efineday("sdg-dash/sdg-overview/template", ["exports"], function (exports) {
         dom.insertBoundary(fragment, null);
         return morphs;
       },
-      statements: [["inline", "t", ["application.title"], [], ["loc", [null, [10, 12], [10, 37]]]], ["inline", "arcgis-map-landing", [], ["class", "landing-map"], ["loc", [null, [18, 2], [18, 46]]]], ["inline", "sdg-overview-collage", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [20, 32], [20, 37]]]]], [], []], "loadSDG", "routeToSDG", "class", "marg-top-neg-50"], ["loc", [null, [20, 2], [20, 85]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [28, 31], [28, 98]]]]], [], 0, null, ["loc", [null, [28, 10], [28, 160]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [29, 31], [29, 102]]]]], [], 1, null, ["loc", [null, [29, 10], [29, 182]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [30, 31], [30, 98]]]]], [], 2, null, ["loc", [null, [30, 10], [30, 180]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [31, 31], [31, 102]]]]], [], 3, null, ["loc", [null, [31, 10], [31, 178]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [32, 32], [32, 108]]]]], [], 4, null, ["loc", [null, [32, 10], [32, 197]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "BOGOTA", "target_id", "11.1"], ["loc", [null, [33, 32], [33, 101]]]]], [], 5, null, ["loc", [null, [33, 10], [33, 190]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [34, 36], [34, 62]]]]], [], 6, null, ["loc", [null, [34, 10], [34, 165]]]], ["block", "ember-wormhole", [], ["to", "about-modal-destination"], 7, null, ["loc", [null, [41, 0], [43, 19]]]]],
+      statements: [["inline", "t", ["application.title"], [], ["loc", [null, [10, 12], [10, 37]]]], ["inline", "arcgis-map-landing", [], ["class", "landing-map"], ["loc", [null, [18, 2], [18, 46]]]], ["inline", "sdg-overview-collage", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [20, 32], [20, 37]]]]], [], []], "loadSDG", "routeToSDG", "class", "marg-top-neg-50"], ["loc", [null, [20, 2], [20, 85]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [28, 31], [28, 98]]]]], [], 0, null, ["loc", [null, [28, 10], [28, 160]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [29, 31], [29, 102]]]]], [], 1, null, ["loc", [null, [29, 10], [29, 182]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [30, 31], [30, 98]]]]], [], 2, null, ["loc", [null, [30, 10], [30, 180]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [31, 31], [31, 102]]]]], [], 3, null, ["loc", [null, [31, 10], [31, 178]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [32, 32], [32, 108]]]]], [], 4, null, ["loc", [null, [32, 10], [32, 197]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [33, 32], [33, 106]]]]], [], 5, null, ["loc", [null, [33, 10], [33, 195]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [34, 36], [34, 62]]]]], [], 6, null, ["loc", [null, [34, 10], [34, 165]]]], ["block", "ember-wormhole", [], ["to", "about-modal-destination"], 7, null, ["loc", [null, [41, 0], [43, 19]]]]],
       locals: [],
       templates: [child0, child1, child2, child3, child4, child5, child6, child7]
     };
@@ -11185,7 +11185,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+03a31725"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+a2aeee70"});
 }
 
 /* jshint ignore:end */
