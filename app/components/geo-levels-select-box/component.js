@@ -17,7 +17,7 @@ export default Ember.Component.extend({
       const sel = this.$(elId).val();
       
       const levels = this.get('session').get('available_dashboard_levels');
-      const new_level = levels.filter(function (l) { return l.title === sel })[0];
+      const new_level = levels.filter(function (l) { return l.title === sel; })[0];
       this.get('session').set('selected_dashboard', new_level);
 
       this.sendAction('goToGeoLevel', sel);

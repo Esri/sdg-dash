@@ -34,30 +34,9 @@ export default Ember.Component.extend({
         this.set('bookmarks', bookmarks);
         this.set('bookmark_counter', 0);
 
-        // this._startExtentAnimation(bookmarks);
       });
 
-  },
-
-  _startExtentAnimation(bookmarks) {
-    const time_interval = 6000;
-    const animHandler = setInterval(function () {
-      let idx = this.get('bookmark_counter');
-      const bk = this.get('bookmarks')[idx];
-      const map = this.get('map');
-
-      map.setExtent(new Extent(bk.extent), true)
-        .then( () => {
-          idx++;
-          if (idx === this.get('bookmarks').length) {
-            idx = 0;
-          }
-          this.set('bookmark_counter', idx);
-        });
-
-    }.bind(this), time_interval);
-    this.set('animHandler', animHandler);
-  },
+  },  
 
   willDestroyElement() {
     const animHandler = this.get('animHandler');

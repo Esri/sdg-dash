@@ -21,7 +21,7 @@ export default Ember.Component.extend({
       this.$(elId).selectpicker('val', geo_value);
     }
 
-    this.$(elId).change(function (a) {
+    this.$(elId).change(function () {
       let selector = this.$(elId);
       let selected_item = this.$(':selected', selector);
       let selected_geo_group = selected_item.parent().attr('value');
