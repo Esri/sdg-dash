@@ -91,7 +91,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    // ENV.locationType = 'hash';
+    ENV.locationType = 'auto';
     ENV.baseURL = '/sdg-dash/';
     // ENV.baseURL = '/';
     ENV.sdgApi = 'https://sdg-api.herokuapp.com/';
