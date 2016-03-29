@@ -34,7 +34,7 @@ export default Ember.Component.extend({
           const display_name = response.data.filter(function (item) {
             return item.id === geo_value;
           })[0].display;
-          console.log(display_name);
+          
           this.$().val(display_name);
         }
 
@@ -49,13 +49,13 @@ export default Ember.Component.extend({
         }, this);
         
         const countries = new Bloodhound({
-          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('display'),
+          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('display','id'),
           queryTokenizer: Bloodhound.tokenizers.whitespace,
           local: countries_data
         });
 
         const cities = new Bloodhound({
-          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('display'),
+          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('display','id'),
           queryTokenizer: Bloodhound.tokenizers.whitespace,
           local: cities_data
         });
@@ -102,7 +102,7 @@ export default Ember.Component.extend({
       })
       .catch((error) => {
         console.log('error getting geographies for selector: ', error);
-      })
+      });
   },
 
   sessionRouteChanged: Ember.observer('session.selected_sdg', function () {
