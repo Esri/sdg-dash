@@ -28,8 +28,8 @@ export default Ember.Component.extend({
         });
 
         // wire up change event
-        this.$(elId).change(function (a) {
-          var selected = $(elId).val();
+        this.$(elId).change(function () {
+          var selected = this.$(elId).val();
           this._changeDisplayName();
           this.get('changeSdg')(selected);
         }.bind(this));

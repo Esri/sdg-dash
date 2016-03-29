@@ -65,8 +65,9 @@ module.exports = function(defaults) {
   app.import('./vendor/bootstrap-select/bootstrap-select.min.css');
 
   // typeahead
-  app.import('./bower_components/typeahead.js/dist/typeahead.jquery.min.js');
-  app.import('./bower_components/typeahead.js/dist/bloodhound.min.js');
+  app.import('./bower_components/typeahead.js/dist/typeahead.bundle.min.js');
+  // app.import('./bower_components/typeahead.js/dist/typeahead.jquery.min.js');
+  // app.import('./bower_components/typeahead.js/dist/bloodhound.min.js');
   
   return app.toTree([bootstrap_fonts]);
 };

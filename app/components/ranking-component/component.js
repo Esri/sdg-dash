@@ -1,10 +1,11 @@
 import Ember from 'ember';
-import ajax from 'ic-ajax';
 import QueryTask from 'esri/tasks/QueryTask';
 import Query from 'esri/tasks/query';
 
 export default Ember.Component.extend({
   classNames: ['ranking-view'],
+
+  queryHandle: null,
 
   didInsertElement() {
     this._super(...arguments);
@@ -24,7 +25,8 @@ export default Ember.Component.extend({
     query.outFields = settings.query.outFields;
     query.orderByFields = settings.query.orderByFields;
 
-    task.execute(query, this._handleQueryResponse.bind(this), this._handleQueryError.bind(this));
+    const qH = task.execute(query, this._handleQueryResponse.bind(this), this._handleQueryError.bind(this));
+    this.set('queryHandle', qH);
   },
 
   _handleQueryResponse(response) {
@@ -37,7 +39,7 @@ export default Ember.Component.extend({
       const highlight_padding = settings.highlight_padding;
       const value_field = settings.value_field;
 
-      let row;
+      // let row;
       let i = 1;
       let foundIndex = null;
       for (i;i < features.length;i++) {
@@ -114,17 +116,23 @@ export default Ember.Component.extend({
     let ratio = 0,
         i = numbers.length;
 
-    while ( i-- ) numbers[i] > ratio && ( ratio = numbers[i] );
+    while ( i-- ) { numbers[i] > ratio && ( ratio = numbers[i] ); }
 
     ratio /= 100;
     i = numbers.length;
 
-    while (i--) numbers[i] =  numbers[i] / ratio;
+    while (i--) { numbers[i] =  numbers[i] / ratio; }
     return numbers;
   },
 
   _handleQueryError(error) {
     console.log('error querying for ranking card component', error);
-  }
+  },
 
+  willDestroyElement() {
+    const qH = this.get('queryHandle');
+    if (qH) {
+      qH.cancel();
+    }
+  }
 });
