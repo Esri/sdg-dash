@@ -2,7 +2,13 @@
 var Funnel = require('broccoli-funnel');
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
+var env = EmberApp.env() || 'development';
+// var isProductionLikeBuild = ['production', 'staging'].indexOf(env) > -1;
+
 module.exports = function(defaults) {
+  
+  console.log('BUILD: Env is ' + env);
+  
   var app = new EmberApp(defaults, {
     // Add options here
     sassOptions: {
@@ -19,6 +25,10 @@ module.exports = function(defaults) {
         'esri','dojo','dojox','dijit',
         'put-selector','xstyle','dbind','dgrid'
       ]
+    },
+
+    fingerprint: {
+      exclude: ['images']
     }
   });
 
