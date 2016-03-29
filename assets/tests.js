@@ -76,7 +76,7 @@ efineday('sdg-dash/tests/components/arcgis-map-landing/component.jshint', ['expo
   QUnit.module('JSHint - components/arcgis-map-landing');
   QUnit.test('components/arcgis-map-landing/component.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/arcgis-map-landing/component.js should pass jshint.\ncomponents/arcgis-map-landing/component.js: line 42, col 25, \'bookmarks\' is defined but never used.\n\n1 error');
+    assert.ok(false, 'components/arcgis-map-landing/component.js should pass jshint.\ncomponents/arcgis-map-landing/component.js: line 4, col 8, \'Extent\' is defined but never used.\n\n1 error');
   });
 });
 efineday('sdg-dash/tests/components/arcgis-map-sdg-index/component.jshint', ['exports'], function (exports) {
@@ -112,7 +112,7 @@ efineday('sdg-dash/tests/components/country-select-box/component.jshint', ['expo
   QUnit.module('JSHint - components/country-select-box');
   QUnit.test('components/country-select-box/component.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/country-select-box/component.js should pass jshint.\ncomponents/country-select-box/component.js: line 24, col 35, \'a\' is defined but never used.\n\n1 error');
+    assert.ok(true, 'components/country-select-box/component.js should pass jshint.');
   });
 });
 efineday('sdg-dash/tests/components/data-info-popover/component.jshint', ['exports'], function (exports) {
@@ -130,7 +130,7 @@ efineday('sdg-dash/tests/components/geo-levels-select-box/component.jshint', ['e
   QUnit.module('JSHint - components/geo-levels-select-box');
   QUnit.test('components/geo-levels-select-box/component.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/geo-levels-select-box/component.js should pass jshint.\ncomponents/geo-levels-select-box/component.js: line 20, col 76, Missing semicolon.\n\n1 error');
+    assert.ok(true, 'components/geo-levels-select-box/component.js should pass jshint.');
   });
 });
 efineday('sdg-dash/tests/components/geography-search-box/component.jshint', ['exports'], function (exports) {
@@ -139,7 +139,7 @@ efineday('sdg-dash/tests/components/geography-search-box/component.jshint', ['ex
   QUnit.module('JSHint - components/geography-search-box');
   QUnit.test('components/geography-search-box/component.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/geography-search-box/component.js should pass jshint.\ncomponents/geography-search-box/component.js: line 105, col 9, Missing semicolon.\ncomponents/geography-search-box/component.js: line 51, col 31, \'Bloodhound\' is not defined.\ncomponents/geography-search-box/component.js: line 52, col 27, \'Bloodhound\' is not defined.\ncomponents/geography-search-box/component.js: line 53, col 27, \'Bloodhound\' is not defined.\ncomponents/geography-search-box/component.js: line 57, col 28, \'Bloodhound\' is not defined.\ncomponents/geography-search-box/component.js: line 58, col 27, \'Bloodhound\' is not defined.\ncomponents/geography-search-box/component.js: line 59, col 27, \'Bloodhound\' is not defined.\n\n7 errors');
+    assert.ok(false, 'components/geography-search-box/component.js should pass jshint.\ncomponents/geography-search-box/component.js: line 51, col 31, \'Bloodhound\' is not defined.\ncomponents/geography-search-box/component.js: line 52, col 27, \'Bloodhound\' is not defined.\ncomponents/geography-search-box/component.js: line 53, col 27, \'Bloodhound\' is not defined.\ncomponents/geography-search-box/component.js: line 57, col 28, \'Bloodhound\' is not defined.\ncomponents/geography-search-box/component.js: line 58, col 27, \'Bloodhound\' is not defined.\ncomponents/geography-search-box/component.js: line 59, col 27, \'Bloodhound\' is not defined.\n\n6 errors');
   });
 });
 efineday('sdg-dash/tests/components/login-button/component.jshint', ['exports'], function (exports) {
@@ -193,7 +193,7 @@ efineday('sdg-dash/tests/components/ranking-component/component.jshint', ['expor
   QUnit.module('JSHint - components/ranking-component');
   QUnit.test('components/ranking-component/component.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/ranking-component/component.js should pass jshint.\ncomponents/ranking-component/component.js: line 40, col 11, \'row\' is defined but never used.\ncomponents/ranking-component/component.js: line 117, col 19, Expected \'{\' and instead saw \'numbers\'.\ncomponents/ranking-component/component.js: line 117, col 62, Expected an assignment or function call and instead saw an expression.\ncomponents/ranking-component/component.js: line 122, col 17, Expected \'{\' and instead saw \'numbers\'.\ncomponents/ranking-component/component.js: line 2, col 8, \'ajax\' is defined but never used.\n\n5 errors');
+    assert.ok(false, 'components/ranking-component/component.js should pass jshint.\ncomponents/ranking-component/component.js: line 119, col 64, Expected an assignment or function call and instead saw an expression.\n\n1 error');
   });
 });
 efineday('sdg-dash/tests/components/sdg-overview-collage/component.jshint', ['exports'], function (exports) {
@@ -211,7 +211,7 @@ efineday('sdg-dash/tests/components/sdg-select-box/component.jshint', ['exports'
   QUnit.module('JSHint - components/sdg-select-box');
   QUnit.test('components/sdg-select-box/component.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/sdg-select-box/component.js should pass jshint.\ncomponents/sdg-select-box/component.js: line 31, col 39, \'a\' is defined but never used.\ncomponents/sdg-select-box/component.js: line 32, col 26, \'$\' is not defined.\n\n2 errors');
+    assert.ok(true, 'components/sdg-select-box/component.js should pass jshint.');
   });
 });
 efineday('sdg-dash/tests/components/storymap-card/component.jshint', ['exports'], function (exports) {

@@ -501,29 +501,7 @@ efineday('sdg-dash/components/arcgis-map-landing/component', ['exports', 'ember'
         var bookmarks = response.itemInfo.itemData.bookmarks;
         _this.set('bookmarks', bookmarks);
         _this.set('bookmark_counter', 0);
-
-        // this._startExtentAnimation(bookmarks);
       });
-    },
-
-    _startExtentAnimation: function _startExtentAnimation(bookmarks) {
-      var time_interval = 6000;
-      var animHandler = setInterval((function () {
-        var _this2 = this;
-
-        var idx = this.get('bookmark_counter');
-        var bk = this.get('bookmarks')[idx];
-        var map = this.get('map');
-
-        map.setExtent(new _esriGeometryExtent['default'](bk.extent), true).then(function () {
-          idx++;
-          if (idx === _this2.get('bookmarks').length) {
-            idx = 0;
-          }
-          _this2.set('bookmark_counter', idx);
-        });
-      }).bind(this), time_interval);
-      this.set('animHandler', animHandler);
     },
 
     willDestroyElement: function willDestroyElement() {
@@ -917,7 +895,7 @@ efineday('sdg-dash/components/country-select-box/component', ['exports', 'ember'
         this.$(elId).selectpicker('val', geo_value);
       }
 
-      this.$(elId).change((function (a) {
+      this.$(elId).change((function () {
         var selector = this.$(elId);
         var selected_item = this.$(':selected', selector);
         var selected_geo_group = selected_item.parent().attr('value');
@@ -2662,7 +2640,7 @@ efineday('sdg-dash/components/geography-search-box/component', ['exports', 'embe
           var display_name = response.data.filter(function (item) {
             return item.id === geo_value;
           })[0].display;
-          console.log(display_name);
+
           _this.$().val(display_name);
         }
 
@@ -2677,13 +2655,13 @@ efineday('sdg-dash/components/geography-search-box/component', ['exports', 'embe
         }, _this);
 
         var countries = new Bloodhound({
-          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('display'),
+          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('display', 'id'),
           queryTokenizer: Bloodhound.tokenizers.whitespace,
           local: countries_data
         });
 
         var cities = new Bloodhound({
-          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('display'),
+          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('display', 'id'),
           queryTokenizer: Bloodhound.tokenizers.whitespace,
           local: cities_data
         });
@@ -4181,9 +4159,11 @@ efineday("sdg-dash/components/ranking-card/template", ["exports"], function (exp
     };
   })());
 });
-efineday('sdg-dash/components/ranking-component/component', ['exports', 'ember', 'ic-ajax', 'esri/tasks/QueryTask', 'esri/tasks/query'], function (exports, _ember, _icAjax, _esriTasksQueryTask, _esriTasksQuery) {
+efineday('sdg-dash/components/ranking-component/component', ['exports', 'ember', 'esri/tasks/QueryTask', 'esri/tasks/query'], function (exports, _ember, _esriTasksQueryTask, _esriTasksQuery) {
   exports['default'] = _ember['default'].Component.extend({
     classNames: ['ranking-view'],
+
+    queryHandle: null,
 
     didInsertElement: function didInsertElement() {
       this._super.apply(this, arguments);
@@ -4203,7 +4183,8 @@ efineday('sdg-dash/components/ranking-component/component', ['exports', 'ember',
       query.outFields = settings.query.outFields;
       query.orderByFields = settings.query.orderByFields;
 
-      task.execute(query, this._handleQueryResponse.bind(this), this._handleQueryError.bind(this));
+      var qH = task.execute(query, this._handleQueryResponse.bind(this), this._handleQueryError.bind(this));
+      this.set('queryHandle', qH);
     },
 
     _handleQueryResponse: function _handleQueryResponse(response) {
@@ -4219,7 +4200,7 @@ efineday('sdg-dash/components/ranking-component/component', ['exports', 'ember',
           var highlight_padding = settings.highlight_padding;
           var value_field = settings.value_field;
 
-          var row = undefined;
+          // let row;
           var i = 1;
           var foundIndex = null;
           for (i; i < features.length; i++) {
@@ -4296,19 +4277,29 @@ efineday('sdg-dash/components/ranking-component/component', ['exports', 'ember',
       var ratio = 0,
           i = numbers.length;
 
-      while (i--) numbers[i] > ratio && (ratio = numbers[i]);
+      while (i--) {
+        numbers[i] > ratio && (ratio = numbers[i]);
+      }
 
       ratio /= 100;
       i = numbers.length;
 
-      while (i--) numbers[i] = numbers[i] / ratio;
+      while (i--) {
+        numbers[i] = numbers[i] / ratio;
+      }
       return numbers;
     },
 
     _handleQueryError: function _handleQueryError(error) {
       console.log('error querying for ranking card component', error);
-    }
+    },
 
+    willDestroyElement: function willDestroyElement() {
+      var qH = this.get('queryHandle');
+      if (qH) {
+        qH.cancel();
+      }
+    }
   });
 });
 efineday("sdg-dash/components/ranking-component/template", ["exports"], function (exports) {
@@ -4639,8 +4630,8 @@ efineday('sdg-dash/components/sdg-select-box/component', ['exports', 'ember', 'i
         });
 
         // wire up change event
-        this.$(elId).change((function (a) {
-          var selected = $(elId).val();
+        this.$(elId).change((function () {
+          var selected = this.$(elId).val();
           this._changeDisplayName();
           this.get('changeSdg')(selected);
         }).bind(this));
@@ -11185,7 +11176,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+a2aeee70"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+095622ca"});
 }
 
 /* jshint ignore:end */
