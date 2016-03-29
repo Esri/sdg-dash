@@ -90,12 +90,15 @@ module.exports = function(environment) {
     ENV.sdgDashboardsApi = 'https://sdg-dashboard-api.herokuapp.com/';
   }
 
-  if (environment === 'production') {
-    ENV.locationType = 'auto';
-    ENV.baseURL = '/sdg-dash/';
-    // ENV.baseURL = '/';
+  if (environment === 'gh-pages') {
+    ENV.locationType = 'hash';
+    ENV.baseURL = '/sdg-dash';
     ENV.sdgApi = 'https://sdg-api.herokuapp.com/';
     ENV.sdgDashboardsApi = 'https://sdg-dashboard-api.herokuapp.com/';
+  }
+
+  if (environment === 'production') {
+
   }
 
   return ENV;
