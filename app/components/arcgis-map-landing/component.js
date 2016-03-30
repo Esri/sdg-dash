@@ -1,13 +1,11 @@
 import Ember from 'ember';
-
 import arcgisUtils from 'esri/arcgis/utils';
-import Extent from 'esri/geometry/Extent';
-import on from 'dojo/on';
 
 export default Ember.Component.extend({
+  
+  map: null,
 
   didInsertElement() {
-
     const webmapId = 'b663c29073f447c98b79c9b4455a4bb8';
     const options = {
       mapOptions: {
@@ -23,26 +21,15 @@ export default Ember.Component.extend({
     arcgisUtils.createMap(webmapId, this.element, options)
       .then( (response) => {
         let map = response.map;
-        on.once(map, 'click, mouse-down', function () {
-          const handler = this.get('animHandler');
-          clearInterval(handler);
-        }.bind(this));
-
+        map.disableScrollWheelZoom();
         this.set('map', map);
-
-        let bookmarks = response.itemInfo.itemData.bookmarks;
-        this.set('bookmarks', bookmarks);
-        this.set('bookmark_counter', 0);
-
       });
-
   },  
 
   willDestroyElement() {
-    const animHandler = this.get('animHandler');
-    if (animHandler) {
-      clearInterval(animHandler);
+    const map = this.get('map');
+    if (map) {
+      map.destroy();
     }
   }
-
 });

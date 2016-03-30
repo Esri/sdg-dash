@@ -26,6 +26,8 @@ export default Ember.Component.extend({
     }
     svc.createMap(webmap, this.element, settings.options).then((response) => {
       this.map = response.map;
+      this.map.disableScrollWheelZoom();
+      
       this.itemInfo = response.itemInfo;
       if (response.clickEventHandle) {
         this.handlers.push(response.clickEventHandle);
