@@ -2,6 +2,7 @@ import Ember from 'ember';
 import colorUtils from 'sdg-dash/utils/colors';
 
 export default Ember.Component.extend({
+  classNames: ['btn btn-nocursor'],
   
   didInsertElement() {
     const elId = '#geo-levels-selector';

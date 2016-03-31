@@ -1,3 +1,18 @@
+.sdg-separator {
+  border-top: 1px solid rgba(248, 248, 248, 0.55);
+}
+.navbar-selector {
+  /*border-top: 1px solid rgba(248, 248, 248, 0.55);*/
+  /*border-left: 0;*/
+  /*border-right: 0;*/
+  /*border-bottom: 0;*/
+  border: 0;
+}
+.btn-nocursor {
+  cursor: default;
+  padding-right: 0;
+  padding-left: 0;
+}
 .country-select-container {
   padding: 5px 0px 5px 0;
 }
@@ -11,10 +26,20 @@
   height: 210px;
 }
 
-.glyph-sdg-logo {
-  margin: -10px 0px 0px 0px;
-  height: 70px;
-  position: absolute;
+@media (min-width: 1200px) {
+  .glyph-sdg-logo {
+    margin: -10px 0px 0px 40px !important;
+    height: 80px;
+    position: absolute;
+  }
+}
+
+@media (min-width: 768px) {
+  .glyph-sdg-logo {
+    margin: -10px 0px 0px -20px;
+    height: 80px;
+    position: absolute;
+  }
 }
 
 .glyph-globe-select {
@@ -23,14 +48,23 @@
   position: absolute;
 }
 
+.glyph-target-select {
+  float: left;
+  margin: -2px 0;
+  padding: 3px 0px 0px 0px !important;
+  font-size: 35px;
+  height: 40px;
+  color: white !important;
+}
+
 .img-shift {
   margin-left: 35px;
 }
 
 .selector-row {
-  margin: 0;
+  padding-left: 50px;
   color:white;
-  border-top:1px solid rgba(248, 248, 248, .55);
+  /*border-top:1px solid rgba(248, 248, 248, .55);*/
 }
 
 .status-container {

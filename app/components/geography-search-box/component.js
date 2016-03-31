@@ -28,14 +28,14 @@ export default Ember.Component.extend({
         }
 
         const qp = this.get('container').lookup('router:main').router.state.queryParams;
-        let geo_value = 'Global Progress';
         if (qp && qp.geo_group && qp.geo_value){
-          geo_value = qp.geo_value;
           const display_name = response.data.filter(function (item) {
-            return item.id === geo_value;
+            return item.id === qp.geo_value;
           })[0].display;
           
           this.$().val(display_name);
+        } else {
+          this.$().val('Global Progress');
         }
 
         let countries_data = [];
