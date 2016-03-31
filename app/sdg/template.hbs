@@ -1,8 +1,8 @@
-<div class="container-fluid no-padding">
-  <div style="background-color:{{model.colorHex}};color:white;">
+<div class="container-fluid no-padding" style="background-color:{{model.colorHex}};">
+  <div class="container" style="background-color:{{model.colorHex}};color:white;">
     <div class="row">
-      <div class="col-xs-3">
-        <img class="img-shift" src="images/sdg/TGG_Icon_Only_Color_{{model.displayNumber}}.gif" height="210" width="210">
+      <div class="col-xs-3 text-center">
+        <img class="img-shift" src="images/sdg/TGG_Icon_Only_Color_{{model.displayNumber}}.gif" height="150" width="150">
       </div>
       <div class="col-xs-7 pad-top-10">
         <div class="row">
@@ -26,37 +26,48 @@
         </div> -->
       </div>
     </div>
+    <hr class="sdg-separator">
+    <br>
+    <nav class="navbar navbar-default navbar-selector text-center" style="background-color:rgba({{model.colorRgb}}, 0.75);">
+      <!-- <div class="container"> -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          {{#link-to 'sdg-overview'}}
+            <img class="glyph-sdg-logo img-dp-shadow" src='images/landing/sdg-logo-only.png'>
+          {{/link-to}}
+        </div>
 
-    <div class="row selector-row" style="background-color:rgba({{model.colorRgb}}, 0.75);">
-      <div class="col-xs-1">
-        <!-- <img class="glyph-sdg-logo" src="images/sdg/main-logo-white40x40.png"> -->
-        {{#link-to 'sdg-overview'}}
-          <img class="glyph-sdg-logo img-dp-shadow" src='images/landing/sdg-logo-only.png'>
-        {{/link-to}}
-      </div>
-      <div class="col-xs-2 country-select-container">
-        {{sdg-select-box model=model changeSdg=(action 'changeSdg') }}
-      </div>
-      <div class="col-xs-1">
-        <span class="glyphicon glyphicon-globe glyph-globe-select" aria-hidden="true"></span>
-      </div>
-      <div class="col-xs-2 country-select-container">
-        <!-- {{country-select-box model=model goToGeography=(action 'goToGeography')}} -->
-        {{geography-search-box model=model goToGeography=(action 'goToGeography')}}
-      </div>
-      <div class="col-xs-1">
-        <span class="glyphicon glyphicon-map-marker glyph-globe-select" aria-hidden="true"></span>
-      </div>
-      <div class="col-xs-2 country-select-container">
-        {{geo-levels-select-box model=model goToGeoLevel="goToGeoLevel" }}
-      </div>
-      <div class="col-xs-1">
-        <span class="glyphicon glyphicon-record glyph-globe-select" aria-hidden="true"></span>
-      </div>
-      <div class="col-xs-2 country-select-container">
-        {{targets-select-button model=model }}
-      </div>
-    </div>
+        <div class="collapse navbar-collapse selector-row" id="bs-example-navbar-collapse-1">
+          
+            {{sdg-select-box model=model changeSdg=(action 'changeSdg') }}
+            <div class="btn btn-nocursor">
+              <div class="navbar-brand glyph-target-select">
+                <span class="glyphicon glyphicon-record" aria-hidden="true"></span>
+              </div>
+            </div>
+            {{targets-select-button model=model }}     
+            <div class="btn btn-nocursor">
+              <div class="navbar-brand glyph-target-select">
+                <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+              </div>
+            </div>
+            <!-- {{geography-search-box model=model goToGeography=(action 'goToGeography')}}   -->       
+            {{country-select-box model=model goToGeography=(action 'goToGeography')}}  
+            <div class="btn btn-nocursor">
+              <div class="navbar-brand glyph-target-select">
+                <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+              </div>
+            </div>
+            {{geo-levels-select-box model=model goToGeoLevel="goToGeoLevel" }}
+          
+        </div>
+      <!-- </div> -->
+    </nav>
 
   </div>
 </div>
