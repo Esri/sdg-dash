@@ -31,9 +31,15 @@
 }
 
 .glyph-sdg-logo {
-  margin: -10px 0px 0px -20px;
-  height: 80px;
+  margin: 5px 0px 0px 10px;
+  height: 40px;
   position: absolute;
+}
+
+@media (min-width: 1200px) {
+  .glyph-sdg-logo {
+    margin:5px 0px 0px 100px !important;
+  }
 }
 
 .glyph-globe-select {
@@ -52,7 +58,7 @@
 }
 
 .selector-row {
-  padding-left: 50px;
+  /*padding-left: 50px;*/
   color:white;
   /*border-top:1px solid rgba(248, 248, 248, .55);*/
 }
@@ -70,8 +76,8 @@
 }
 
 .img-dp-shadow {
-  -webkit-filter: drop-shadow(2px 2px 5px #f8f8f8);
-  -moz-filter: drop-shadow(2px 2px 5px #f8f8f8);
+  -webkit-filter: drop-shadow(1px 1px 2px #f8f8f8);
+  -moz-filter: drop-shadow(1px 1px 2px #f8f8f8);
 }
 
 .vcenter {
