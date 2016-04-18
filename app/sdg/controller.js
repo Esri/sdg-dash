@@ -39,8 +39,10 @@ export default Ember.Controller.extend({
       const params = {
         queryParams: { 
           geo_group : this.geo_group, 
-          geo_value: this.geo_value, 
-          target_id: null }
+          // geo_value: this.geo_value, 
+          geo_value: 'GLOBAL', 
+          target_id: null 
+        }
       };
       this.transitionToRoute('sdg', selected, params);
     },

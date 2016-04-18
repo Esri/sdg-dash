@@ -25,6 +25,9 @@ export default Ember.Route.extend({
 
     let svc = this.get('session');
     svc.set('selected_sdg', sdg);
+
+    // reset all the cards!!
+    svc.set('cards', []);
     
     // handle in-bound query params if they exist
     const geo_group = transition.queryParams.geo_group || 'countries';
@@ -44,6 +47,7 @@ export default Ember.Route.extend({
       selected_target = targets.filter(function (t) { return t.id === in_target; })[0];
     } else {
       selected_target = {id: 'SDG Index'};
+      svc.set('selected_geo_value', 'GLOBAL');
     }
     
     // keep this in

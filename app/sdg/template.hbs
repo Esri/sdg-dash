@@ -90,7 +90,15 @@
     {{#if session.cards.length}}
       {{grid-layout model=model cards=session.cards action="noOp"}}
     {{else}}
-      {{no-data-card}}
+      {{#if session.isLoadingCards}}
+        <div class="loader is-active padding-leader-3 padding-trailer-3" style="margin-top: 100px;">
+          <div class="loader-bars"></div>
+          <div class="loader-text">Loading ...</div>
+        </div>
+      {{else}}
+        {{no-data-card}}
+      {{/if}}
+      
     {{/if}}
 
   </div>
