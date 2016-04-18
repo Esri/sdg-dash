@@ -2,10 +2,6 @@
   border-top: 1px solid rgba(248, 248, 248, 0.55);
 }
 .navbar-selector {
-  /*border-top: 1px solid rgba(248, 248, 248, 0.55);*/
-  /*border-left: 0;*/
-  /*border-right: 0;*/
-  /*border-bottom: 0;*/
   border: 0;
 }
 .btn-nocursor {
@@ -34,12 +30,10 @@
   }
 }
 
-@media (min-width: 768px) {
-  .glyph-sdg-logo {
-    margin: -10px 0px 0px -20px;
-    height: 80px;
-    position: absolute;
-  }
+.glyph-sdg-logo {
+  margin: -10px 0px 0px -20px;
+  height: 80px;
+  position: absolute;
 }
 
 .glyph-globe-select {
@@ -55,10 +49,6 @@
   font-size: 35px;
   height: 40px;
   color: white !important;
-}
-
-.img-shift {
-  margin-left: 35px;
 }
 
 .selector-row {

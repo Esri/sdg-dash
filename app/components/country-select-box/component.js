@@ -44,6 +44,7 @@ export default Ember.Component.extend({
   sessionRouteChanged: Ember.observer('session.selected_sdg', function () {
     this._clearCustomClasses();
     this._reTheme();
+    this.$('#country-selector').selectpicker('val', 'GLOBAL');
   }),
 
   _clearCustomClasses() {

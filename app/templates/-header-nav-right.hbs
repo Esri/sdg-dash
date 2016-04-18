@@ -1,7 +1,21 @@
 <ul class='nav navbar-nav navbar-right'>
   
-  <!-- <li><a href="http://www.arcgis.com/features/features.html" target="_blank">{{ t 'application.header.about' }}</a></li> -->
+  <li><a href="#" data-toggle="modal" data-target="#aboutModal">{{ t 'application.header.about' }}</a></li>
   
+   <ul class="nav navbar-nav navbar-right">      
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      {{session.locale_label}} <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a  {{action 'changeLocale' 'en' }} >{{t 'application.languages.en'}}</a></li>
+        <li><a  {{action 'changeLocale' 'es' }} >{{t 'application.languages.es'}}</a></li>
+        <!-- <li><a  {{action 'changeLocale' 'ar' }} >{{t 'application.languages.arabic'}}</a></li> -->
+        <li><a  {{action 'changeLocale' 'fr' }} >{{t 'application.languages.fr'}}</a></li>
+        <li><a  {{action 'changeLocale' 'ru' }} >{{t 'application.languages.ru'}}</a></li>
+      </ul>
+    </li>
+  </ul>
+
 <!--   {{#if session.isAuthenticated}}
     <li><img src={{session.userThumbnail}} class='user-thumbnail hidden-xs' /></li>
     <ul class="nav navbar-nav navbar-right">      

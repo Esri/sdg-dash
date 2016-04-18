@@ -23,6 +23,10 @@ module.exports = function(environment) {
       }
     },
 
+    i18n : {
+      defaultLocale: 'en'
+    },
+
     contentSecurityPolicy: {
       'default-src': "'none' blob:",
       'script-src': "'self' http://arcgis-sdgs-385255865.us-east-1.elb.amazonaws.com/ 'unsafe-eval' 'unsafe-inline' http://*.arcgis.com/ https://*.arcgis.com/ https://apf-koop-sample-app.herokuapp.com https://*.esri.com",

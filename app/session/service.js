@@ -14,20 +14,33 @@ export default Ember.Service.extend({
   selected_geo_value: null,
   selected_geo_level: null,
 
+  locale_label: 'English',
+
   loadDashboardCards(geography_group, geo_value, goal, target_id) {
-    this.loadDashboards(geography_group, geo_value, goal, target_id)
-      .then(function (response) {
-        
-        this.set('available_dashboards', response.data);
-        
-        let cards = [];
-        
-        if (response.data[0] && response.data[0].items) {
-          cards = response.data[0].items;
-          this.set('available_geo_levels', response.data.map(function (d) { return d.title; }));
-        }
-        this.set('cards', cards);
-      }.bind(this));
+    this.set('isLoadingCards', true);
+
+    // START - for testing loading indicator
+    // return; //keeps the loading indicator on the page
+    // Ember.run.later(this, function() {
+
+      this.loadDashboards(geography_group, geo_value, goal, target_id)
+        .then(function (response) {
+          
+          this.set('available_dashboards', response.data);
+          
+          let cards = [];
+          
+          if (response.data[0] && response.data[0].items) {
+            cards = response.data[0].items;
+            this.set('available_geo_levels', response.data.map(function (d) { return d.title; }));
+          }
+          this.set('cards', cards);
+
+          this.set('isLoadingCards', false);
+        }.bind(this));
+
+    // END - for testing loading indicator
+    // }, 2000);
   },
 
   loadAvailableGeographies() {
