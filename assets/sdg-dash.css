@@ -6334,6 +6334,17 @@ button.close {
   height: 400px;
   /*width: 400px;*/ }
 
+.sdg-separator {
+  border-top: 1px solid rgba(248, 248, 248, 0.55); }
+
+.navbar-selector {
+  border: 0; }
+
+.btn-nocursor {
+  cursor: default;
+  padding-right: 0;
+  padding-left: 0; }
+
 .country-select-container {
   padding: 5px 0px 5px 0; }
 
@@ -6344,23 +6355,38 @@ button.close {
 .bg-wrapper {
   height: 210px; }
 
+@media (min-width: 1200px) {
+  .glyph-sdg-logo {
+    margin: -10px 0px 0px 40px !important;
+    height: 80px;
+    position: absolute; } }
+
 .glyph-sdg-logo {
-  margin: -10px 0px 0px 0px;
-  height: 70px;
+  margin: 5px 0px 0px 10px;
+  height: 40px;
   position: absolute; }
+
+@media (min-width: 1200px) {
+  .glyph-sdg-logo {
+    margin: 5px 0px 0px 100px !important; } }
 
 .glyph-globe-select {
   font-size: 35px;
   margin: 5px 0 0 35px;
   position: absolute; }
 
-.img-shift {
-  margin-left: 35px; }
+.glyph-target-select {
+  float: left;
+  margin: -2px 0;
+  padding: 3px 0px 0px 0px !important;
+  font-size: 35px;
+  height: 40px;
+  color: white !important; }
 
 .selector-row {
-  margin: 0;
+  /*padding-left: 50px;*/
   color: white;
-  border-top: 1px solid rgba(248, 248, 248, 0.55); }
+  /*border-top:1px solid rgba(248, 248, 248, .55);*/ }
 
 .status-container {
   margin-top: 30px; }
@@ -6374,8 +6400,8 @@ button.close {
   border-right: 1px solid #ddd; }
 
 .img-dp-shadow {
-  -webkit-filter: drop-shadow(2px 2px 5px #f8f8f8);
-  -moz-filter: drop-shadow(2px 2px 5px #f8f8f8); }
+  -webkit-filter: drop-shadow(1px 1px 2px #f8f8f8);
+  -moz-filter: drop-shadow(1px 1px 2px #f8f8f8); }
 
 .vcenter {
   display: table-cell;
@@ -6391,17 +6417,22 @@ button.close {
   padding: 5px 15px; }
 
 .navbar-header {
-  margin-left: -15px; }
+  /*margin-left: -15px;*/ }
 
 .brand-logo {
-  height: 60px;
-  width: 60px; }
+  height: 80px;
+  width: 80px; }
 
 .sit-on-top {
   z-index: 1; }
 
 .sign-in {
   margin-top: 200px; }
+
+.navbar {
+  background-color: #eee;
+  background: #eee;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
 
 /*partials*/
 .user-thumbnail {
@@ -7113,6 +7144,12 @@ hr {
 
 .no-padding {
   padding: 0; }
+
+.no-pad-left {
+  padding-left: 0; }
+
+.no-pad-right {
+  padding-right: 0; }
 
 .padding-5 {
   padding: 5px; }

@@ -24,6 +24,9 @@ efineday('sdg-dash/application/adapter', ['exports', 'ember-data'], function (ex
 });
 efineday('sdg-dash/application/controller', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller.extend({
+
+    hexColorsArray: ['#fcb851', '#e64053', '#55bcb6', '#77edb2'],
+
     actions: {
       signin: function signin() {
         console.log('doSignIn from controller');
@@ -34,9 +37,24 @@ efineday('sdg-dash/application/controller', ['exports', 'ember'], function (expo
     }
   });
 });
-efineday('sdg-dash/application/route', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Route.extend({
+efineday('sdg-dash/application/route', ['exports', 'ember', 'sdg-dash/mixins/loading-slider'], function (exports, _ember, _sdgDashMixinsLoadingSlider) {
+  exports['default'] = _ember['default'].Route.extend(_sdgDashMixinsLoadingSlider['default'], {
+
+    i18n: _ember['default'].inject.service(),
+
+    beforeModel: function beforeModel() {
+      var svc = this.get('i18n');
+      console.log(svc);
+    },
+
     actions: {
+      changeLocale: function changeLocale(locale) {
+        var svc = this.get('i18n');
+        svc.set('locale', locale);
+
+        var locale_label = svc.t('application.languages.' + locale);
+        this.get('session').set('locale_label', locale_label);
+      }
       // signin: function() {
       //   this.get('authSession').open('arcgis-oauth-bearer')
       //     .then((authorization) => {
@@ -68,8 +86,8 @@ efineday("sdg-dash/application/template", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 11,
-            "column": 32
+            "line": 17,
+            "column": 28
           }
         },
         "moduleName": "sdg-dash/application/template.hbs"
@@ -80,7 +98,11 @@ efineday("sdg-dash/application/template", ["exports"], function (exports) {
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
-        var el1 = dom.createComment(" {{ partial \"-header\" }} ");
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n\n");
         dom.appendChild(el0, el1);
@@ -105,21 +127,25 @@ efineday("sdg-dash/application/template", ["exports"], function (exports) {
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
-        var el1 = dom.createElement("div");
-        dom.setAttribute(el1, "id", "about-modal-destination");
+        var el1 = dom.createComment(" <div id=\"about-modal-destination\"></div> ");
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n\n");
         dom.appendChild(el0, el1);
-        var el1 = dom.createComment(" {{ partial \"-footer\" }} ");
+        var el1 = dom.createComment(" {{#ember-wormhole to=\"about-modal-destination\"}} -->\n<!--   {{about-modal}} -->\n<!-- {{/ember-wormhole}} ");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
         dom.appendChild(el0, el1);
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [2]), 1, 1);
+        var morphs = new Array(3);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        morphs[1] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+        morphs[2] = dom.createMorphAt(dom.childAt(fragment, [4]), 1, 1);
+        dom.insertBoundary(fragment, 0);
         return morphs;
       },
-      statements: [["inline", "liquid-outlet", [], ["class", "bg-gray"], ["loc", [null, [4, 2], [4, 35]]]]],
+      statements: [["inline", "partial", ["-header"], [], ["loc", [null, [1, 0], [1, 23]]]], ["inline", "loading-slider", [], ["isLoading", ["subexpr", "@mut", [["get", "loading", ["loc", [null, [3, 27], [3, 34]]]]], [], []], "expanding", true, "color", ["subexpr", "@mut", [["get", "hexColorsArray", ["loc", [null, [3, 56], [3, 70]]]]], [], []]], ["loc", [null, [3, 0], [3, 72]]]], ["inline", "liquid-outlet", [], ["class", "bg-gray"], ["loc", [null, [6, 2], [6, 35]]]]],
       locals: [],
       templates: []
     };
@@ -302,7 +328,7 @@ efineday("sdg-dash/components/about-modal/template", ["exports"], function (expo
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("h4");
         dom.setAttribute(el5, "class", "modal-title");
-        var el6 = dom.createTextNode("About");
+        var el6 = dom.createComment("");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n      ");
@@ -315,17 +341,19 @@ efineday("sdg-dash/components/about-modal/template", ["exports"], function (expo
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("p");
-        var el6 = dom.createTextNode("This is a conceptual web application that can be used to discover, use and share data, services & content related to the Sustainable Development Goals.");
+        var el6 = dom.createComment("");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("p");
         var el6 = dom.createElement("strong");
-        var el7 = dom.createTextNode("Data Disclaimer:");
+        var el7 = dom.createComment("");
         dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode(" The depiction and use of boundaries, geographic names and related data shown on maps and included in lists, tables, documents, and databases on this web site are not warranted to be error free nor do they necessarily imply official endorsement or acceptance by Esri.");
+        var el6 = dom.createTextNode(" ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createComment("");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n      ");
@@ -341,7 +369,7 @@ efineday("sdg-dash/components/about-modal/template", ["exports"], function (expo
         dom.setAttribute(el5, "type", "button");
         dom.setAttribute(el5, "class", "btn btn-default");
         dom.setAttribute(el5, "data-dismiss", "modal");
-        var el6 = dom.createTextNode("Close");
+        var el6 = dom.createComment("");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n      ");
@@ -358,10 +386,19 @@ efineday("sdg-dash/components/about-modal/template", ["exports"], function (expo
         dom.appendChild(el0, el1);
         return el0;
       },
-      buildRenderNodes: function buildRenderNodes() {
-        return [];
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [0, 1, 1]);
+        var element1 = dom.childAt(element0, [3]);
+        var element2 = dom.childAt(element1, [3]);
+        var morphs = new Array(5);
+        morphs[0] = dom.createMorphAt(dom.childAt(element0, [1, 3]), 0, 0);
+        morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
+        morphs[2] = dom.createMorphAt(dom.childAt(element2, [0]), 0, 0);
+        morphs[3] = dom.createMorphAt(element2, 2, 2);
+        morphs[4] = dom.createMorphAt(dom.childAt(element0, [5, 1]), 0, 0);
+        return morphs;
       },
-      statements: [],
+      statements: [["inline", "t", ["application.about.title"], [], ["loc", [null, [6, 32], [6, 63]]]], ["inline", "t", ["application.about.text"], [], ["loc", [null, [9, 11], [9, 41]]]], ["inline", "t", ["application.about.data_disclaimer"], [], ["loc", [null, [10, 19], [10, 60]]]], ["inline", "t", ["application.about.data_disclaimer_text"], [], ["loc", [null, [10, 70], [10, 116]]]], ["inline", "t", ["application.about.btn_close"], [], ["loc", [null, [13, 75], [13, 110]]]]],
       locals: [],
       templates: []
     };
@@ -411,6 +448,8 @@ efineday('sdg-dash/components/arcgis-map/component', ['exports', 'ember'], funct
 
       svc.createMap(webmap, this.element, options).then(function (response) {
         _this.map = response.map;
+        _this.map.disableScrollWheelZoom();
+
         _this.itemInfo = response.itemInfo;
         if (response.clickEventHandle) {
           _this.handlers.push(response.clickEventHandle);
@@ -471,8 +510,10 @@ efineday("sdg-dash/components/arcgis-map/template", ["exports"], function (expor
     };
   })());
 });
-efineday('sdg-dash/components/arcgis-map-landing/component', ['exports', 'ember', 'esri/arcgis/utils', 'esri/geometry/Extent', 'dojo/on'], function (exports, _ember, _esriArcgisUtils, _esriGeometryExtent, _dojoOn) {
+efineday('sdg-dash/components/arcgis-map-landing/component', ['exports', 'ember', 'esri/arcgis/utils'], function (exports, _ember, _esriArcgisUtils) {
   exports['default'] = _ember['default'].Component.extend({
+
+    map: null,
 
     didInsertElement: function didInsertElement() {
       var _this = this;
@@ -491,26 +532,17 @@ efineday('sdg-dash/components/arcgis-map-landing/component', ['exports', 'ember'
 
       _esriArcgisUtils['default'].createMap(webmapId, this.element, options).then(function (response) {
         var map = response.map;
-        _dojoOn['default'].once(map, 'click, mouse-down', (function () {
-          var handler = this.get('animHandler');
-          clearInterval(handler);
-        }).bind(_this));
-
+        map.disableScrollWheelZoom();
         _this.set('map', map);
-
-        var bookmarks = response.itemInfo.itemData.bookmarks;
-        _this.set('bookmarks', bookmarks);
-        _this.set('bookmark_counter', 0);
       });
     },
 
     willDestroyElement: function willDestroyElement() {
-      var animHandler = this.get('animHandler');
-      if (animHandler) {
-        clearInterval(animHandler);
+      var map = this.get('map');
+      if (map) {
+        map.destroy();
       }
     }
-
   });
 });
 efineday("sdg-dash/components/arcgis-map-landing/template", ["exports"], function (exports) {
@@ -588,6 +620,8 @@ efineday('sdg-dash/components/arcgis-map-sdg-index/component', ['exports', 'embe
       }
       svc.createMap(webmap, this.element, settings.options).then(function (response) {
         _this.map = response.map;
+        _this.map.disableScrollWheelZoom();
+
         _this.itemInfo = response.itemInfo;
         if (response.clickEventHandle) {
           _this.handlers.push(response.clickEventHandle);
@@ -873,8 +907,10 @@ efineday("sdg-dash/components/contribute-modal/template", ["exports"], function 
     };
   })());
 });
-efineday('sdg-dash/components/country-select-box/component', ['exports', 'ember'], function (exports, _ember) {
+efineday('sdg-dash/components/country-select-box/component', ['exports', 'ember', 'sdg-dash/utils/colors'], function (exports, _ember, _sdgDashUtilsColors) {
   exports['default'] = _ember['default'].Component.extend({
+
+    classNames: ['btn', 'no-pad-left'],
 
     didInsertElement: function didInsertElement() {
       var elId = '#country-selector';
@@ -882,7 +918,7 @@ efineday('sdg-dash/components/country-select-box/component', ['exports', 'ember'
         style: 'btn-default country-sel-input',
         selectOnTab: true,
         size: 8,
-        width: '300px'
+        width: '185px'
       });
 
       this.$('.dropdown-menu.open').css('max-width', '300px');
@@ -907,6 +943,47 @@ efineday('sdg-dash/components/country-select-box/component', ['exports', 'ember'
 
         this.get('goToGeography')(selected_geo_group, selected_geo_value);
       }).bind(this));
+
+      this._reTheme();
+    },
+
+    sessionRouteChanged: _ember['default'].observer('session.selected_sdg', function () {
+      this._clearCustomClasses();
+      this._reTheme();
+      this.$('#country-selector').selectpicker('val', 'GLOBAL');
+    }),
+
+    _clearCustomClasses: function _clearCustomClasses() {
+      this.$('.btn').removeClass().addClass('btn dropdown-toggle btn-default');
+    },
+
+    _reTheme: function _reTheme() {
+      var sdg_id = this.get('session').get('selected_sdg').get('id');
+      var current_sdg_class = 'btn-sdg-' + sdg_id;
+      this.set('current_sdg_class', current_sdg_class);
+
+      var dark_color = this.get('session').get('selected_sdg').get('colorHex');
+      var light_color = _sdgDashUtilsColors['default'].shadeColor(dark_color, 0.75);
+      console.log('light color', light_color, 'dark_color', dark_color);
+
+      this.$('.btn').css('color', dark_color);
+      this.$('.btn').css('border-color', dark_color);
+
+      var elId = '#country-selector';
+      var holderEl = null;
+      this.$(elId).on('show.bs.select', (function () {
+        holderEl = this.$('.dropdown-menu .inner li.selected.active a').css('background-color', dark_color).css('color', 'white');
+      }).bind(this));
+      this.$(elId).on('hide.bs.select', (function () {
+        holderEl.css('background-color', 'white').css('color', '#4C4C4C');
+      }).bind(this));
+    },
+
+    mouseEnter: function mouseEnter() {
+      this.$('.btn').removeClass('btn-default').addClass(this.get('current_sdg_class'));
+    },
+    mouseLeave: function mouseLeave() {
+      this.$('.btn').removeClass(this.get('current_sdg_class')).addClass('btn-default');
     }
 
   });
@@ -950,6 +1027,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "GLOBAL,Global Progress");
         dom.setAttribute(el3, "value", "GLOBAL");
         var el4 = dom.createTextNode(" Global Progress ");
         dom.appendChild(el3, el4);
@@ -957,6 +1035,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "AF,Afghanistan");
         dom.setAttribute(el3, "value", "AF");
         var el4 = dom.createTextNode(" Afghanistan ");
         dom.appendChild(el3, el4);
@@ -964,6 +1043,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "AL,Albania");
         dom.setAttribute(el3, "value", "AL");
         var el4 = dom.createTextNode(" Albania ");
         dom.appendChild(el3, el4);
@@ -971,6 +1051,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "DZ,Algeria");
         dom.setAttribute(el3, "value", "DZ");
         var el4 = dom.createTextNode(" Algeria ");
         dom.appendChild(el3, el4);
@@ -978,6 +1059,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "AD,Andorra");
         dom.setAttribute(el3, "value", "AD");
         var el4 = dom.createTextNode(" Andorra ");
         dom.appendChild(el3, el4);
@@ -985,6 +1067,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "AO,Angola");
         dom.setAttribute(el3, "value", "AO");
         var el4 = dom.createTextNode(" Angola ");
         dom.appendChild(el3, el4);
@@ -992,6 +1075,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "AG,Antigua and Barbuda");
         dom.setAttribute(el3, "value", "AG");
         var el4 = dom.createTextNode(" Antigua and Barbuda ");
         dom.appendChild(el3, el4);
@@ -999,6 +1083,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "AR,Argentina");
         dom.setAttribute(el3, "value", "AR");
         var el4 = dom.createTextNode(" Argentina ");
         dom.appendChild(el3, el4);
@@ -1006,6 +1091,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "AM,Armenia");
         dom.setAttribute(el3, "value", "AM");
         var el4 = dom.createTextNode(" Armenia ");
         dom.appendChild(el3, el4);
@@ -1013,6 +1099,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "AU,Australia");
         dom.setAttribute(el3, "value", "AU");
         var el4 = dom.createTextNode(" Australia ");
         dom.appendChild(el3, el4);
@@ -1020,6 +1107,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "AT,Austria");
         dom.setAttribute(el3, "value", "AT");
         var el4 = dom.createTextNode(" Austria ");
         dom.appendChild(el3, el4);
@@ -1027,6 +1115,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "AZ,Azerbaijan");
         dom.setAttribute(el3, "value", "AZ");
         var el4 = dom.createTextNode(" Azerbaijan ");
         dom.appendChild(el3, el4);
@@ -1034,6 +1123,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BS,Bahamas");
         dom.setAttribute(el3, "value", "BS");
         var el4 = dom.createTextNode(" Bahamas ");
         dom.appendChild(el3, el4);
@@ -1041,6 +1131,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BH,Bahrain");
         dom.setAttribute(el3, "value", "BH");
         var el4 = dom.createTextNode(" Bahrain ");
         dom.appendChild(el3, el4);
@@ -1048,6 +1139,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BD,Bangladesh");
         dom.setAttribute(el3, "value", "BD");
         var el4 = dom.createTextNode(" Bangladesh ");
         dom.appendChild(el3, el4);
@@ -1055,6 +1147,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BB,Barbados");
         dom.setAttribute(el3, "value", "BB");
         var el4 = dom.createTextNode(" Barbados ");
         dom.appendChild(el3, el4);
@@ -1062,6 +1155,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BY,Belarus");
         dom.setAttribute(el3, "value", "BY");
         var el4 = dom.createTextNode(" Belarus ");
         dom.appendChild(el3, el4);
@@ -1069,6 +1163,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BE,Belgium");
         dom.setAttribute(el3, "value", "BE");
         var el4 = dom.createTextNode(" Belgium ");
         dom.appendChild(el3, el4);
@@ -1076,6 +1171,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BZ,Belize");
         dom.setAttribute(el3, "value", "BZ");
         var el4 = dom.createTextNode(" Belize ");
         dom.appendChild(el3, el4);
@@ -1083,6 +1179,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BJ,Benin");
         dom.setAttribute(el3, "value", "BJ");
         var el4 = dom.createTextNode(" Benin ");
         dom.appendChild(el3, el4);
@@ -1090,6 +1187,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BT,Bhutan");
         dom.setAttribute(el3, "value", "BT");
         var el4 = dom.createTextNode(" Bhutan ");
         dom.appendChild(el3, el4);
@@ -1097,6 +1195,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BO,Bolivia (Plurinational State of)");
         dom.setAttribute(el3, "value", "BO");
         var el4 = dom.createTextNode(" Bolivia (Plurinational State of) ");
         dom.appendChild(el3, el4);
@@ -1104,6 +1203,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BA,Bosnia and Herzegovina");
         dom.setAttribute(el3, "value", "BA");
         var el4 = dom.createTextNode(" Bosnia and Herzegovina ");
         dom.appendChild(el3, el4);
@@ -1111,6 +1211,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BW,Botswana");
         dom.setAttribute(el3, "value", "BW");
         var el4 = dom.createTextNode(" Botswana ");
         dom.appendChild(el3, el4);
@@ -1118,6 +1219,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BR,Brazil");
         dom.setAttribute(el3, "value", "BR");
         var el4 = dom.createTextNode(" Brazil ");
         dom.appendChild(el3, el4);
@@ -1125,6 +1227,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BN,Brunei Darussalam");
         dom.setAttribute(el3, "value", "BN");
         var el4 = dom.createTextNode(" Brunei Darussalam ");
         dom.appendChild(el3, el4);
@@ -1132,6 +1235,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BG,Bulgaria");
         dom.setAttribute(el3, "value", "BG");
         var el4 = dom.createTextNode(" Bulgaria ");
         dom.appendChild(el3, el4);
@@ -1139,6 +1243,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BF,Burkina Faso");
         dom.setAttribute(el3, "value", "BF");
         var el4 = dom.createTextNode(" Burkina Faso ");
         dom.appendChild(el3, el4);
@@ -1146,6 +1251,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "BI,Burundi");
         dom.setAttribute(el3, "value", "BI");
         var el4 = dom.createTextNode(" Burundi ");
         dom.appendChild(el3, el4);
@@ -1153,6 +1259,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CV,Cabo Verde");
         dom.setAttribute(el3, "value", "CV");
         var el4 = dom.createTextNode(" Cabo Verde ");
         dom.appendChild(el3, el4);
@@ -1160,6 +1267,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "KH,Cambodia");
         dom.setAttribute(el3, "value", "KH");
         var el4 = dom.createTextNode(" Cambodia ");
         dom.appendChild(el3, el4);
@@ -1167,6 +1275,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CM,Cameroon");
         dom.setAttribute(el3, "value", "CM");
         var el4 = dom.createTextNode(" Cameroon ");
         dom.appendChild(el3, el4);
@@ -1174,6 +1283,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CA,Canada");
         dom.setAttribute(el3, "value", "CA");
         var el4 = dom.createTextNode(" Canada ");
         dom.appendChild(el3, el4);
@@ -1181,6 +1291,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CF,Central African Republic");
         dom.setAttribute(el3, "value", "CF");
         var el4 = dom.createTextNode(" Central African Republic ");
         dom.appendChild(el3, el4);
@@ -1188,6 +1299,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "TD,Chad");
         dom.setAttribute(el3, "value", "TD");
         var el4 = dom.createTextNode(" Chad ");
         dom.appendChild(el3, el4);
@@ -1195,6 +1307,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CL,Chile");
         dom.setAttribute(el3, "value", "CL");
         var el4 = dom.createTextNode(" Chile ");
         dom.appendChild(el3, el4);
@@ -1202,6 +1315,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CN,China");
         dom.setAttribute(el3, "value", "CN");
         var el4 = dom.createTextNode(" China ");
         dom.appendChild(el3, el4);
@@ -1209,6 +1323,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CO,Colombia");
         dom.setAttribute(el3, "value", "CO");
         var el4 = dom.createTextNode(" Colombia ");
         dom.appendChild(el3, el4);
@@ -1216,6 +1331,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "KM,Comoros");
         dom.setAttribute(el3, "value", "KM");
         var el4 = dom.createTextNode(" Comoros ");
         dom.appendChild(el3, el4);
@@ -1223,6 +1339,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CG,Congo");
         dom.setAttribute(el3, "value", "CG");
         var el4 = dom.createTextNode(" Congo ");
         dom.appendChild(el3, el4);
@@ -1230,6 +1347,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CR,Costa Rica");
         dom.setAttribute(el3, "value", "CR");
         var el4 = dom.createTextNode(" Costa Rica ");
         dom.appendChild(el3, el4);
@@ -1237,6 +1355,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CI,Côte D'Ivoire");
         dom.setAttribute(el3, "value", "CI");
         var el4 = dom.createTextNode(" Côte D'Ivoire ");
         dom.appendChild(el3, el4);
@@ -1244,6 +1363,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "HR,Croatia");
         dom.setAttribute(el3, "value", "HR");
         var el4 = dom.createTextNode(" Croatia ");
         dom.appendChild(el3, el4);
@@ -1251,6 +1371,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CU,Cuba");
         dom.setAttribute(el3, "value", "CU");
         var el4 = dom.createTextNode(" Cuba ");
         dom.appendChild(el3, el4);
@@ -1258,6 +1379,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CY,Cyprus");
         dom.setAttribute(el3, "value", "CY");
         var el4 = dom.createTextNode(" Cyprus ");
         dom.appendChild(el3, el4);
@@ -1265,6 +1387,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CZ,Czech Republic");
         dom.setAttribute(el3, "value", "CZ");
         var el4 = dom.createTextNode(" Czech Republic ");
         dom.appendChild(el3, el4);
@@ -1272,6 +1395,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "KP,Democratic People's Republic of Korea");
         dom.setAttribute(el3, "value", "KP");
         var el4 = dom.createTextNode(" Democratic People's Republic of Korea ");
         dom.appendChild(el3, el4);
@@ -1279,6 +1403,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CD,Democratic Republic of the Congo");
         dom.setAttribute(el3, "value", "CD");
         var el4 = dom.createTextNode(" Democratic Republic of the Congo ");
         dom.appendChild(el3, el4);
@@ -1286,6 +1411,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "DK,Denmark");
         dom.setAttribute(el3, "value", "DK");
         var el4 = dom.createTextNode(" Denmark ");
         dom.appendChild(el3, el4);
@@ -1293,6 +1419,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "DJ,Djibouti");
         dom.setAttribute(el3, "value", "DJ");
         var el4 = dom.createTextNode(" Djibouti ");
         dom.appendChild(el3, el4);
@@ -1300,6 +1427,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "DM,Dominica");
         dom.setAttribute(el3, "value", "DM");
         var el4 = dom.createTextNode(" Dominica ");
         dom.appendChild(el3, el4);
@@ -1307,6 +1435,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "DO,Dominican Republic");
         dom.setAttribute(el3, "value", "DO");
         var el4 = dom.createTextNode(" Dominican Republic ");
         dom.appendChild(el3, el4);
@@ -1314,6 +1443,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "EC,Ecuador");
         dom.setAttribute(el3, "value", "EC");
         var el4 = dom.createTextNode(" Ecuador ");
         dom.appendChild(el3, el4);
@@ -1321,6 +1451,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "EG,Egypt");
         dom.setAttribute(el3, "value", "EG");
         var el4 = dom.createTextNode(" Egypt ");
         dom.appendChild(el3, el4);
@@ -1328,6 +1459,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SV,El Salvador");
         dom.setAttribute(el3, "value", "SV");
         var el4 = dom.createTextNode(" El Salvador ");
         dom.appendChild(el3, el4);
@@ -1335,6 +1467,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "GQ,Equatorial Guinea");
         dom.setAttribute(el3, "value", "GQ");
         var el4 = dom.createTextNode(" Equatorial Guinea ");
         dom.appendChild(el3, el4);
@@ -1342,6 +1475,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "ER,Eritrea");
         dom.setAttribute(el3, "value", "ER");
         var el4 = dom.createTextNode(" Eritrea ");
         dom.appendChild(el3, el4);
@@ -1349,6 +1483,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "EE,Estonia");
         dom.setAttribute(el3, "value", "EE");
         var el4 = dom.createTextNode(" Estonia ");
         dom.appendChild(el3, el4);
@@ -1356,6 +1491,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "ET,Ethiopia");
         dom.setAttribute(el3, "value", "ET");
         var el4 = dom.createTextNode(" Ethiopia ");
         dom.appendChild(el3, el4);
@@ -1363,6 +1499,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "FJ,Fiji");
         dom.setAttribute(el3, "value", "FJ");
         var el4 = dom.createTextNode(" Fiji ");
         dom.appendChild(el3, el4);
@@ -1370,6 +1507,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "FI,Finland");
         dom.setAttribute(el3, "value", "FI");
         var el4 = dom.createTextNode(" Finland ");
         dom.appendChild(el3, el4);
@@ -1377,6 +1515,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "FR,France");
         dom.setAttribute(el3, "value", "FR");
         var el4 = dom.createTextNode(" France ");
         dom.appendChild(el3, el4);
@@ -1384,6 +1523,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "GA,Gabon");
         dom.setAttribute(el3, "value", "GA");
         var el4 = dom.createTextNode(" Gabon ");
         dom.appendChild(el3, el4);
@@ -1391,6 +1531,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "GM,Gambia (The)");
         dom.setAttribute(el3, "value", "GM");
         var el4 = dom.createTextNode(" Gambia (The) ");
         dom.appendChild(el3, el4);
@@ -1398,6 +1539,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "GE,Georgia");
         dom.setAttribute(el3, "value", "GE");
         var el4 = dom.createTextNode(" Georgia ");
         dom.appendChild(el3, el4);
@@ -1405,6 +1547,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "DE,Germany");
         dom.setAttribute(el3, "value", "DE");
         var el4 = dom.createTextNode(" Germany ");
         dom.appendChild(el3, el4);
@@ -1412,6 +1555,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "GH,Ghana");
         dom.setAttribute(el3, "value", "GH");
         var el4 = dom.createTextNode(" Ghana ");
         dom.appendChild(el3, el4);
@@ -1419,6 +1563,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "GR,Greece");
         dom.setAttribute(el3, "value", "GR");
         var el4 = dom.createTextNode(" Greece ");
         dom.appendChild(el3, el4);
@@ -1426,6 +1571,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "GD,Grenada");
         dom.setAttribute(el3, "value", "GD");
         var el4 = dom.createTextNode(" Grenada ");
         dom.appendChild(el3, el4);
@@ -1433,6 +1579,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "GT,Guatemala");
         dom.setAttribute(el3, "value", "GT");
         var el4 = dom.createTextNode(" Guatemala ");
         dom.appendChild(el3, el4);
@@ -1440,6 +1587,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "GN,Guinea");
         dom.setAttribute(el3, "value", "GN");
         var el4 = dom.createTextNode(" Guinea ");
         dom.appendChild(el3, el4);
@@ -1447,6 +1595,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "GW,Guinea-Bissau");
         dom.setAttribute(el3, "value", "GW");
         var el4 = dom.createTextNode(" Guinea-Bissau ");
         dom.appendChild(el3, el4);
@@ -1454,6 +1603,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "GY,Guyana");
         dom.setAttribute(el3, "value", "GY");
         var el4 = dom.createTextNode(" Guyana ");
         dom.appendChild(el3, el4);
@@ -1461,6 +1611,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "HT,Haiti");
         dom.setAttribute(el3, "value", "HT");
         var el4 = dom.createTextNode(" Haiti ");
         dom.appendChild(el3, el4);
@@ -1468,6 +1619,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "HN,Honduras");
         dom.setAttribute(el3, "value", "HN");
         var el4 = dom.createTextNode(" Honduras ");
         dom.appendChild(el3, el4);
@@ -1475,6 +1627,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "HU,Hungary");
         dom.setAttribute(el3, "value", "HU");
         var el4 = dom.createTextNode(" Hungary ");
         dom.appendChild(el3, el4);
@@ -1482,6 +1635,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "IS,Iceland");
         dom.setAttribute(el3, "value", "IS");
         var el4 = dom.createTextNode(" Iceland ");
         dom.appendChild(el3, el4);
@@ -1489,6 +1643,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "IN,India");
         dom.setAttribute(el3, "value", "IN");
         var el4 = dom.createTextNode(" India ");
         dom.appendChild(el3, el4);
@@ -1496,6 +1651,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "ID,Indonesia");
         dom.setAttribute(el3, "value", "ID");
         var el4 = dom.createTextNode(" Indonesia ");
         dom.appendChild(el3, el4);
@@ -1503,6 +1659,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "IR,Iran (Islamic Republic of)");
         dom.setAttribute(el3, "value", "IR");
         var el4 = dom.createTextNode(" Iran (Islamic Republic of) ");
         dom.appendChild(el3, el4);
@@ -1510,6 +1667,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "IQ,Iraq");
         dom.setAttribute(el3, "value", "IQ");
         var el4 = dom.createTextNode(" Iraq ");
         dom.appendChild(el3, el4);
@@ -1517,6 +1675,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "IE,Ireland");
         dom.setAttribute(el3, "value", "IE");
         var el4 = dom.createTextNode(" Ireland ");
         dom.appendChild(el3, el4);
@@ -1524,6 +1683,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "IL,Israel");
         dom.setAttribute(el3, "value", "IL");
         var el4 = dom.createTextNode(" Israel ");
         dom.appendChild(el3, el4);
@@ -1531,6 +1691,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "IT,Italy");
         dom.setAttribute(el3, "value", "IT");
         var el4 = dom.createTextNode(" Italy ");
         dom.appendChild(el3, el4);
@@ -1538,6 +1699,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "JM,Jamaica");
         dom.setAttribute(el3, "value", "JM");
         var el4 = dom.createTextNode(" Jamaica ");
         dom.appendChild(el3, el4);
@@ -1545,6 +1707,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "JP,Japan");
         dom.setAttribute(el3, "value", "JP");
         var el4 = dom.createTextNode(" Japan ");
         dom.appendChild(el3, el4);
@@ -1552,6 +1715,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "JO,Jordan");
         dom.setAttribute(el3, "value", "JO");
         var el4 = dom.createTextNode(" Jordan ");
         dom.appendChild(el3, el4);
@@ -1559,6 +1723,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "KZ,Kazakhstan");
         dom.setAttribute(el3, "value", "KZ");
         var el4 = dom.createTextNode(" Kazakhstan ");
         dom.appendChild(el3, el4);
@@ -1566,6 +1731,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "KE,Kenya");
         dom.setAttribute(el3, "value", "KE");
         var el4 = dom.createTextNode(" Kenya ");
         dom.appendChild(el3, el4);
@@ -1573,6 +1739,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "KI,Kiribati");
         dom.setAttribute(el3, "value", "KI");
         var el4 = dom.createTextNode(" Kiribati ");
         dom.appendChild(el3, el4);
@@ -1580,6 +1747,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "KW,Kuwait");
         dom.setAttribute(el3, "value", "KW");
         var el4 = dom.createTextNode(" Kuwait ");
         dom.appendChild(el3, el4);
@@ -1587,6 +1755,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "KG,Kyrgyzstan");
         dom.setAttribute(el3, "value", "KG");
         var el4 = dom.createTextNode(" Kyrgyzstan ");
         dom.appendChild(el3, el4);
@@ -1594,6 +1763,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "LA,Lao People's Democratic Republic");
         dom.setAttribute(el3, "value", "LA");
         var el4 = dom.createTextNode(" Lao People's Democratic Republic ");
         dom.appendChild(el3, el4);
@@ -1601,6 +1771,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "LV,Latvia");
         dom.setAttribute(el3, "value", "LV");
         var el4 = dom.createTextNode(" Latvia ");
         dom.appendChild(el3, el4);
@@ -1608,6 +1779,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "LB,Lebanon");
         dom.setAttribute(el3, "value", "LB");
         var el4 = dom.createTextNode(" Lebanon ");
         dom.appendChild(el3, el4);
@@ -1615,6 +1787,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "LS,Lesotho");
         dom.setAttribute(el3, "value", "LS");
         var el4 = dom.createTextNode(" Lesotho ");
         dom.appendChild(el3, el4);
@@ -1622,6 +1795,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "LR,Liberia");
         dom.setAttribute(el3, "value", "LR");
         var el4 = dom.createTextNode(" Liberia ");
         dom.appendChild(el3, el4);
@@ -1629,6 +1803,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "LY,Libya");
         dom.setAttribute(el3, "value", "LY");
         var el4 = dom.createTextNode(" Libya ");
         dom.appendChild(el3, el4);
@@ -1636,6 +1811,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "LI,Liechtenstein");
         dom.setAttribute(el3, "value", "LI");
         var el4 = dom.createTextNode(" Liechtenstein ");
         dom.appendChild(el3, el4);
@@ -1643,6 +1819,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "LT,Lithuania");
         dom.setAttribute(el3, "value", "LT");
         var el4 = dom.createTextNode(" Lithuania ");
         dom.appendChild(el3, el4);
@@ -1650,6 +1827,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "LU,Luxembourg");
         dom.setAttribute(el3, "value", "LU");
         var el4 = dom.createTextNode(" Luxembourg ");
         dom.appendChild(el3, el4);
@@ -1657,6 +1835,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MG,Madagascar");
         dom.setAttribute(el3, "value", "MG");
         var el4 = dom.createTextNode(" Madagascar ");
         dom.appendChild(el3, el4);
@@ -1664,6 +1843,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MW,Malawi");
         dom.setAttribute(el3, "value", "MW");
         var el4 = dom.createTextNode(" Malawi ");
         dom.appendChild(el3, el4);
@@ -1671,6 +1851,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MY,Malaysia");
         dom.setAttribute(el3, "value", "MY");
         var el4 = dom.createTextNode(" Malaysia ");
         dom.appendChild(el3, el4);
@@ -1678,6 +1859,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MV,Maldives");
         dom.setAttribute(el3, "value", "MV");
         var el4 = dom.createTextNode(" Maldives ");
         dom.appendChild(el3, el4);
@@ -1685,6 +1867,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "ML,Mali");
         dom.setAttribute(el3, "value", "ML");
         var el4 = dom.createTextNode(" Mali ");
         dom.appendChild(el3, el4);
@@ -1692,6 +1875,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MT,Malta");
         dom.setAttribute(el3, "value", "MT");
         var el4 = dom.createTextNode(" Malta ");
         dom.appendChild(el3, el4);
@@ -1699,6 +1883,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MH,Marshall Islands");
         dom.setAttribute(el3, "value", "MH");
         var el4 = dom.createTextNode(" Marshall Islands ");
         dom.appendChild(el3, el4);
@@ -1706,6 +1891,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MR,Mauritania");
         dom.setAttribute(el3, "value", "MR");
         var el4 = dom.createTextNode(" Mauritania ");
         dom.appendChild(el3, el4);
@@ -1713,6 +1899,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MU,Mauritius");
         dom.setAttribute(el3, "value", "MU");
         var el4 = dom.createTextNode(" Mauritius ");
         dom.appendChild(el3, el4);
@@ -1720,6 +1907,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MX,Mexico");
         dom.setAttribute(el3, "value", "MX");
         var el4 = dom.createTextNode(" Mexico ");
         dom.appendChild(el3, el4);
@@ -1727,6 +1915,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "FM,Micronesia (Federated States of)");
         dom.setAttribute(el3, "value", "FM");
         var el4 = dom.createTextNode(" Micronesia (Federated States of)");
         dom.appendChild(el3, el4);
@@ -1734,6 +1923,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MC,Monaco");
         dom.setAttribute(el3, "value", "MC");
         var el4 = dom.createTextNode(" Monaco ");
         dom.appendChild(el3, el4);
@@ -1741,6 +1931,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MN,Mongolia");
         dom.setAttribute(el3, "value", "MN");
         var el4 = dom.createTextNode(" Mongolia ");
         dom.appendChild(el3, el4);
@@ -1748,6 +1939,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "ME,Montenegro");
         dom.setAttribute(el3, "value", "ME");
         var el4 = dom.createTextNode(" Montenegro ");
         dom.appendChild(el3, el4);
@@ -1755,6 +1947,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MA,Morocco");
         dom.setAttribute(el3, "value", "MA");
         var el4 = dom.createTextNode(" Morocco ");
         dom.appendChild(el3, el4);
@@ -1762,6 +1955,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MZ,Mozambique");
         dom.setAttribute(el3, "value", "MZ");
         var el4 = dom.createTextNode(" Mozambique ");
         dom.appendChild(el3, el4);
@@ -1769,6 +1963,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MM,Myanmar");
         dom.setAttribute(el3, "value", "MM");
         var el4 = dom.createTextNode(" Myanmar ");
         dom.appendChild(el3, el4);
@@ -1776,6 +1971,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "NA,Namibia");
         dom.setAttribute(el3, "value", "NA");
         var el4 = dom.createTextNode(" Namibia ");
         dom.appendChild(el3, el4);
@@ -1783,6 +1979,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "NR,Nauru");
         dom.setAttribute(el3, "value", "NR");
         var el4 = dom.createTextNode(" Nauru ");
         dom.appendChild(el3, el4);
@@ -1790,6 +1987,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "NP,Nepal");
         dom.setAttribute(el3, "value", "NP");
         var el4 = dom.createTextNode(" Nepal ");
         dom.appendChild(el3, el4);
@@ -1797,6 +1995,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "NL,Netherlands");
         dom.setAttribute(el3, "value", "NL");
         var el4 = dom.createTextNode(" Netherlands ");
         dom.appendChild(el3, el4);
@@ -1804,6 +2003,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "NZ,New Zealand");
         dom.setAttribute(el3, "value", "NZ");
         var el4 = dom.createTextNode(" New Zealand ");
         dom.appendChild(el3, el4);
@@ -1811,6 +2011,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "NI,Nicaragua");
         dom.setAttribute(el3, "value", "NI");
         var el4 = dom.createTextNode(" Nicaragua ");
         dom.appendChild(el3, el4);
@@ -1818,6 +2019,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "NE,Niger");
         dom.setAttribute(el3, "value", "NE");
         var el4 = dom.createTextNode(" Niger ");
         dom.appendChild(el3, el4);
@@ -1825,6 +2027,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "NG,Nigeria");
         dom.setAttribute(el3, "value", "NG");
         var el4 = dom.createTextNode(" Nigeria ");
         dom.appendChild(el3, el4);
@@ -1832,6 +2035,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "NO,Norway");
         dom.setAttribute(el3, "value", "NO");
         var el4 = dom.createTextNode(" Norway ");
         dom.appendChild(el3, el4);
@@ -1839,6 +2043,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "OM,Oman");
         dom.setAttribute(el3, "value", "OM");
         var el4 = dom.createTextNode(" Oman ");
         dom.appendChild(el3, el4);
@@ -1846,6 +2051,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "PK,Pakistan");
         dom.setAttribute(el3, "value", "PK");
         var el4 = dom.createTextNode(" Pakistan ");
         dom.appendChild(el3, el4);
@@ -1853,6 +2059,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "PW,Palau");
         dom.setAttribute(el3, "value", "PW");
         var el4 = dom.createTextNode(" Palau ");
         dom.appendChild(el3, el4);
@@ -1860,6 +2067,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "PA,Panama");
         dom.setAttribute(el3, "value", "PA");
         var el4 = dom.createTextNode(" Panama ");
         dom.appendChild(el3, el4);
@@ -1867,6 +2075,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "PG,Papua New Guinea");
         dom.setAttribute(el3, "value", "PG");
         var el4 = dom.createTextNode(" Papua New Guinea ");
         dom.appendChild(el3, el4);
@@ -1874,6 +2083,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "PY,Paraguay");
         dom.setAttribute(el3, "value", "PY");
         var el4 = dom.createTextNode(" Paraguay ");
         dom.appendChild(el3, el4);
@@ -1881,6 +2091,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "PE,Peru");
         dom.setAttribute(el3, "value", "PE");
         var el4 = dom.createTextNode(" Peru ");
         dom.appendChild(el3, el4);
@@ -1888,6 +2099,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "PH,Philippines");
         dom.setAttribute(el3, "value", "PH");
         var el4 = dom.createTextNode(" Philippines ");
         dom.appendChild(el3, el4);
@@ -1895,6 +2107,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "PL,Poland");
         dom.setAttribute(el3, "value", "PL");
         var el4 = dom.createTextNode(" Poland ");
         dom.appendChild(el3, el4);
@@ -1902,6 +2115,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "PT,Portugal");
         dom.setAttribute(el3, "value", "PT");
         var el4 = dom.createTextNode(" Portugal ");
         dom.appendChild(el3, el4);
@@ -1909,6 +2123,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "QA,Qatar");
         dom.setAttribute(el3, "value", "QA");
         var el4 = dom.createTextNode(" Qatar ");
         dom.appendChild(el3, el4);
@@ -1916,6 +2131,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "KR,Republic of Korea");
         dom.setAttribute(el3, "value", "KR");
         var el4 = dom.createTextNode(" Republic of Korea ");
         dom.appendChild(el3, el4);
@@ -1923,6 +2139,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MD,Republic of Moldova");
         dom.setAttribute(el3, "value", "MD");
         var el4 = dom.createTextNode(" Republic of Moldova ");
         dom.appendChild(el3, el4);
@@ -1930,6 +2147,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "RO,Romania");
         dom.setAttribute(el3, "value", "RO");
         var el4 = dom.createTextNode(" Romania ");
         dom.appendChild(el3, el4);
@@ -1937,6 +2155,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "RU,Russian Federation");
         dom.setAttribute(el3, "value", "RU");
         var el4 = dom.createTextNode(" Russian Federation ");
         dom.appendChild(el3, el4);
@@ -1944,6 +2163,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "RW,Rwanda");
         dom.setAttribute(el3, "value", "RW");
         var el4 = dom.createTextNode(" Rwanda ");
         dom.appendChild(el3, el4);
@@ -1951,6 +2171,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "KN,Saint Kitts and Nevis");
         dom.setAttribute(el3, "value", "KN");
         var el4 = dom.createTextNode(" Saint Kitts and Nevis ");
         dom.appendChild(el3, el4);
@@ -1958,6 +2179,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "LC,Saint Lucia");
         dom.setAttribute(el3, "value", "LC");
         var el4 = dom.createTextNode(" Saint Lucia ");
         dom.appendChild(el3, el4);
@@ -1965,6 +2187,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "VC,Saint Vincent and the Grenadines");
         dom.setAttribute(el3, "value", "VC");
         var el4 = dom.createTextNode(" Saint Vincent and the Grenadines ");
         dom.appendChild(el3, el4);
@@ -1972,6 +2195,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "WS,Samoa");
         dom.setAttribute(el3, "value", "WS");
         var el4 = dom.createTextNode(" Samoa ");
         dom.appendChild(el3, el4);
@@ -1979,6 +2203,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SM,San Marino");
         dom.setAttribute(el3, "value", "SM");
         var el4 = dom.createTextNode(" San Marino ");
         dom.appendChild(el3, el4);
@@ -1986,6 +2211,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "ST,Sao Tome and Principe");
         dom.setAttribute(el3, "value", "ST");
         var el4 = dom.createTextNode(" Sao Tome and Principe ");
         dom.appendChild(el3, el4);
@@ -1993,6 +2219,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SA,Saudi Arabia");
         dom.setAttribute(el3, "value", "SA");
         var el4 = dom.createTextNode(" Saudi Arabia ");
         dom.appendChild(el3, el4);
@@ -2000,6 +2227,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SN,Senegal");
         dom.setAttribute(el3, "value", "SN");
         var el4 = dom.createTextNode(" Senegal ");
         dom.appendChild(el3, el4);
@@ -2007,6 +2235,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "RS,Serbia");
         dom.setAttribute(el3, "value", "RS");
         var el4 = dom.createTextNode(" Serbia ");
         dom.appendChild(el3, el4);
@@ -2014,6 +2243,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SC,Seychelles");
         dom.setAttribute(el3, "value", "SC");
         var el4 = dom.createTextNode(" Seychelles ");
         dom.appendChild(el3, el4);
@@ -2021,6 +2251,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SL,Sierra Leone");
         dom.setAttribute(el3, "value", "SL");
         var el4 = dom.createTextNode(" Sierra Leone ");
         dom.appendChild(el3, el4);
@@ -2028,6 +2259,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SG,Singapore");
         dom.setAttribute(el3, "value", "SG");
         var el4 = dom.createTextNode(" Singapore ");
         dom.appendChild(el3, el4);
@@ -2035,6 +2267,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SK,Slovakia");
         dom.setAttribute(el3, "value", "SK");
         var el4 = dom.createTextNode(" Slovakia ");
         dom.appendChild(el3, el4);
@@ -2042,6 +2275,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SI,Slovenia");
         dom.setAttribute(el3, "value", "SI");
         var el4 = dom.createTextNode(" Slovenia ");
         dom.appendChild(el3, el4);
@@ -2049,6 +2283,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SB,Solomon Islands");
         dom.setAttribute(el3, "value", "SB");
         var el4 = dom.createTextNode(" Solomon Islands ");
         dom.appendChild(el3, el4);
@@ -2056,6 +2291,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SO,Somalia");
         dom.setAttribute(el3, "value", "SO");
         var el4 = dom.createTextNode(" Somalia ");
         dom.appendChild(el3, el4);
@@ -2063,6 +2299,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "ZA,South Africa");
         dom.setAttribute(el3, "value", "ZA");
         var el4 = dom.createTextNode(" South Africa ");
         dom.appendChild(el3, el4);
@@ -2070,6 +2307,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SS,South Sudan");
         dom.setAttribute(el3, "value", "SS");
         var el4 = dom.createTextNode(" South Sudan ");
         dom.appendChild(el3, el4);
@@ -2077,6 +2315,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "ES,Spain");
         dom.setAttribute(el3, "value", "ES");
         var el4 = dom.createTextNode(" Spain ");
         dom.appendChild(el3, el4);
@@ -2084,6 +2323,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "LK,Sri Lanka");
         dom.setAttribute(el3, "value", "LK");
         var el4 = dom.createTextNode(" Sri Lanka ");
         dom.appendChild(el3, el4);
@@ -2091,6 +2331,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SD,Sudan");
         dom.setAttribute(el3, "value", "SD");
         var el4 = dom.createTextNode(" Sudan ");
         dom.appendChild(el3, el4);
@@ -2098,6 +2339,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SR,Suriname");
         dom.setAttribute(el3, "value", "SR");
         var el4 = dom.createTextNode(" Suriname ");
         dom.appendChild(el3, el4);
@@ -2105,6 +2347,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SZ,Swaziland");
         dom.setAttribute(el3, "value", "SZ");
         var el4 = dom.createTextNode(" Swaziland ");
         dom.appendChild(el3, el4);
@@ -2112,6 +2355,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SE,Sweden");
         dom.setAttribute(el3, "value", "SE");
         var el4 = dom.createTextNode(" Sweden ");
         dom.appendChild(el3, el4);
@@ -2119,6 +2363,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "CH,Switzerland");
         dom.setAttribute(el3, "value", "CH");
         var el4 = dom.createTextNode(" Switzerland ");
         dom.appendChild(el3, el4);
@@ -2126,6 +2371,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "SY,Syrian Arab Republic");
         dom.setAttribute(el3, "value", "SY");
         var el4 = dom.createTextNode(" Syrian Arab Republic ");
         dom.appendChild(el3, el4);
@@ -2133,6 +2379,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "TJ,Tajikistan");
         dom.setAttribute(el3, "value", "TJ");
         var el4 = dom.createTextNode(" Tajikistan ");
         dom.appendChild(el3, el4);
@@ -2140,6 +2387,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "TH,Thailand");
         dom.setAttribute(el3, "value", "TH");
         var el4 = dom.createTextNode(" Thailand ");
         dom.appendChild(el3, el4);
@@ -2147,6 +2395,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "MK,The former Yugoslav Republic of Macedonia");
         dom.setAttribute(el3, "value", "MK");
         var el4 = dom.createTextNode(" The former Yugoslav Republic of Macedonia ");
         dom.appendChild(el3, el4);
@@ -2154,6 +2403,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "TL,Timor-Leste");
         dom.setAttribute(el3, "value", "TL");
         var el4 = dom.createTextNode(" Timor-Leste ");
         dom.appendChild(el3, el4);
@@ -2161,6 +2411,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "TG,Togo");
         dom.setAttribute(el3, "value", "TG");
         var el4 = dom.createTextNode(" Togo ");
         dom.appendChild(el3, el4);
@@ -2168,6 +2419,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "TO,Tonga");
         dom.setAttribute(el3, "value", "TO");
         var el4 = dom.createTextNode(" Tonga ");
         dom.appendChild(el3, el4);
@@ -2175,6 +2427,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "TT,Trinidad and Tobago");
         dom.setAttribute(el3, "value", "TT");
         var el4 = dom.createTextNode(" Trinidad and Tobago ");
         dom.appendChild(el3, el4);
@@ -2182,6 +2435,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "TN,Tunisia");
         dom.setAttribute(el3, "value", "TN");
         var el4 = dom.createTextNode(" Tunisia ");
         dom.appendChild(el3, el4);
@@ -2189,6 +2443,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "TR,Turkey");
         dom.setAttribute(el3, "value", "TR");
         var el4 = dom.createTextNode(" Turkey ");
         dom.appendChild(el3, el4);
@@ -2196,6 +2451,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "TM,Turkmenistan");
         dom.setAttribute(el3, "value", "TM");
         var el4 = dom.createTextNode(" Turkmenistan ");
         dom.appendChild(el3, el4);
@@ -2203,6 +2459,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "TV,Tuvalu");
         dom.setAttribute(el3, "value", "TV");
         var el4 = dom.createTextNode(" Tuvalu ");
         dom.appendChild(el3, el4);
@@ -2210,6 +2467,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "UG,Uganda");
         dom.setAttribute(el3, "value", "UG");
         var el4 = dom.createTextNode(" Uganda ");
         dom.appendChild(el3, el4);
@@ -2217,6 +2475,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "UA,Ukraine");
         dom.setAttribute(el3, "value", "UA");
         var el4 = dom.createTextNode(" Ukraine ");
         dom.appendChild(el3, el4);
@@ -2224,6 +2483,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "AE,United Arab Emirates");
         dom.setAttribute(el3, "value", "AE");
         var el4 = dom.createTextNode(" United Arab Emirates ");
         dom.appendChild(el3, el4);
@@ -2231,6 +2491,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "GB,United Kingdom of Great Britain and Northern Ireland");
         dom.setAttribute(el3, "value", "GB");
         var el4 = dom.createTextNode(" United Kingdom of Great Britain and Northern Ireland ");
         dom.appendChild(el3, el4);
@@ -2238,6 +2499,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "TZ,United Republic of Tanzania");
         dom.setAttribute(el3, "value", "TZ");
         var el4 = dom.createTextNode(" United Republic of Tanzania ");
         dom.appendChild(el3, el4);
@@ -2245,6 +2507,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "US,United States of America");
         dom.setAttribute(el3, "value", "US");
         var el4 = dom.createTextNode(" United States of America ");
         dom.appendChild(el3, el4);
@@ -2252,6 +2515,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "UY,Uruguay");
         dom.setAttribute(el3, "value", "UY");
         var el4 = dom.createTextNode(" Uruguay ");
         dom.appendChild(el3, el4);
@@ -2259,6 +2523,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "UZ,Uzbekistan");
         dom.setAttribute(el3, "value", "UZ");
         var el4 = dom.createTextNode(" Uzbekistan ");
         dom.appendChild(el3, el4);
@@ -2266,6 +2531,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "VU,Vanuatu");
         dom.setAttribute(el3, "value", "VU");
         var el4 = dom.createTextNode(" Vanuatu ");
         dom.appendChild(el3, el4);
@@ -2273,6 +2539,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "VE,Venezuela (Bolivarian Republic of)");
         dom.setAttribute(el3, "value", "VE");
         var el4 = dom.createTextNode(" Venezuela (Bolivarian Republic of)");
         dom.appendChild(el3, el4);
@@ -2280,6 +2547,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "VN,Viet Nam");
         dom.setAttribute(el3, "value", "VN");
         var el4 = dom.createTextNode(" Viet Nam ");
         dom.appendChild(el3, el4);
@@ -2287,6 +2555,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "YE,Yemen");
         dom.setAttribute(el3, "value", "YE");
         var el4 = dom.createTextNode(" Yemen ");
         dom.appendChild(el3, el4);
@@ -2294,6 +2563,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "ZM,Zambia");
         dom.setAttribute(el3, "value", "ZM");
         var el4 = dom.createTextNode(" Zambia ");
         dom.appendChild(el3, el4);
@@ -2301,14 +2571,15 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "ZW,Zimbabwe");
         dom.setAttribute(el3, "value", "ZW");
         var el4 = dom.createTextNode(" Zimbabwe ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
+        var el3 = dom.createTextNode("\n");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n  ");
+        var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("optgroup");
         dom.setAttribute(el2, "label", "Cities");
@@ -2316,6 +2587,7 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
+        dom.setAttribute(el3, "data-tokens", "Global Progress");
         dom.setAttribute(el3, "value", "GLOBAL_CITIES");
         var el4 = dom.createTextNode(" Global Progress ");
         dom.appendChild(el3, el4);
@@ -2323,11 +2595,12 @@ efineday("sdg-dash/components/country-select-box/template", ["exports"], functio
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("option");
-        dom.setAttribute(el3, "value", "BOGOTA");
+        dom.setAttribute(el3, "data-tokens", "Bogota");
+        dom.setAttribute(el3, "value", "city_BOGOTA");
         var el4 = dom.createTextNode("Bogota");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
+        var el3 = dom.createTextNode("\n");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
@@ -2437,6 +2710,7 @@ efineday('sdg-dash/components/featured-datasets-card/component', ['exports', 'em
 });
 efineday('sdg-dash/components/geo-levels-select-box/component', ['exports', 'ember', 'sdg-dash/utils/colors'], function (exports, _ember, _sdgDashUtilsColors) {
   exports['default'] = _ember['default'].Component.extend({
+    classNames: ['btn btn-nocursor'],
 
     didInsertElement: function didInsertElement() {
       var elId = '#geo-levels-selector';
@@ -2634,14 +2908,14 @@ efineday('sdg-dash/components/geography-search-box/component', ['exports', 'embe
         }
 
         var qp = _this.get('container').lookup('router:main').router.state.queryParams;
-        var geo_value = 'Global Progress';
         if (qp && qp.geo_group && qp.geo_value) {
-          geo_value = qp.geo_value;
           var display_name = response.data.filter(function (item) {
-            return item.id === geo_value;
+            return item.id === qp.geo_value;
           })[0].display;
 
           _this.$().val(display_name);
+        } else {
+          _this.$().val('Global Progress');
         }
 
         var countries_data = [];
@@ -3405,6 +3679,199 @@ efineday("sdg-dash/components/lm-container", ["exports", "ember", "liquid-fire/t
    Released under The MIT License (MIT)
    Copyright (c) 2014 Instructure, Inc.
 */
+efineday('sdg-dash/components/loading-slider', ['exports', 'ember'], function (exports, _ember) {
+  var Component = _ember['default'].Component;
+  var run = _ember['default'].run;
+  var isBlank = _ember['default'].isBlank;
+  var inject = _ember['default'].inject;
+  var on = _ember['default'].on;
+  exports['default'] = Component.extend({
+    tagName: 'div',
+    classNames: ['loading-slider'],
+    classNameBindings: 'expanding',
+
+    loadingSlider: inject.service(),
+
+    init: function init() {
+      this._super.apply(this, arguments);
+      run.once(this, function () {
+        this.get('loadingSlider').on('startLoading', this, this._startLoading);
+        this.get('loadingSlider').on('endLoading', this, this._endLoading);
+        this.get('loadingSlider').on('changeAttrs', this, this._changeAttrs);
+      });
+    },
+
+    setAttrsThenManage: on('didReceiveAttrs', function () {
+      this.setProperties({
+        isLoading: this.getAttr('isLoading'),
+        duration: this.getAttr('duration'),
+        expanding: this.getAttr('expanding'),
+        speed: this.getAttr('speed'),
+        color: this.getAttr('color')
+      });
+
+      this.manage();
+    }),
+
+    willDestroy: function willDestroy() {
+      run.once(this, function () {
+        this.get('loadingSlider').off('startLoading', this, this._startLoading);
+        this.get('loadingSlider').off('endLoading', this, this._endLoading);
+        this.get('loadingSlider').off('changeAttrs', this, this._changeAttrs);
+      });
+    },
+
+    _startLoading: function _startLoading() {
+      this.set('isLoading', true);
+      this.manage();
+    },
+
+    _endLoading: function _endLoading() {
+      this.set('isLoading', false);
+    },
+
+    _changeAttrs: function _changeAttrs(attrs) {
+      this.setProperties(attrs);
+      this.manage();
+    },
+
+    manage: function manage() {
+      if (isBlank(this.$())) {
+        return;
+      }
+
+      if (this.get('isLoading')) {
+        if (this.get('expanding')) {
+          this.expandingAnimate.call(this);
+        } else {
+          this.animate.call(this);
+        }
+      } else {
+        this.set('isLoaded', true);
+      }
+    },
+
+    animate: function animate() {
+      this.set('isLoaded', false);
+      var self = this,
+          elapsedTime = 0,
+          inner = $('<span>'),
+          outer = this.$(),
+          duration = this.getWithDefault('duration', 300),
+          innerWidth = 0,
+          outerWidth = this.$().width(),
+          stepWidth = Math.round(outerWidth / 50),
+          color = this.get('color');
+
+      outer.append(inner);
+      if (color) {
+        inner.css('background-color', color);
+      }
+
+      var interval = window.setInterval(function () {
+        elapsedTime = elapsedTime + 10;
+        inner.width(innerWidth = innerWidth + stepWidth);
+
+        // slow the animation if we used more than 75% the estimated duration
+        // or 66% of the animation width
+        if (elapsedTime > duration * 0.75 || innerWidth > outerWidth * 0.66) {
+          // don't stop the animation completely
+          if (stepWidth > 1) {
+            stepWidth = stepWidth * 0.97;
+          }
+        }
+
+        if (innerWidth > outerWidth) {
+          run.later(function () {
+            outer.empty();
+            window.clearInterval(interval);
+          }, 50);
+        }
+
+        // the activity has finished
+        if (self.get('isLoaded')) {
+          // start with a sizable pixel step
+          if (stepWidth < 10) {
+            stepWidth = 10;
+          }
+          // accelerate to completion
+          stepWidth = stepWidth + stepWidth;
+        }
+      }, 10);
+    },
+
+    expandingAnimate: function expandingAnimate() {
+      var self = this,
+          outer = this.$(),
+          speed = this.getWithDefault('speed', 1000),
+          colorQueue = this.get('color');
+
+      if ('object' === typeof colorQueue) {
+        (function updateFn() {
+          var color = colorQueue.shift();
+          colorQueue.push(color);
+          self.expandItem.call(self, color);
+          if (!self.get('isLoading')) {
+            outer.empty();
+          } else {
+            window.setTimeout(updateFn, speed);
+          }
+        })();
+      } else {
+        this.expandItem.call(this, colorQueue, true);
+      }
+    },
+
+    expandItem: function expandItem(color, cleanUp) {
+      var self = this,
+          inner = $('<span>').css({ 'background-color': color }),
+          outer = this.$(),
+          innerWidth = 0,
+          outerWidth = outer.width(),
+          stepWidth = Math.round(outerWidth / 50);
+      var ua = window.navigator.userAgent;
+      var ie10 = ua.indexOf("MSIE "),
+          ie11 = ua.indexOf('Trident/'),
+          ieEdge = ua.indexOf('Edge/');
+
+      outer.append(inner);
+
+      var interval = window.setInterval(function () {
+        var step = innerWidth = innerWidth + stepWidth;
+        if (innerWidth > outerWidth) {
+          window.clearInterval(interval);
+          if (cleanUp) {
+            outer.empty();
+          }
+        }
+        if (ie10 > 0 || ie11 > 0 || ieEdge > 0) {
+          inner.css({
+            'margin': '0 auto',
+            'width': step
+          });
+        } else {
+          inner.css({
+            'margin-left': '-' + step / 2 + 'px',
+            'width': step
+          });
+        }
+      }, 10);
+    },
+
+    didInsertElement: function didInsertElement() {
+      this.$().html('<span>');
+
+      var color = this.get('color');
+      if (color) {
+        this.$('span').css('background-color', color);
+      }
+
+      if (this.get('runManageInitially')) {
+        this._startLoading();
+      }
+    }
+  });
+});
 efineday('sdg-dash/components/login-button/component', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Component.extend({
     text: 'Connect using Facebook or Google+'
@@ -4438,10 +4905,29 @@ efineday("sdg-dash/components/ranking-component/template", ["exports"], function
 });
 efineday('sdg-dash/components/sdg-overview-collage/component', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Component.extend({
+
+    i18n: _ember['default'].inject.service(),
+
+    // currentLocale: Ember.computed('i18n', function () {
+    //   return this.get('i18n').locale;
+    // }), 
+
+    currentLocale: 'en',
+
+    currentLocaleObserver: _ember['default'].observer('i18n.locale', function () {
+      this.set('currentLocale', this.get('i18n').locale);
+    }),
+
     actions: {
       loadSDG: function loadSDG(goal) {
         this.sendAction('loadSDG', goal);
       }
+    },
+
+    didInitAttrs: function didInitAttrs() {
+      // initialize service for locale binding in template
+      this.get('i18n');
+      console.log('init!');
     },
 
     didInsertElement: function didInsertElement() {
@@ -4517,7 +5003,7 @@ efineday("sdg-dash/components/sdg-overview-collage/template", ["exports"], funct
           morphs[1] = dom.createElementMorph(element0);
           return morphs;
         },
-        statements: [["attribute", "src", ["concat", ["images/sdg/TGG_Icon_Color_", ["get", "goal.displayNumber", ["loc", [null, [5, 72], [5, 90]]]], ".png"]]], ["element", "action", ["loadSDG", ["get", "goal", ["loc", [null, [5, 32], [5, 36]]]]], [], ["loc", [null, [5, 13], [5, 38]]]]],
+        statements: [["attribute", "src", ["concat", ["images/sdg/", ["get", "currentLocale", ["loc", [null, [5, 57], [5, 70]]]], "/TGG_Icon_Color_", ["get", "goal.displayNumber", ["loc", [null, [5, 90], [5, 108]]]], ".png"]]], ["element", "action", ["loadSDG", ["get", "goal", ["loc", [null, [5, 32], [5, 36]]]]], [], ["loc", [null, [5, 13], [5, 38]]]]],
         locals: ["goal"],
         templates: []
       };
@@ -4535,7 +5021,7 @@ efineday("sdg-dash/components/sdg-overview-collage/template", ["exports"], funct
             "column": 0
           },
           "end": {
-            "line": 15,
+            "line": 16,
             "column": 6
           }
         },
@@ -4562,14 +5048,14 @@ efineday("sdg-dash/components/sdg-overview-collage/template", ["exports"], funct
         dom.appendChild(el3, el4);
         var el4 = dom.createComment("");
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("      ");
+        var el4 = dom.createTextNode("      \n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("img");
         dom.setAttribute(el4, "src", "images/sdg/TGG_Icon_Color_18.png");
         dom.setAttribute(el4, "height", "150");
         dom.setAttribute(el4, "width", "150");
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n\n      ");
+        var el4 = dom.createTextNode("\n      \n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createComment(" Esri SDG Overview Story Map ");
         dom.appendChild(el3, el4);
@@ -4609,6 +5095,7 @@ efineday("sdg-dash/components/sdg-overview-collage/template", ["exports"], funct
 });
 efineday('sdg-dash/components/sdg-select-box/component', ['exports', 'ember', 'ic-ajax', 'sdg-dash/config/environment', 'sdg-dash/utils/colors'], function (exports, _ember, _icAjax, _sdgDashConfigEnvironment, _sdgDashUtilsColors) {
   exports['default'] = _ember['default'].Component.extend({
+    classNames: ['btn'],
 
     didInsertElement: function didInsertElement() {
       (0, _icAjax['default'])({
@@ -4624,9 +5111,10 @@ efineday('sdg-dash/components/sdg-select-box/component', ['exports', 'ember', 'i
         // initialize the selectpicker plugin
         this.$(elId).selectpicker({
           style: 'btn-default',
+          liveSearch: false,
           selectOnTab: true,
-          size: 8,
-          width: '220px'
+          size: 'auto',
+          width: '175px'
         });
 
         // wire up change event
@@ -4651,7 +5139,7 @@ efineday('sdg-dash/components/sdg-select-box/component', ['exports', 'ember', 'i
     }),
 
     _clearCustomClasses: function _clearCustomClasses() {
-      _ember['default'].$('#' + this.elementId + ' .btn').removeClass().addClass('btn dropdown-toggle btn-default');
+      this.$('.btn').removeClass().addClass('btn dropdown-toggle btn-default');
     },
 
     _reTheme: function _reTheme() {
@@ -4659,16 +5147,16 @@ efineday('sdg-dash/components/sdg-select-box/component', ['exports', 'ember', 'i
       var light_color = _sdgDashUtilsColors['default'].shadeColor(dark_color, 0.75);
       console.log('light color', light_color, 'dark_color', dark_color);
 
-      _ember['default'].$('#' + this.elementId + ' .btn').css('color', dark_color);
-      _ember['default'].$('#' + this.elementId + ' .btn').css('border-color', dark_color);
+      this.$('.btn').css('color', dark_color);
+      this.$('.btn').css('border-color', dark_color);
 
       var elId = '#sdg-selector';
       var holderEl = null;
       this.$(elId).on('show.bs.select', (function () {
-        holderEl = this.$('.dropdown-menu .inner li.selected.active a').css('background-color', dark_color);
+        holderEl = this.$('.dropdown-menu .inner li.selected a').css('background-color', dark_color).css('color', 'white');
       }).bind(this));
       this.$(elId).on('hide.bs.select', (function () {
-        holderEl.css('background-color', 'white');
+        holderEl.css('background-color', 'white').css('color', '#4C4C4C');
       }).bind(this));
 
       var sdg_id = this.get('session').get('selected_sdg').get('id');
@@ -4677,10 +5165,10 @@ efineday('sdg-dash/components/sdg-select-box/component', ['exports', 'ember', 'i
     },
 
     mouseEnter: function mouseEnter() {
-      _ember['default'].$('#' + this.elementId + ' .btn').removeClass('btn-default').addClass(this.get('current_sdg_class'));
+      this.$('.btn').removeClass('btn-default').addClass(this.get('current_sdg_class'));
     },
     mouseLeave: function mouseLeave() {
-      _ember['default'].$('#' + this.elementId + ' .btn').removeClass(this.get('current_sdg_class')).addClass('btn-default');
+      this.$('.btn').removeClass(this.get('current_sdg_class')).addClass('btn-default');
     },
 
     _changeDisplayName: function _changeDisplayName() {
@@ -4706,7 +5194,7 @@ efineday("sdg-dash/components/sdg-select-box/template", ["exports"], function (e
             "column": 0
           },
           "end": {
-            "line": 3,
+            "line": 2,
             "column": 9
           }
         },
@@ -4722,7 +5210,7 @@ efineday("sdg-dash/components/sdg-select-box/template", ["exports"], function (e
         dom.setAttribute(el1, "id", "sdg-selector");
         dom.setAttribute(el1, "class", "selectpicker");
         dom.setAttribute(el1, "data-live-search", "true");
-        var el2 = dom.createTextNode("\n\n");
+        var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         return el0;
@@ -5320,6 +5808,8 @@ efineday("sdg-dash/components/target-select-box/template", ["exports"], function
 });
 efineday('sdg-dash/components/targets-select-button/component', ['exports', 'ember', 'sdg-dash/utils/colors'], function (exports, _ember, _sdgDashUtilsColors) {
   exports['default'] = _ember['default'].Component.extend({
+    classNames: ['btn btn-nocursor'],
+
     didInsertElement: function didInsertElement() {
       this._reTheme();
     },
@@ -5333,8 +5823,8 @@ efineday('sdg-dash/components/targets-select-button/component', ['exports', 'emb
       var light_color = _sdgDashUtilsColors['default'].shadeColor(dark_color, 0.75);
       console.log('light color', light_color, 'dark_color', dark_color);
 
-      _ember['default'].$('#' + this.elementId + ' .btn').css('color', dark_color);
-      _ember['default'].$('#' + this.elementId + ' .btn').css('border-color', dark_color);
+      this.$('.btn').css('color', dark_color);
+      this.$('.btn').css('border-color', dark_color);
 
       var elId = '#sdg-selector';
       var holderEl = null;
@@ -5351,10 +5841,10 @@ efineday('sdg-dash/components/targets-select-button/component', ['exports', 'emb
     },
 
     mouseEnter: function mouseEnter() {
-      _ember['default'].$('#' + this.elementId + ' .btn').removeClass('btn-default').addClass(this.get('current_sdg_class'));
+      this.$('.btn').removeClass('btn-default').addClass(this.get('current_sdg_class'));
     },
     mouseLeave: function mouseLeave() {
-      _ember['default'].$('#' + this.elementId + ' .btn').removeClass(this.get('current_sdg_class')).addClass('btn-default');
+      this.$('.btn').removeClass(this.get('current_sdg_class')).addClass('btn-default');
     }
   });
 });
@@ -5373,8 +5863,8 @@ efineday("sdg-dash/components/targets-select-button/template", ["exports"], func
             "column": 0
           },
           "end": {
-            "line": 2,
-            "column": 0
+            "line": 1,
+            "column": 112
           }
         },
         "moduleName": "sdg-dash/components/targets-select-button/template.hbs"
@@ -5391,8 +5881,6 @@ efineday("sdg-dash/components/targets-select-button/template", ["exports"], func
         dom.setAttribute(el1, "data-target", "#myModal");
         var el2 = dom.createComment("");
         dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
         return el0;
       },
@@ -6373,6 +6861,51 @@ efineday("sdg-dash/landing/template", ["exports"], function (exports) {
     };
   })());
 });
+efineday("sdg-dash/locales/ar/config", ["exports"], function (exports) {
+  // Ember-I18n includes configuration for common locales. Most users
+  // can safely delete this file. Use it if you need to override behavior
+  // for a locale or efineday behavior for a locale that Ember-I18n
+  // doesn't know about.
+  exports["default"] = {
+    // rtl: [true|FALSE],
+    //
+    // pluralForm: function(count) {
+    //   if (count === 0) { return 'zero'; }
+    //   if (count === 1) { return 'one'; }
+    //   if (count === 2) { return 'two'; }
+    //   if (count < 5) { return 'few'; }
+    //   if (count >= 5) { return 'many'; }
+    //   return 'other';
+    // }
+  };
+});
+efineday("sdg-dash/locales/ar/translations", ["exports"], function (exports) {
+  exports["default"] = {
+    "application": {
+      "title": "Objectivos de Desarrollo Sostenbile",
+      "header": {
+        "signIn": "Sign In",
+        "signOut": "Sign Out",
+        "sdghome": "SDG Home Page",
+        "about": "Acerca"
+      },
+      "languages": {
+        "english": "English",
+        "arabic": "العربية"
+      }
+    }
+
+    // "some.translation.key": "Text for some.translation.key",
+    //
+    // "a": {
+    //   "nested": {
+    //     "key": "Text for a.nested.key"
+    //   }
+    // },
+    //
+    // "key.with.interpolation": "Text with {{anInterpolation}}"
+  };
+});
 efineday("sdg-dash/locales/en/config", ["exports"], function (exports) {
   // Ember-I18n includes configuration for common locales. Most users
   // can safely delete this file. Use it if you need to override behavior
@@ -6401,9 +6934,188 @@ efineday("sdg-dash/locales/en/translations", ["exports"], function (exports) {
         "signOut": "Sign Out",
         "sdghome": "SDG Home Page",
         "about": "About"
+      },
+      "languages": {
+        "en": "English",
+        "ar": "العربية",
+        "es": "Español",
+        "fr": "Français",
+        "ru": "Русский"
+      },
+      "about": {
+        "title": "About",
+        "text": "This is a conceptual web application that can be used to discover, use and share data, services & content related to the Sustainable Development Goals.",
+        "data_disclaimer": "Data Disclaimer",
+        "data_disclaimer_text": "The depiction and use of boundaries, geographic names and related data shown on maps and included in lists, tables, documents, and databases on this web site are not warranted to be error free nor do they necessarily imply official endorsement or acceptance by Esri.",
+        "btn_close": "Close"
       }
     }
 
+    // "some.translation.key": "Text for some.translation.key",
+    //
+    // "a": {
+    //   "nested": {
+    //     "key": "Text for a.nested.key"
+    //   }
+    // },
+    //
+    // "key.with.interpolation": "Text with {{anInterpolation}}"
+  };
+});
+efineday("sdg-dash/locales/es/config", ["exports"], function (exports) {
+  // Ember-I18n includes configuration for common locales. Most users
+  // can safely delete this file. Use it if you need to override behavior
+  // for a locale or efineday behavior for a locale that Ember-I18n
+  // doesn't know about.
+  exports["default"] = {
+    // rtl: [true|FALSE],
+    //
+    // pluralForm: function(count) {
+    //   if (count === 0) { return 'zero'; }
+    //   if (count === 1) { return 'one'; }
+    //   if (count === 2) { return 'two'; }
+    //   if (count < 5) { return 'few'; }
+    //   if (count >= 5) { return 'many'; }
+    //   return 'other';
+    // }
+  };
+});
+efineday("sdg-dash/locales/es/translations", ["exports"], function (exports) {
+  exports["default"] = {
+
+    "application": {
+      "title": "Objectivos de Desarrollo Sostenbile",
+      "header": {
+        "signIn": "Sign In",
+        "signOut": "Sign Out",
+        "sdghome": "SDG Home Page",
+        "about": "Acerca"
+      },
+      "languages": {
+        "en": "English",
+        "ar": "العربية",
+        "es": "Español",
+        "fr": "Français",
+        "ru": "Русский"
+      },
+      "about": {
+        "title": "Acerca",
+        "text": "Esta es una aplicación web conceptual que puede ser utilizado para descubrir, usar y compartir datos, servicios y contenidos relacionados con los objetivos del desarrollo sostenible.",
+        "data_disclaimer": "Negación de datos",
+        "data_disclaimer_text": "La representación y uso de fronteras, nombres geográficos y demás datos relacionados mostrados en mapas e incluidos en listas, tablas, documentos y bases de datos en este sitio web no están garantizados de estar libres de errores ni necesariamente implica reconocimiento o aceptación por parte Esri.",
+        "btn_close": "Cerca"
+      }
+    }
+
+    // "some.translation.key": "Text for some.translation.key",
+    //
+    // "a": {
+    //   "nested": {
+    //     "key": "Text for a.nested.key"
+    //   }
+    // },
+    //
+    // "key.with.interpolation": "Text with {{anInterpolation}}"
+  };
+});
+efineday("sdg-dash/locales/fr/config", ["exports"], function (exports) {
+  // Ember-I18n includes configuration for common locales. Most users
+  // can safely delete this file. Use it if you need to override behavior
+  // for a locale or efineday behavior for a locale that Ember-I18n
+  // doesn't know about.
+  exports["default"] = {
+    // rtl: [true|FALSE],
+    //
+    // pluralForm: function(count) {
+    //   if (count === 0) { return 'zero'; }
+    //   if (count === 1) { return 'one'; }
+    //   if (count === 2) { return 'two'; }
+    //   if (count < 5) { return 'few'; }
+    //   if (count >= 5) { return 'many'; }
+    //   return 'other';
+    // }
+  };
+});
+efineday("sdg-dash/locales/fr/translations", ["exports"], function (exports) {
+  exports["default"] = {
+    "application": {
+      "title": "Objectifs de Développement Durable",
+      "header": {
+        "signIn": "Sign In",
+        "signOut": "Sign Out",
+        "sdghome": "SDG Home Page",
+        "about": "Contexte"
+      },
+      "languages": {
+        "en": "English",
+        "ar": "العربية",
+        "es": "Español",
+        "fr": "Français",
+        "ru": "Русский"
+      },
+      "about": {
+        "title": "Contexte",
+        "text": "Ceci est une application web conceptuel qui peut être utilisé pour découvrir , utiliser et partager des données , des services et du contenu en rapport avec les objectifs de développement durable.",
+        "data_disclaimer": "Avertissement de données",
+        "data_disclaimer_text": "La représentation et l'utilisation des limites , des noms géographiques et les données connexes figurant sur les cartes et incluses dans des listes , des tableaux , des documents et des bases de données sur ce site Web ne sont pas garantis sans erreur et n'impliquent nécessairement l'approbation ou acceptation officielle par Esri.",
+        "btn_close": "Fermer"
+      }
+    }
+
+    // "some.translation.key": "Text for some.translation.key",
+    //
+    // "a": {
+    //   "nested": {
+    //     "key": "Text for a.nested.key"
+    //   }
+    // },
+    //
+    // "key.with.interpolation": "Text with {{anInterpolation}}"
+  };
+});
+efineday("sdg-dash/locales/ru/config", ["exports"], function (exports) {
+  // Ember-I18n includes configuration for common locales. Most users
+  // can safely delete this file. Use it if you need to override behavior
+  // for a locale or efineday behavior for a locale that Ember-I18n
+  // doesn't know about.
+  exports["default"] = {
+    // rtl: [true|FALSE],
+    //
+    // pluralForm: function(count) {
+    //   if (count === 0) { return 'zero'; }
+    //   if (count === 1) { return 'one'; }
+    //   if (count === 2) { return 'two'; }
+    //   if (count < 5) { return 'few'; }
+    //   if (count >= 5) { return 'many'; }
+    //   return 'other';
+    // }
+  };
+});
+efineday("sdg-dash/locales/ru/translations", ["exports"], function (exports) {
+  exports["default"] = {
+    "application": {
+      "title": "Цели в области устойчивого развития",
+      "header": {
+        "signIn": "Sign In",
+        "signOut": "Sign Out",
+        "sdghome": "SDG Home Page",
+        "about": "ОСНОВНЫЕ СВЕДЕНИЯ"
+      },
+      "languages": {
+        "en": "English",
+        "ar": "العربية",
+        "es": "Español",
+        "fr": "Français",
+        "ru": "Русский"
+      },
+      "about": {
+        "title": "ОСНОВНЫЕ СВЕДЕНИЯ",
+        "text": "Это концептуальный веб-приложение, которое может быть использовано для обнаружения, использования и обмена данными, услуги & контент, связанных с устойчивым целей развития.",
+        "data_disclaimer": "Отказ от данных",
+        "data_disclaimer_text": "описание и использование границ, географических названий и связанных с ними данных, представленных на картах и включенных в списки, таблицы, документы и базы данных на данном веб-сайте, не гарантируется отсутствие ошибок и они не обязательно означают официального одобрения или признания со стороны Esri.",
+        "btn_close": "Закрыть"
+      }
+    }
     // "some.translation.key": "Text for some.translation.key",
     //
     // "a": {
@@ -6646,6 +7358,33 @@ efineday('sdg-dash/map-service/service', ['exports', 'ember'], function (exports
     }
   });
 });
+efineday('sdg-dash/mixins/loading-slider', ['exports', 'ember'], function (exports, _ember) {
+  var Mixin = _ember['default'].Mixin;
+  var inject = _ember['default'].inject;
+  var isPresent = _ember['default'].isPresent;
+  exports['default'] = Mixin.create({
+    loadingSlider: inject.service(),
+
+    actions: {
+      loading: function loading() {
+        var loadingSliderService = this.get('loadingSlider');
+        loadingSliderService.startLoading();
+        if (isPresent(this.router)) {
+          this.router.one('didTransition', function () {
+            loadingSliderService.endLoading();
+          });
+        }
+        if (this.get('bubbleLoadingSlider')) {
+          return true;
+        }
+      },
+
+      finished: function finished() {
+        this.get('loadingSlider').endLoading();
+      }
+    }
+  });
+});
 efineday('sdg-dash/router', ['exports', 'ember', 'sdg-dash/config/environment'], function (exports, _ember, _sdgDashConfigEnvironment) {
 
   var Router = _ember['default'].Router.extend({
@@ -6714,8 +7453,10 @@ efineday('sdg-dash/sdg/controller', ['exports', 'ember'], function (exports, _em
         var params = {
           queryParams: {
             geo_group: this.geo_group,
-            geo_value: this.geo_value,
-            target_id: null }
+            // geo_value: this.geo_value,
+            geo_value: 'GLOBAL',
+            target_id: null
+          }
         };
         this.transitionToRoute('sdg', selected, params);
       },
@@ -6795,6 +7536,9 @@ efineday('sdg-dash/sdg/route', ['exports', 'ember', 'sdg-dash/utils/colors'], fu
       var svc = this.get('session');
       svc.set('selected_sdg', sdg);
 
+      // reset all the cards!!
+      svc.set('cards', []);
+
       // handle in-bound query params if they exist
       var geo_group = transition.queryParams.geo_group || 'countries';
       var geo_value = transition.queryParams.geo_value || 'GLOBAL';
@@ -6815,6 +7559,7 @@ efineday('sdg-dash/sdg/route', ['exports', 'ember', 'sdg-dash/utils/colors'], fu
         })[0];
       } else {
         selected_target = { id: 'SDG Index' };
+        svc.set('selected_geo_value', 'GLOBAL');
       }
 
       // keep this in
@@ -6914,53 +7659,11 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 33,
-              "column": 8
-            },
-            "end": {
-              "line": 35,
-              "column": 8
-            }
-          },
-          "moduleName": "sdg-dash/sdg/template.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("          ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createElement("img");
-          dom.setAttribute(el1, "class", "glyph-sdg-logo img-dp-shadow");
-          dom.setAttribute(el1, "src", "images/landing/sdg-logo-only.png");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes() {
-          return [];
-        },
-        statements: [],
-        locals: [],
-        templates: []
-      };
-    })();
-    var child1 = (function () {
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.3.0",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 66,
+              "line": 77,
               "column": 4
             },
             "end": {
-              "line": 77,
+              "line": 88,
               "column": 4
             }
           },
@@ -7021,12 +7724,12 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           morphs[1] = dom.createMorphAt(dom.childAt(element0, [3, 1]), 0, 0);
           return morphs;
         },
-        statements: [["content", "model.selected_target.id", ["loc", [null, [70, 35], [70, 63]]]], ["content", "model.selected_target.title", ["loc", [null, [73, 12], [73, 43]]]]],
+        statements: [["content", "model.selected_target.id", ["loc", [null, [81, 35], [81, 63]]]], ["content", "model.selected_target.title", ["loc", [null, [84, 12], [84, 43]]]]],
         locals: [],
         templates: []
       };
     })();
-    var child2 = (function () {
+    var child1 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -7034,11 +7737,11 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 79,
+              "line": 90,
               "column": 4
             },
             "end": {
-              "line": 81,
+              "line": 92,
               "column": 4
             }
           },
@@ -7063,9 +7766,148 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["inline", "grid-layout", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [80, 26], [80, 31]]]]], [], []], "cards", ["subexpr", "@mut", [["get", "session.cards", ["loc", [null, [80, 38], [80, 51]]]]], [], []], "action", "noOp"], ["loc", [null, [80, 6], [80, 67]]]]],
+        statements: [["inline", "grid-layout", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [91, 26], [91, 31]]]]], [], []], "cards", ["subexpr", "@mut", [["get", "session.cards", ["loc", [null, [91, 38], [91, 51]]]]], [], []], "action", "noOp"], ["loc", [null, [91, 6], [91, 67]]]]],
         locals: [],
         templates: []
+      };
+    })();
+    var child2 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.3.0",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 93,
+                "column": 6
+              },
+              "end": {
+                "line": 98,
+                "column": 6
+              }
+            },
+            "moduleName": "sdg-dash/sdg/template.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("div");
+            dom.setAttribute(el1, "class", "loader is-active padding-leader-3 padding-trailer-3");
+            dom.setAttribute(el1, "style", "margin-top: 100px;");
+            var el2 = dom.createTextNode("\n          ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createElement("div");
+            dom.setAttribute(el2, "class", "loader-bars");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode("\n          ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createElement("div");
+            dom.setAttribute(el2, "class", "loader-text");
+            var el3 = dom.createTextNode("Loading ...");
+            dom.appendChild(el2, el3);
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode("\n        ");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child1 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.3.0",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 98,
+                "column": 6
+              },
+              "end": {
+                "line": 100,
+                "column": 6
+              }
+            },
+            "moduleName": "sdg-dash/sdg/template.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+            return morphs;
+          },
+          statements: [["content", "no-data-card", ["loc", [null, [99, 8], [99, 24]]]]],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 92,
+              "column": 4
+            },
+            "end": {
+              "line": 102,
+              "column": 4
+            }
+          },
+          "moduleName": "sdg-dash/sdg/template.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("      \n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+          dom.insertBoundary(fragment, 0);
+          return morphs;
+        },
+        statements: [["block", "if", [["get", "session.isLoadingCards", ["loc", [null, [93, 12], [93, 34]]]]], [], 0, 1, ["loc", [null, [93, 6], [100, 13]]]]],
+        locals: [],
+        templates: [child0, child1]
       };
     })();
     var child3 = (function () {
@@ -7076,12 +7918,12 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 81,
-              "column": 4
+              "line": 107,
+              "column": 0
             },
             "end": {
-              "line": 83,
-              "column": 4
+              "line": 109,
+              "column": 0
             }
           },
           "moduleName": "sdg-dash/sdg/template.hbs"
@@ -7092,7 +7934,7 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("      ");
+          var el1 = dom.createTextNode("  ");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
@@ -7105,7 +7947,7 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["content", "no-data-card", ["loc", [null, [82, 6], [82, 22]]]]],
+        statements: [["inline", "targets-select-modal", [], ["changeTarget", ["subexpr", "action", ["changeTarget"], [], ["loc", [null, [108, 38], [108, 61]]]]], ["loc", [null, [108, 2], [108, 63]]]]],
         locals: [],
         templates: []
       };
@@ -7118,11 +7960,11 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 88,
+              "line": 111,
               "column": 0
             },
             "end": {
-              "line": 90,
+              "line": 113,
               "column": 0
             }
           },
@@ -7147,49 +7989,7 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["inline", "targets-select-modal", [], ["changeTarget", ["subexpr", "action", ["changeTarget"], [], ["loc", [null, [89, 38], [89, 61]]]]], ["loc", [null, [89, 2], [89, 63]]]]],
-        locals: [],
-        templates: []
-      };
-    })();
-    var child5 = (function () {
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.3.0",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 92,
-              "column": 0
-            },
-            "end": {
-              "line": 94,
-              "column": 0
-            }
-          },
-          "moduleName": "sdg-dash/sdg/template.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("  ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(1);
-          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-          return morphs;
-        },
-        statements: [["content", "contribute-modal", ["loc", [null, [93, 2], [93, 22]]]]],
+        statements: [["content", "contribute-modal", ["loc", [null, [112, 2], [112, 22]]]]],
         locals: [],
         templates: []
       };
@@ -7208,7 +8008,7 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 94,
+            "line": 113,
             "column": 19
           }
         },
@@ -7225,6 +8025,7 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("div");
+        dom.setAttribute(el2, "class", "container");
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("div");
@@ -7232,13 +8033,13 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "col-xs-3");
+        dom.setAttribute(el4, "class", "col-xs-3 text-center");
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("img");
         dom.setAttribute(el5, "class", "img-shift");
-        dom.setAttribute(el5, "height", "210");
-        dom.setAttribute(el5, "width", "210");
+        dom.setAttribute(el5, "height", "150");
+        dom.setAttribute(el5, "width", "150");
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n      ");
         dom.appendChild(el4, el5);
@@ -7303,111 +8104,156 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
         var el4 = dom.createTextNode("\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n\n    ");
+        var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "row selector-row");
+        var el3 = dom.createElement("hr");
+        dom.setAttribute(el3, "class", "sdg-separator");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    \n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("nav");
+        dom.setAttribute(el3, "class", "navbar navbar-default navbar-selector text-center");
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
+        var el4 = dom.createComment(" <div class=\"container\"> ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n        ");
+        dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "col-xs-1");
-        var el5 = dom.createTextNode("\n        ");
+        dom.setAttribute(el4, "class", "navbar-header");
+        var el5 = dom.createTextNode("\n          ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createComment(" <img class=\"glyph-sdg-logo\" src=\"images/sdg/main-logo-white40x40.png\"> ");
+        var el5 = dom.createElement("button");
+        dom.setAttribute(el5, "type", "button");
+        dom.setAttribute(el5, "class", "navbar-toggle collapsed");
+        dom.setAttribute(el5, "data-toggle", "collapse");
+        dom.setAttribute(el5, "data-target", "#bs-example-navbar-collapse-1");
+        dom.setAttribute(el5, "aria-expanded", "false");
+        var el6 = dom.createTextNode("\n            ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("span");
+        dom.setAttribute(el6, "class", "sr-only");
+        var el7 = dom.createTextNode("Toggle navigation");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n            ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("span");
+        dom.setAttribute(el6, "class", "icon-bar");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n            ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("span");
+        dom.setAttribute(el6, "class", "icon-bar");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n            ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("span");
+        dom.setAttribute(el6, "class", "icon-bar");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n          ");
+        dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n");
+        var el5 = dom.createTextNode("\n          \n            ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("img");
+        dom.setAttribute(el5, "class", "glyph-sdg-logo");
+        dom.setAttribute(el5, "src", "images/sdg/main-logo-white48x48.png");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n          \n        ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n\n        ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("div");
+        dom.setAttribute(el4, "class", "collapse navbar-collapse selector-row");
+        dom.setAttribute(el4, "id", "bs-example-navbar-collapse-1");
+        var el5 = dom.createTextNode("\n          \n            ");
         dom.appendChild(el4, el5);
         var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("      ");
+        var el5 = dom.createTextNode("\n            ");
         dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "col-xs-2 country-select-container");
-        var el5 = dom.createTextNode("\n        ");
+        var el5 = dom.createElement("div");
+        dom.setAttribute(el5, "class", "btn btn-nocursor");
+        var el6 = dom.createTextNode("\n              ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("div");
+        dom.setAttribute(el6, "class", "navbar-brand glyph-target-select");
+        var el7 = dom.createTextNode("\n                ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createElement("span");
+        dom.setAttribute(el7, "class", "glyphicon glyphicon-record");
+        dom.setAttribute(el7, "aria-hidden", "true");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("\n              ");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n            ");
+        dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
-        var el5 = dom.createComment("");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "col-xs-1");
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("span");
-        dom.setAttribute(el5, "class", "glyphicon glyphicon-globe glyph-globe-select");
-        dom.setAttribute(el5, "aria-hidden", "true");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "col-xs-2 country-select-container");
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createComment(" {{country-select-box model=model goToGeography=(action 'goToGeography')}} ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
+        var el5 = dom.createTextNode("\n            ");
         dom.appendChild(el4, el5);
         var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
+        var el5 = dom.createTextNode("     \n            ");
         dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "col-xs-1");
-        var el5 = dom.createTextNode("\n        ");
+        var el5 = dom.createElement("div");
+        dom.setAttribute(el5, "class", "btn btn-nocursor");
+        var el6 = dom.createTextNode("\n              ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("div");
+        dom.setAttribute(el6, "class", "navbar-brand glyph-target-select");
+        var el7 = dom.createTextNode("\n                ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createElement("span");
+        dom.setAttribute(el7, "class", "glyphicon glyphicon-globe");
+        dom.setAttribute(el7, "aria-hidden", "true");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("\n              ");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n            ");
+        dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("span");
-        dom.setAttribute(el5, "class", "glyphicon glyphicon-map-marker glyph-globe-select");
-        dom.setAttribute(el5, "aria-hidden", "true");
+        var el5 = dom.createTextNode("\n            ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
+        var el5 = dom.createComment(" {{geography-search-box model=model goToGeography=(action 'goToGeography')}}   ");
         dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "col-xs-2 country-select-container");
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createComment("");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "col-xs-1");
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("span");
-        dom.setAttribute(el5, "class", "glyphicon glyphicon-record glyph-globe-select");
-        dom.setAttribute(el5, "aria-hidden", "true");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "col-xs-2 country-select-container");
-        var el5 = dom.createTextNode("\n        ");
+        var el5 = dom.createTextNode("       \n            ");
         dom.appendChild(el4, el5);
         var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
+        var el5 = dom.createTextNode("  \n            ");
         dom.appendChild(el4, el5);
+        var el5 = dom.createElement("div");
+        dom.setAttribute(el5, "class", "btn btn-nocursor");
+        var el6 = dom.createTextNode("\n              ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("div");
+        dom.setAttribute(el6, "class", "navbar-brand glyph-target-select");
+        var el7 = dom.createTextNode("\n                ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createElement("span");
+        dom.setAttribute(el7, "class", "glyphicon glyphicon-map-marker");
+        dom.setAttribute(el7, "aria-hidden", "true");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("\n              ");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n            ");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n            ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n          \n        ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment(" </div> ");
         dom.appendChild(el3, el4);
         var el4 = dom.createTextNode("\n    ");
         dom.appendChild(el3, el4);
@@ -7452,35 +8298,37 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element1 = dom.childAt(fragment, [0, 1]);
+        var element1 = dom.childAt(fragment, [0]);
         var element2 = dom.childAt(element1, [1]);
-        var element3 = dom.childAt(element2, [1, 1]);
-        var element4 = dom.childAt(element2, [3]);
-        var element5 = dom.childAt(element4, [1, 1, 1]);
-        var element6 = dom.childAt(element1, [3]);
-        var element7 = dom.childAt(fragment, [2, 1]);
+        var element3 = dom.childAt(element2, [1]);
+        var element4 = dom.childAt(element3, [1, 1]);
+        var element5 = dom.childAt(element3, [3]);
+        var element6 = dom.childAt(element5, [1, 1, 1]);
+        var element7 = dom.childAt(element2, [5]);
+        var element8 = dom.childAt(element7, [5]);
+        var element9 = dom.childAt(fragment, [2, 1]);
         var morphs = new Array(15);
         morphs[0] = dom.createAttrMorph(element1, 'style');
-        morphs[1] = dom.createAttrMorph(element3, 'src');
-        morphs[2] = dom.createMorphAt(element5, 1, 1);
-        morphs[3] = dom.createMorphAt(element5, 3, 3);
-        morphs[4] = dom.createMorphAt(dom.childAt(element4, [3, 1, 1]), 0, 0);
-        morphs[5] = dom.createAttrMorph(element6, 'style');
-        morphs[6] = dom.createMorphAt(dom.childAt(element6, [1]), 3, 3);
-        morphs[7] = dom.createMorphAt(dom.childAt(element6, [3]), 1, 1);
-        morphs[8] = dom.createMorphAt(dom.childAt(element6, [7]), 3, 3);
-        morphs[9] = dom.createMorphAt(dom.childAt(element6, [11]), 1, 1);
-        morphs[10] = dom.createMorphAt(dom.childAt(element6, [15]), 1, 1);
-        morphs[11] = dom.createMorphAt(element7, 1, 1);
-        morphs[12] = dom.createMorphAt(element7, 3, 3);
+        morphs[1] = dom.createAttrMorph(element2, 'style');
+        morphs[2] = dom.createAttrMorph(element4, 'src');
+        morphs[3] = dom.createMorphAt(element6, 1, 1);
+        morphs[4] = dom.createMorphAt(element6, 3, 3);
+        morphs[5] = dom.createMorphAt(dom.childAt(element5, [3, 1, 1]), 0, 0);
+        morphs[6] = dom.createAttrMorph(element7, 'style');
+        morphs[7] = dom.createMorphAt(element8, 1, 1);
+        morphs[8] = dom.createMorphAt(element8, 5, 5);
+        morphs[9] = dom.createMorphAt(element8, 11, 11);
+        morphs[10] = dom.createMorphAt(element8, 15, 15);
+        morphs[11] = dom.createMorphAt(element9, 1, 1);
+        morphs[12] = dom.createMorphAt(element9, 3, 3);
         morphs[13] = dom.createMorphAt(fragment, 4, 4, contextualElement);
         morphs[14] = dom.createMorphAt(fragment, 6, 6, contextualElement);
         dom.insertBoundary(fragment, null);
         return morphs;
       },
-      statements: [["attribute", "style", ["concat", ["background-color:", ["get", "model.colorHex", ["loc", [null, [2, 33], [2, 47]]]], ";color:white;"]]], ["attribute", "src", ["concat", ["images/sdg/TGG_Icon_Only_Color_", ["get", "model.displayNumber", ["loc", [null, [5, 69], [5, 88]]]], ".gif"]]], ["content", "model.displayNumber", ["loc", [null, [10, 21], [10, 44]]]], ["content", "model.title", ["loc", [null, [10, 46], [10, 61]]]], ["content", "model.description", ["loc", [null, [15, 15], [15, 36]]]], ["attribute", "style", ["concat", ["background-color:rgba(", ["get", "model.colorRgb", ["loc", [null, [30, 65], [30, 79]]]], ", 0.75);"]]], ["block", "link-to", ["sdg-overview"], [], 0, null, ["loc", [null, [33, 8], [35, 20]]]], ["inline", "sdg-select-box", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [38, 31], [38, 36]]]]], [], []], "changeSdg", ["subexpr", "action", ["changeSdg"], [], ["loc", [null, [38, 47], [38, 67]]]]], ["loc", [null, [38, 8], [38, 70]]]], ["inline", "geography-search-box", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [45, 37], [45, 42]]]]], [], []], "goToGeography", ["subexpr", "action", ["goToGeography"], [], ["loc", [null, [45, 57], [45, 81]]]]], ["loc", [null, [45, 8], [45, 83]]]], ["inline", "geo-levels-select-box", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [51, 38], [51, 43]]]]], [], []], "goToGeoLevel", "goToGeoLevel"], ["loc", [null, [51, 8], [51, 74]]]], ["inline", "targets-select-button", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [57, 38], [57, 43]]]]], [], []]], ["loc", [null, [57, 8], [57, 46]]]], ["block", "unless", [["subexpr", "eq", [["get", "model.selected_target.id", ["loc", [null, [66, 18], [66, 42]]]], "SDG Index"], [], ["loc", [null, [66, 14], [66, 55]]]]], [], 1, null, ["loc", [null, [66, 4], [77, 15]]]], ["block", "if", [["get", "session.cards.length", ["loc", [null, [79, 10], [79, 30]]]]], [], 2, 3, ["loc", [null, [79, 4], [83, 11]]]], ["block", "ember-wormhole", [], ["to", "targets-modal-destination"], 4, null, ["loc", [null, [88, 0], [90, 19]]]], ["block", "ember-wormhole", [], ["to", "contribute-modal-destination"], 5, null, ["loc", [null, [92, 0], [94, 19]]]]],
+      statements: [["attribute", "style", ["concat", ["background-color:", ["get", "model.colorHex", ["loc", [null, [1, 66], [1, 80]]]], ";"]]], ["attribute", "style", ["concat", ["background-color:", ["get", "model.colorHex", ["loc", [null, [2, 51], [2, 65]]]], ";color:white;"]]], ["attribute", "src", ["concat", ["images/sdg/TGG_Icon_Only_Color_", ["get", "model.displayNumber", ["loc", [null, [5, 69], [5, 88]]]], ".gif"]]], ["content", "model.displayNumber", ["loc", [null, [10, 21], [10, 44]]]], ["content", "model.title", ["loc", [null, [10, 46], [10, 61]]]], ["content", "model.description", ["loc", [null, [15, 15], [15, 36]]]], ["attribute", "style", ["concat", ["background-color:rgba(", ["get", "model.colorRgb", ["loc", [null, [31, 98], [31, 112]]]], ", 0.75);"]]], ["inline", "sdg-select-box", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [47, 35], [47, 40]]]]], [], []], "changeSdg", ["subexpr", "action", ["changeSdg"], [], ["loc", [null, [47, 51], [47, 71]]]]], ["loc", [null, [47, 12], [47, 74]]]], ["inline", "targets-select-button", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [53, 42], [53, 47]]]]], [], []]], ["loc", [null, [53, 12], [53, 50]]]], ["inline", "country-select-box", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [60, 39], [60, 44]]]]], [], []], "goToGeography", ["subexpr", "action", ["goToGeography"], [], ["loc", [null, [60, 59], [60, 83]]]]], ["loc", [null, [60, 12], [60, 85]]]], ["inline", "geo-levels-select-box", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [66, 42], [66, 47]]]]], [], []], "goToGeoLevel", "goToGeoLevel"], ["loc", [null, [66, 12], [66, 78]]]], ["block", "unless", [["subexpr", "eq", [["get", "model.selected_target.id", ["loc", [null, [77, 18], [77, 42]]]], "SDG Index"], [], ["loc", [null, [77, 14], [77, 55]]]]], [], 0, null, ["loc", [null, [77, 4], [88, 15]]]], ["block", "if", [["get", "session.cards.length", ["loc", [null, [90, 10], [90, 30]]]]], [], 1, 2, ["loc", [null, [90, 4], [102, 11]]]], ["block", "ember-wormhole", [], ["to", "targets-modal-destination"], 3, null, ["loc", [null, [107, 0], [109, 19]]]], ["block", "ember-wormhole", [], ["to", "contribute-modal-destination"], 4, null, ["loc", [null, [111, 0], [113, 19]]]]],
       locals: [],
-      templates: [child0, child1, child2, child3, child4, child5]
+      templates: [child0, child1, child2, child3, child4]
     };
   })());
 });
@@ -7848,48 +8696,6 @@ efineday("sdg-dash/sdg-overview/template", ["exports"], function (exports) {
         templates: []
       };
     })();
-    var child7 = (function () {
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.3.0",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 41,
-              "column": 0
-            },
-            "end": {
-              "line": 43,
-              "column": 0
-            }
-          },
-          "moduleName": "sdg-dash/sdg-overview/template.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("  ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(1);
-          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-          return morphs;
-        },
-        statements: [["content", "about-modal", ["loc", [null, [42, 2], [42, 17]]]]],
-        locals: [],
-        templates: []
-      };
-    })();
     return {
       meta: {
         "fragmentReason": {
@@ -7905,7 +8711,7 @@ efineday("sdg-dash/sdg-overview/template", ["exports"], function (exports) {
           },
           "end": {
             "line": 43,
-            "column": 19
+            "column": 23
           }
         },
         "moduleName": "sdg-dash/sdg-overview/template.hbs"
@@ -7924,69 +8730,7 @@ efineday("sdg-dash/sdg-overview/template", ["exports"], function (exports) {
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "landing-map-top-overlay");
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "pull-left");
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("img");
-        dom.setAttribute(el4, "class", "landing-sdg-logo");
-        dom.setAttribute(el4, "src", "images/landing/sdg-logo-only.png");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("span");
-        dom.setAttribute(el4, "class", "glyphicon glyphicon-info-sign glyph-about");
-        dom.setAttribute(el4, "data-toggle", "modal");
-        dom.setAttribute(el4, "data-target", "#aboutModal");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n    ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "pull-right landing-text-div");
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("span");
-        dom.setAttribute(el4, "class", "landing-title");
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("h3");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("p");
-        dom.setAttribute(el5, "class", "text-success");
-        var el6 = dom.createTextNode("current sdg index (% complete)");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("p");
-        dom.setAttribute(el5, "class", "text-danger");
-        var el6 = dom.createTextNode("% missing values");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n    ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "clearfix");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
+        var el2 = dom.createComment(" <div class=\"landing-map-top-overlay\">\n    <div class=\"pull-left\">\n      <img class=\"landing-sdg-logo\" src='images/landing/sdg-logo-only.png'>\n      <span class=\"glyphicon glyphicon-info-sign glyph-about\" data-toggle=\"modal\" data-target=\"#aboutModal\"></span>\n    </div>\n    <div class=\"pull-right landing-text-div\">\n      <span class=\"landing-title\">\n        <h3>{{t 'application.title'}}</h3>\n        <p class=\"text-success\">current sdg index (% complete)</p>\n        <p class=\"text-danger\">% missing values</p>\n      </span>\n    </div>\n    <div class=\"clearfix\"></div>\n  </div> ");
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n  \n  ");
         dom.appendChild(el1, el2);
@@ -8100,31 +8844,28 @@ efineday("sdg-dash/sdg-overview/template", ["exports"], function (exports) {
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n\n");
         dom.appendChild(el0, el1);
-        var el1 = dom.createComment("");
+        var el1 = dom.createComment(" {{#ember-wormhole to=\"about-modal-destination\"}}\n  {{about-modal}}\n{{/ember-wormhole}} ");
         dom.appendChild(el0, el1);
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [0]);
         var element1 = dom.childAt(fragment, [2, 1, 9]);
-        var morphs = new Array(11);
-        morphs[0] = dom.createMorphAt(dom.childAt(element0, [3, 3, 1, 1]), 0, 0);
-        morphs[1] = dom.createMorphAt(element0, 5, 5);
-        morphs[2] = dom.createMorphAt(element0, 7, 7);
-        morphs[3] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
-        morphs[4] = dom.createMorphAt(dom.childAt(element1, [3]), 0, 0);
-        morphs[5] = dom.createMorphAt(dom.childAt(element1, [5]), 0, 0);
-        morphs[6] = dom.createMorphAt(dom.childAt(element1, [7]), 0, 0);
-        morphs[7] = dom.createMorphAt(dom.childAt(element1, [9]), 0, 0);
-        morphs[8] = dom.createMorphAt(dom.childAt(element1, [11]), 0, 0);
-        morphs[9] = dom.createMorphAt(dom.childAt(element1, [13]), 0, 0);
-        morphs[10] = dom.createMorphAt(fragment, 4, 4, contextualElement);
-        dom.insertBoundary(fragment, null);
+        var morphs = new Array(9);
+        morphs[0] = dom.createMorphAt(element0, 5, 5);
+        morphs[1] = dom.createMorphAt(element0, 7, 7);
+        morphs[2] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
+        morphs[3] = dom.createMorphAt(dom.childAt(element1, [3]), 0, 0);
+        morphs[4] = dom.createMorphAt(dom.childAt(element1, [5]), 0, 0);
+        morphs[5] = dom.createMorphAt(dom.childAt(element1, [7]), 0, 0);
+        morphs[6] = dom.createMorphAt(dom.childAt(element1, [9]), 0, 0);
+        morphs[7] = dom.createMorphAt(dom.childAt(element1, [11]), 0, 0);
+        morphs[8] = dom.createMorphAt(dom.childAt(element1, [13]), 0, 0);
         return morphs;
       },
-      statements: [["inline", "t", ["application.title"], [], ["loc", [null, [10, 12], [10, 37]]]], ["inline", "arcgis-map-landing", [], ["class", "landing-map"], ["loc", [null, [18, 2], [18, 46]]]], ["inline", "sdg-overview-collage", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [20, 32], [20, 37]]]]], [], []], "loadSDG", "routeToSDG", "class", "marg-top-neg-50"], ["loc", [null, [20, 2], [20, 85]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [28, 31], [28, 98]]]]], [], 0, null, ["loc", [null, [28, 10], [28, 160]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [29, 31], [29, 102]]]]], [], 1, null, ["loc", [null, [29, 10], [29, 182]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [30, 31], [30, 98]]]]], [], 2, null, ["loc", [null, [30, 10], [30, 180]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [31, 31], [31, 102]]]]], [], 3, null, ["loc", [null, [31, 10], [31, 178]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [32, 32], [32, 108]]]]], [], 4, null, ["loc", [null, [32, 10], [32, 197]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [33, 32], [33, 106]]]]], [], 5, null, ["loc", [null, [33, 10], [33, 195]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [34, 36], [34, 62]]]]], [], 6, null, ["loc", [null, [34, 10], [34, 165]]]], ["block", "ember-wormhole", [], ["to", "about-modal-destination"], 7, null, ["loc", [null, [41, 0], [43, 19]]]]],
+      statements: [["inline", "arcgis-map-landing", [], ["class", "landing-map"], ["loc", [null, [18, 2], [18, 46]]]], ["inline", "sdg-overview-collage", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [20, 32], [20, 37]]]]], [], []], "loadSDG", "routeToSDG", "class", "marg-top-neg-50"], ["loc", [null, [20, 2], [20, 85]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [28, 31], [28, 98]]]]], [], 0, null, ["loc", [null, [28, 10], [28, 160]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [29, 31], [29, 102]]]]], [], 1, null, ["loc", [null, [29, 10], [29, 182]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [30, 31], [30, 98]]]]], [], 2, null, ["loc", [null, [30, 10], [30, 180]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [31, 31], [31, 102]]]]], [], 3, null, ["loc", [null, [31, 10], [31, 178]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [32, 32], [32, 108]]]]], [], 4, null, ["loc", [null, [32, 10], [32, 197]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [33, 32], [33, 106]]]]], [], 5, null, ["loc", [null, [33, 10], [33, 195]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [34, 36], [34, 62]]]]], [], 6, null, ["loc", [null, [34, 10], [34, 165]]]]],
       locals: [],
-      templates: [child0, child1, child2, child3, child4, child5, child6, child7]
+      templates: [child0, child1, child2, child3, child4, child5, child6]
     };
   })());
 });
@@ -8142,6 +8883,23 @@ efineday("sdg-dash/services/liquid-fire-modals", ["exports", "liquid-fire/modals
 efineday("sdg-dash/services/liquid-fire-transitions", ["exports", "liquid-fire/transition-map"], function (exports, _liquidFireTransitionMap) {
   exports["default"] = _liquidFireTransitionMap["default"];
 });
+efineday('sdg-dash/services/loading-slider', ['exports', 'ember'], function (exports, _ember) {
+  var Service = _ember['default'].Service;
+  var Evented = _ember['default'].Evented;
+  exports['default'] = Service.extend(Evented, {
+    startLoading: function startLoading() {
+      this.trigger('startLoading');
+    },
+
+    endLoading: function endLoading() {
+      this.trigger('endLoading');
+    },
+
+    changeAttrs: function changeAttrs(attrs) {
+      this.trigger('changeAttrs', attrs);
+    }
+  });
+});
 efineday('sdg-dash/session/service', ['exports', 'ember', 'ic-ajax', 'sdg-dash/config/environment'], function (exports, _ember, _icAjax, _sdgDashConfigEnvironment) {
   exports['default'] = _ember['default'].Service.extend({
 
@@ -8155,7 +8913,15 @@ efineday('sdg-dash/session/service', ['exports', 'ember', 'ic-ajax', 'sdg-dash/c
     selected_geo_value: null,
     selected_geo_level: null,
 
+    locale_label: 'English',
+
     loadDashboardCards: function loadDashboardCards(geography_group, geo_value, goal, target_id) {
+      this.set('isLoadingCards', true);
+
+      // START - for testing loading indicator
+      // return; //keeps the loading indicator on the page
+      // Ember.run.later(this, function() {
+
       this.loadDashboards(geography_group, geo_value, goal, target_id).then((function (response) {
 
         this.set('available_dashboards', response.data);
@@ -8169,7 +8935,12 @@ efineday('sdg-dash/session/service', ['exports', 'ember', 'ic-ajax', 'sdg-dash/c
           }));
         }
         this.set('cards', cards);
+
+        this.set('isLoadingCards', false);
       }).bind(this));
+
+      // END - for testing loading indicator
+      // }, 2000);
     },
 
     loadAvailableGeographies: function loadAvailableGeographies() {
@@ -8308,7 +9079,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 24,
+            "line": 38,
             "column": 5
           }
         },
@@ -8324,9 +9095,92 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         dom.setAttribute(el1, "class", "nav navbar-nav navbar-right");
         var el2 = dom.createTextNode("\n  \n  ");
         dom.appendChild(el1, el2);
-        var el2 = dom.createComment(" <li><a href=\"http://www.arcgis.com/features/features.html\" target=\"_blank\">{{ t 'application.header.about' }}</a></li> ");
+        var el2 = dom.createElement("li");
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3, "href", "#");
+        dom.setAttribute(el3, "data-toggle", "modal");
+        dom.setAttribute(el3, "data-target", "#aboutModal");
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n  \n");
+        var el2 = dom.createTextNode("\n  \n   ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("ul");
+        dom.setAttribute(el2, "class", "nav navbar-nav navbar-right");
+        var el3 = dom.createTextNode("      \n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("li");
+        dom.setAttribute(el3, "class", "dropdown");
+        var el4 = dom.createTextNode("\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("a");
+        dom.setAttribute(el4, "href", "#");
+        dom.setAttribute(el4, "class", "dropdown-toggle");
+        dom.setAttribute(el4, "data-toggle", "dropdown");
+        dom.setAttribute(el4, "role", "button");
+        dom.setAttribute(el4, "aria-haspopup", "true");
+        dom.setAttribute(el4, "aria-expanded", "false");
+        var el5 = dom.createTextNode("\n      ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode(" ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("span");
+        dom.setAttribute(el5, "class", "caret");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("ul");
+        dom.setAttribute(el4, "class", "dropdown-menu");
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createElement("a");
+        var el7 = dom.createComment("");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createElement("a");
+        var el7 = dom.createComment("");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment(" <li><a  {{action 'changeLocale' 'ar' }} >{{t 'application.languages.arabic'}}</a></li> ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createElement("a");
+        var el7 = dom.createComment("");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createElement("a");
+        var el7 = dom.createComment("");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n      ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n\n");
         dom.appendChild(el1, el2);
         var el2 = dom.createComment("   {{#if session.isAuthenticated}}\n    <li><img src={{session.userThumbnail}} class='user-thumbnail hidden-xs' /></li>\n    <ul class=\"nav navbar-nav navbar-right\">      \n      <li class=\"dropdown\">\n        <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        {{ session.user.firstName }} <span class=\"caret\"></span></a>\n        <ul class=\"dropdown-menu\">\n          \n          <li><a href=\"http://www.un.org/sustainabledevelopment/sustainable-development-goals/\" target=\"_blank\" >{{t 'application.header.sdghome' }}</a></li>\n          <li class=\"divider\"></li>\n          <li class=\"user-sign-inout\"><a {{action 'invalidateSession'}} >{{t 'application.header.signOut' }}</a></li>\n        </ul>\n      </li>\n    </ul>\n\n  {{else}}\n    <li class=\"user-sign-inout\"><a {{action 'authOrLoad' 'doAuthenticate' }} >{{t 'application.header.signIn'}}</a></li>\n  {{/if}} ");
         dom.appendChild(el1, el2);
@@ -8335,10 +9189,28 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         dom.appendChild(el0, el1);
         return el0;
       },
-      buildRenderNodes: function buildRenderNodes() {
-        return [];
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [0]);
+        var element1 = dom.childAt(element0, [3, 1]);
+        var element2 = dom.childAt(element1, [3]);
+        var element3 = dom.childAt(element2, [1, 0]);
+        var element4 = dom.childAt(element2, [3, 0]);
+        var element5 = dom.childAt(element2, [7, 0]);
+        var element6 = dom.childAt(element2, [9, 0]);
+        var morphs = new Array(10);
+        morphs[0] = dom.createMorphAt(dom.childAt(element0, [1, 0]), 0, 0);
+        morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]), 1, 1);
+        morphs[2] = dom.createElementMorph(element3);
+        morphs[3] = dom.createMorphAt(element3, 0, 0);
+        morphs[4] = dom.createElementMorph(element4);
+        morphs[5] = dom.createMorphAt(element4, 0, 0);
+        morphs[6] = dom.createElementMorph(element5);
+        morphs[7] = dom.createMorphAt(element5, 0, 0);
+        morphs[8] = dom.createElementMorph(element6);
+        morphs[9] = dom.createMorphAt(element6, 0, 0);
+        return morphs;
       },
-      statements: [],
+      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["content", "session.locale_label", ["loc", [null, [8, 6], [8, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [10, 16], [10, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [10, 49], [10, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [11, 16], [11, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [11, 49], [11, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [13, 16], [13, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [13, 49], [13, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [14, 16], [14, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [14, 49], [14, 81]]]]],
       locals: [],
       templates: []
     };
@@ -8354,11 +9226,11 @@ efineday("sdg-dash/templates/-header", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 4,
+              "line": 5,
               "column": 6
             },
             "end": {
-              "line": 6,
+              "line": 7,
               "column": 6
             }
           },
@@ -8391,7 +9263,8 @@ efineday("sdg-dash/templates/-header", ["exports"], function (exports) {
     return {
       meta: {
         "fragmentReason": {
-          "name": "triple-curlies"
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
         },
         "revision": "Ember@2.3.0",
         "loc": {
@@ -8401,8 +9274,8 @@ efineday("sdg-dash/templates/-header", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 17,
-            "column": 6
+            "line": 20,
+            "column": 15
           }
         },
         "moduleName": "sdg-dash/templates/-header.hbs"
@@ -8413,8 +9286,12 @@ efineday("sdg-dash/templates/-header", ["exports"], function (exports) {
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment(" <div class=\"navbar navbar-default navbar-top sit-on-top\" role=\"navigation\"> ");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
-        dom.setAttribute(el1, "class", "navbar navbar-default navbar-top sit-on-top");
+        dom.setAttribute(el1, "class", "navbar navbar-top sit-on-top");
         dom.setAttribute(el1, "role", "navigation");
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
@@ -8434,7 +9311,7 @@ efineday("sdg-dash/templates/-header", ["exports"], function (exports) {
         dom.setAttribute(el4, "class", "navbar-brand");
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("h6");
+        var el5 = dom.createElement("h5");
         var el6 = dom.createComment("");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
@@ -8468,18 +9345,24 @@ efineday("sdg-dash/templates/-header", ["exports"], function (exports) {
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [0, 1]);
+        var element0 = dom.childAt(fragment, [2, 1]);
         var element1 = dom.childAt(element0, [1]);
-        var morphs = new Array(3);
+        var morphs = new Array(4);
         morphs[0] = dom.createMorphAt(element1, 1, 1);
         morphs[1] = dom.createMorphAt(dom.childAt(element1, [3, 1]), 0, 0);
         morphs[2] = dom.createMorphAt(dom.childAt(element0, [3, 1]), 1, 1);
+        morphs[3] = dom.createMorphAt(fragment, 4, 4, contextualElement);
+        dom.insertBoundary(fragment, null);
         return morphs;
       },
-      statements: [["block", "link-to", ["sdg-overview"], ["class", "navbar-brand"], 0, null, ["loc", [null, [4, 6], [6, 20]]]], ["inline", "t", ["application.title"], [], ["loc", [null, [8, 12], [8, 39]]]], ["inline", "partial", ["-header-nav-right"], [], ["loc", [null, [13, 8], [13, 41]]]]],
+      statements: [["block", "link-to", ["sdg-overview"], ["class", "navbar-brand"], 0, null, ["loc", [null, [5, 6], [7, 20]]]], ["inline", "t", ["application.title"], [], ["loc", [null, [9, 12], [9, 39]]]], ["inline", "partial", ["-header-nav-right"], [], ["loc", [null, [14, 8], [14, 41]]]], ["content", "about-modal", ["loc", [null, [20, 0], [20, 15]]]]],
       locals: [],
       templates: [child0]
     };
@@ -11176,7 +12059,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+095622ca"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+25b456f6"});
 }
 
 /* jshint ignore:end */

@@ -76,7 +76,7 @@ efineday('sdg-dash/tests/components/arcgis-map-landing/component.jshint', ['expo
   QUnit.module('JSHint - components/arcgis-map-landing');
   QUnit.test('components/arcgis-map-landing/component.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/arcgis-map-landing/component.js should pass jshint.\ncomponents/arcgis-map-landing/component.js: line 4, col 8, \'Extent\' is defined but never used.\n\n1 error');
+    assert.ok(true, 'components/arcgis-map-landing/component.js should pass jshint.');
   });
 });
 efineday('sdg-dash/tests/components/arcgis-map-sdg-index/component.jshint', ['exports'], function (exports) {
@@ -112,7 +112,7 @@ efineday('sdg-dash/tests/components/country-select-box/component.jshint', ['expo
   QUnit.module('JSHint - components/country-select-box');
   QUnit.test('components/country-select-box/component.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'components/country-select-box/component.js should pass jshint.');
+    assert.ok(false, 'components/country-select-box/component.js should pass jshint.\ncomponents/country-select-box/component.js: line 14, col 7, Comma warnings can be turned off with \'laxcomma\'.\ncomponents/country-select-box/component.js: line 13, col 13, Bad line breaking before \',\'.\n\n2 errors');
   });
 });
 efineday('sdg-dash/tests/components/data-info-popover/component.jshint', ['exports'], function (exports) {
@@ -211,7 +211,7 @@ efineday('sdg-dash/tests/components/sdg-select-box/component.jshint', ['exports'
   QUnit.module('JSHint - components/sdg-select-box');
   QUnit.test('components/sdg-select-box/component.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'components/sdg-select-box/component.js should pass jshint.');
+    assert.ok(false, 'components/sdg-select-box/component.js should pass jshint.\ncomponents/sdg-select-box/component.js: line 28, col 11, Comma warnings can be turned off with \'laxcomma\'.\ncomponents/sdg-select-box/component.js: line 27, col 24, Bad line breaking before \',\'.\ncomponents/sdg-select-box/component.js: line 28, col 18, Bad line breaking before \',\'.\n\n3 errors');
   });
 });
 efineday('sdg-dash/tests/components/storymap-card/component.jshint', ['exports'], function (exports) {
@@ -2543,6 +2543,24 @@ efineday('sdg-dash/tests/landing/route.jshint', ['exports'], function (exports) 
     assert.ok(true, 'landing/route.js should pass jshint.');
   });
 });
+efineday('sdg-dash/tests/locales/ar/config.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - locales/ar');
+  QUnit.test('locales/ar/config.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'locales/ar/config.js should pass jshint.');
+  });
+});
+efineday('sdg-dash/tests/locales/ar/translations.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - locales/ar');
+  QUnit.test('locales/ar/translations.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'locales/ar/translations.js should pass jshint.');
+  });
+});
 efineday('sdg-dash/tests/locales/en/config.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -2559,6 +2577,60 @@ efineday('sdg-dash/tests/locales/en/translations.jshint', ['exports'], function 
   QUnit.test('locales/en/translations.js should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'locales/en/translations.js should pass jshint.');
+  });
+});
+efineday('sdg-dash/tests/locales/es/config.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - locales/es');
+  QUnit.test('locales/es/config.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'locales/es/config.js should pass jshint.');
+  });
+});
+efineday('sdg-dash/tests/locales/es/translations.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - locales/es');
+  QUnit.test('locales/es/translations.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'locales/es/translations.js should pass jshint.');
+  });
+});
+efineday('sdg-dash/tests/locales/fr/config.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - locales/fr');
+  QUnit.test('locales/fr/config.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'locales/fr/config.js should pass jshint.');
+  });
+});
+efineday('sdg-dash/tests/locales/fr/translations.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - locales/fr');
+  QUnit.test('locales/fr/translations.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'locales/fr/translations.js should pass jshint.');
+  });
+});
+efineday('sdg-dash/tests/locales/ru/config.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - locales/ru');
+  QUnit.test('locales/ru/config.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'locales/ru/config.js should pass jshint.');
+  });
+});
+efineday('sdg-dash/tests/locales/ru/translations.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - locales/ru');
+  QUnit.test('locales/ru/translations.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'locales/ru/translations.js should pass jshint.');
   });
 });
 efineday('sdg-dash/tests/map-overview/route.jshint', ['exports'], function (exports) {
