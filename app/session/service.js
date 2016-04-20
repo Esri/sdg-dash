@@ -76,6 +76,31 @@ export default Ember.Service.extend({
       });
   },
 
+  getIndicatorsForTarget(target_id, metadata) {
+    let data = {
+      targets : target_id,
+      includeMetadata: metadata || false
+    };
+
+    return ajax({
+      url: ENV.sdgApi + 'indicators',
+      data: data,
+      dataType: 'json'
+    });
+  },
+
+  getMetadata(indicator_id) {
+    let data = {
+      ids: indicator_id,
+      includeMetadata: true
+    };
+    return ajax({
+      url: ENV.sdgApi + 'indicators',
+      data: data,
+      dataType: 'json'
+    });
+  },
+
   reconfigure(response) {
     let levels = [],
       dash;

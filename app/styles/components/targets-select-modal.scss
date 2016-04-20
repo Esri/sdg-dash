@@ -4,7 +4,6 @@
 }
 .target-display {
   display: table-cell;
-  /*float: none;*/
   margin-bottom: 20px;
   border-left: 1px solid #ddd;
 }
@@ -22,4 +21,54 @@
   font-size: 25px;
   padding: 15px;
   color: gray;
+}
+
+/*indicator sheet*/
+.target-indicator-sheet {
+  display: none;
+  min-height: 500px;
+}
+
+.target-indicator-sheet h3 {
+  margin-top: 5px;
+}
+
+.indicator-id-display {
+  margin-left: -50px;
+  margin-bottom: 20px;
+  display: table-cell;
+}
+.indicator-title-display {
+  border-left: 1px solid #ddd;
+  display: table-cell;
+  margin-bottom: 20px;
+}
+.indicator-title-display a {
+  font-size: 12px;
+}
+
+/*metadata sheet*/
+.metadata-sheet {
+  display: none;
+  min-height: 500px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.metadata-sheet .back-link {
+  margin-left: -45px;
+}
+
+.metadata-sheet h3 {
+  font-weight: 400;
+}
+.metadata-sheet h6 {
+  font-size: 15px;
+}
+
+.targ-sep {
+  display: none;
+}
+.ind-sep {
+  display: none;
 }

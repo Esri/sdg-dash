@@ -3,9 +3,15 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Targets</h4>
+        <h4 class="modal-title" id="myModalLabel">
+          Targets 
+          <span class="targ-sep">/</span>
+          <span class="targ-display">{{session.target_display}}</span>
+          <span class="ind-sep">/</span>
+          <span class="ind-display">{{session.indicator_display}}</span>
+        </h4>
       </div>
-      <div class="modal-body modal-body-container">
+      <div class="modal-body modal-body-container target-sheet">
         <div class="row">
           <div class="col-xs-1 target-display">
             <!-- <h5 class="target-id">SDG Index</h5> -->
@@ -34,28 +40,66 @@
             <div class="col-xs-11 target-display pad-bottom-20">
               <div class="target-desc pad-bottom-10">{{target.title}}</div>
               <button {{action 'setDashboardTarget' target}} class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Dashboard
+                <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Set to Dashboard
               </button>
-              <button class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-flag" aria-hidden="true"></span> Indicators
-              </button>
-              <button class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Datasets
+              <button {{action 'loadIndicatorSheet' target}} class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-flag" aria-hidden="true"></span> View Indicators
               </button>
             </div>
           </div>
         {{/each}}
       </div>
+
+      <div class="modal-body modal-body-container target-indicator-sheet">
+        <button {{ action 'backToTargets'}} type="button" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon glyphicon-menu-left"></span> Back
+        </button>
+        <h3 class="text-center">Indicators</h3>
+        <br>
+        {{#each session.current_indicators as |indicator|}}
+          <div class="row">
+            <div class="col-xs-2 indicator-id-display">
+              <h5 class="target-id">{{indicator.indicator_id}}</h5>
+              <div class="clearfix"></div>
+            </div>
+            <div class="col-xs-10 indicator-title-display pad-bottom-20">
+              <div class="target-desc pad-bottom-10">{{indicator.indicator}}</div>
+              {{#if indicator.has_metadata}}
+                <button {{action 'loadMetadata' indicator}} class="btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> View Metadata
+                </button>
+              {{else}}
+                <button class="btn btn-default btn-sm disabled">
+                  <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> No Metadata Available
+                </button>
+                <a href="{{indicator.goal_meta_link}}#page={{indicator.goal_meta_link_page}}" target="_blank"> View Report </a>
+              {{/if}}              
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+      <div class="modal-body modal-body-container metadata-sheet">
+        <button {{ action 'backToIndicators'}} type="button" class="btn btn-default btn-sm back-link">
+          <span class="glyphicon glyphicon glyphicon-menu-left"></span> Back
+        </button>
+        <h3 class="text-center">{{session.indicator_display_text}}</h3>
+        <h6 class="text-center">
+          <a href="{{session.indicator_direct_link}}" target="_blank">View Full Report</a>
+        </h6>
+        <br>
+        {{#each session.metadata_display as |item|}}
+          <div class="row">
+            <h5>{{item.header}}</h5>
+            <hr>
+            <p>{{item.text}}</p>
+            <br>
+          </div>
+        {{/each}}
+      </div>
+
       <div class="modal-footer">
-        <!-- <div class="pull-left">
-          <button {{action 'setToSdgIndex'}} type="button" class="btn btn-info">
-            <span class="glyphicon glyphicon-list-alt"></span> Set Dashboard to SDG Index Score
-          </button>
-        </div> -->
-        <!-- <div class="pull-right"> -->
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <!-- </div> -->
-        <!-- <div class="clearfix"></div> -->
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
