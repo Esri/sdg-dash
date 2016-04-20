@@ -10,8 +10,8 @@
   /*margin-left: -15px;*/
 }
 .brand-logo {
-  height: 80px;
-  width: 80px;
+  height: 70px;
+  width: 70px;
 }
 
 .sit-on-top {
@@ -26,4 +26,10 @@
   background-color: #eee;
   background: #eee;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 768px) {
+  .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+    margin-left: -20px;
+  }
 }
