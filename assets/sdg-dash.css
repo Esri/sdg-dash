@@ -6420,8 +6420,8 @@ button.close {
   /*margin-left: -15px;*/ }
 
 .brand-logo {
-  height: 80px;
-  width: 80px; }
+  height: 70px;
+  width: 70px; }
 
 .sit-on-top {
   z-index: 1; }
@@ -6433,6 +6433,10 @@ button.close {
   background-color: #eee;
   background: #eee;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
+
+@media (min-width: 768px) {
+  .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+    margin-left: -20px; } }
 
 /*partials*/
 .user-thumbnail {
@@ -6660,7 +6664,6 @@ button.close {
 
 .target-display {
   display: table-cell;
-  /*float: none;*/
   margin-bottom: 20px;
   border-left: 1px solid #ddd; }
 
@@ -6677,6 +6680,49 @@ button.close {
   font-size: 25px;
   padding: 15px;
   color: gray; }
+
+/*indicator sheet*/
+.target-indicator-sheet {
+  display: none;
+  min-height: 500px; }
+
+.target-indicator-sheet h3 {
+  margin-top: 5px; }
+
+.indicator-id-display {
+  margin-left: -50px;
+  margin-bottom: 20px;
+  display: table-cell; }
+
+.indicator-title-display {
+  border-left: 1px solid #ddd;
+  display: table-cell;
+  margin-bottom: 20px; }
+
+.indicator-title-display a {
+  font-size: 12px; }
+
+/*metadata sheet*/
+.metadata-sheet {
+  display: none;
+  min-height: 500px;
+  padding-left: 60px;
+  padding-right: 60px; }
+
+.metadata-sheet .back-link {
+  margin-left: -45px; }
+
+.metadata-sheet h3 {
+  font-weight: 400; }
+
+.metadata-sheet h6 {
+  font-size: 15px; }
+
+.targ-sep {
+  display: none; }
+
+.ind-sep {
+  display: none; }
 
 /*other*/
 .btn-sdg-1 {

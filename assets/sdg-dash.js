@@ -3051,6 +3051,58 @@ efineday('sdg-dash/components/grid-layout/component', ['exports', 'ember-cli-ope
     }
   });
 });
+efineday('sdg-dash/components/indicator-sheet/component', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Component.extend({
+
+    didInsertElement: function didInsertElement() {}
+  });
+});
+efineday("sdg-dash/components/indicator-sheet/template", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type"]
+        },
+        "revision": "Ember@2.3.0",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 2,
+            "column": 0
+          }
+        },
+        "moduleName": "sdg-dash/components/indicator-sheet/template.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        return morphs;
+      },
+      statements: [["content", "yield", ["loc", [null, [1, 0], [1, 9]]]]],
+      locals: [],
+      templates: []
+    };
+  })());
+});
 efineday('sdg-dash/components/ivy-videojs-player', ['exports', 'ivy-videojs/components/ivy-videojs-player'], function (exports, _ivyVideojsComponentsIvyVideojsPlayer) {
   Object.defineProperty(exports, 'default', {
     enumerable: true,
@@ -5895,9 +5947,48 @@ efineday("sdg-dash/components/targets-select-button/template", ["exports"], func
     };
   })());
 });
-efineday('sdg-dash/components/targets-select-modal/component', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({
+efineday("sdg-dash/components/targets-select-modal/component", ["exports", "ember"], function (exports, _ember) {
+  exports["default"] = _ember["default"].Component.extend({
     target: null,
+
+    display_data: [],
+
+    breadcrumbs: [],
+
+    metadata_field_aliases: {
+      goal: "Goal",
+      goal_meta_link: "Link to UN Stats Metadata Compilation Report in PDF format",
+      goal_meta_link_page: "Page Number to link directly to Indicator within PDF",
+      target_id: "Target ID",
+      target: "Target Description",
+      indicator_id: "Indicator ID",
+      indicator: "Indicator Description",
+      has_metadata: "Is Metadata from the UN Stats report available",
+      definition: "Precise Definition of the Indicator",
+      method: "Method of Computation and/or Estimation",
+      rationale_interpretation: "Rationale and/or Interpretation",
+      domain: "Domain",
+      subdomain: "Subdomain",
+      target_linkage: "How is the indicator linked to the specific TARGET as worded in the OWG Report?",
+      exists_reported: "Does the indicator already exist and is it regularly reported?",
+      reliability_coverage_comparability_subnational_compute: "Comment on the reliability, potential coverage, comparability across countries, and the possibility to compute the indicator at sub-national level",
+      baseline_value_2015: "Is there already a baseline value for 2015?",
+      sources_data_collection: "Sources and Data Collection",
+      quantifiable_derivatives: "Quantifiable Derivatives",
+      frequency: "Frequency of Data Collection",
+      disaggregation: "Data Disaggregation",
+      global_regional_monitoring_data: "Entity Responsible for Data for Global and Regional Monitoring",
+      comments_limitations: "Comments and Limitations",
+      gender_equality_issues: "Identifiable Gender Equality Issues",
+      responsible_entities: "Responsible Entities",
+      current_data_availability: "Current Data Availability",
+      related_targets: "Related Targets",
+      related_indicators: "Related Indicators",
+      supplementary_information: "Supplementary Information",
+      references: "References"
+    },
+
+    skip_fields_for_display: ['goal', 'goal_meta_link', 'goal_meta_link_page', 'has_metadata', 'target', 'target_id', 'indicator', 'indicator_id'],
 
     actions: {
       setDashboardTarget: function setDashboardTarget(target) {
@@ -5910,7 +6001,111 @@ efineday('sdg-dash/components/targets-select-modal/component', ['exports', 'embe
         this.$('#myModal').one('hidden.bs.modal', this.modalDidHide.bind(this));
         this.set('target', { id: 'SDG Index' });
         this.$('#myModal').modal('hide');
+      },
+
+      loadIndicatorSheet: function loadIndicatorSheet(target) {
+        var _this = this;
+
+        // this.set('breadcrumbs', [ { title: target.id } ]);
+
+        var svc = this.get('session');
+        svc.getIndicatorsForTarget(target.id, true).then(function (response) {
+          console.log(response);
+
+          _this.$('.targ-sep, .targ-display').fadeIn();
+
+          svc.set('target_display', target.id);
+
+          svc.set('current_indicators', response.data);
+
+          _this.$('.target-sheet').fadeOut().promise().done((function () {
+            this.$('.target-indicator-sheet').fadeIn();
+          }).bind(_this));
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      },
+
+      loadMetadata: function loadMetadata(indicator) {
+        var svc = this.get('session');
+        svc.getMetadata(indicator.indicator_id).then((function (response) {
+          console.log(response);
+
+          this.$('.ind-sep, .ind-display').fadeIn();
+
+          svc.set('indicator_display', indicator.indicator_id);
+          svc.set('indicator_display_text', indicator.indicator);
+          var indicator_direct_link = indicator.goal_meta_link + "#page=" + indicator.goal_meta_link_page;
+          svc.set('indicator_direct_link', indicator_direct_link);
+
+          this.showMetadata(response.data[0]);
+        }).bind(this))["catch"](function (error) {
+          console.log(error);
+        });
+      },
+
+      backToTargets: function backToTargets() {
+        this.$('.target-indicator-sheet').fadeOut().promise().done((function () {
+          this.$('.targ-sep, .targ-display').fadeOut();
+          this.$('.target-sheet').fadeIn();
+        }).bind(this));
+      },
+
+      backToIndicators: function backToIndicators() {
+        this.$('.metadata-sheet').fadeOut().promise().done((function () {
+          this.$('.ind-sep, .ind-display').fadeOut();
+          this.$('.target-indicator-sheet').fadeIn();
+        }).bind(this));
       }
+    },
+
+    didInsertElement: function didInsertElement() {
+      this.set('breadcrumbs', []);
+      this.set('display_data', []);
+
+      this.$('#myModal').on('hide.bs.modal', (function () {
+        // reset targets & indicators displays
+        this.$('.ind-sep, .ind-display, .targ-sep, .targ-display').hide();
+        this.$('.target-indicator-sheet, .metadata-sheet').hide();
+        this.$('.target-sheet').show();
+      }).bind(this));
+    },
+
+    showMetadata: function showMetadata(metadata) {
+
+      var svc = this.get('session');
+
+      var metadata_display = [];
+      svc.set('metadata_display', metadata_display);
+
+      var field_aliases = this.get('metadata_field_aliases');
+      var skip_fields = this.get('skip_fields_for_display');
+      var header = '';
+      var text = '';
+      for (var field in metadata) {
+        if (skip_fields.indexOf(field) !== -1 || metadata[field] === '') {
+          continue;
+        }
+        header = field_aliases[field];
+        if (field === 'responsible_entities') {
+          text = metadata[field].join(', ');
+        } else {
+          text = new _ember["default"].Handlebars.SafeString(metadata[field].replace(/\\n/g, '<br><br>').replace(/\\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'));
+        }
+
+        var title = metadata['indicator'];
+        metadata_display.push({
+          title: title,
+          header: header,
+          text: text
+        });
+      }
+
+      svc.set('metadata_display', metadata_display);
+
+      this.$('.target-indicator-sheet').fadeOut().promise().done((function () {
+        this.$('.metadata-sheet').fadeIn();
+      }).bind(this));
     },
 
     modalDidHide: function modalDidHide(e) {
@@ -5931,11 +6126,11 @@ efineday("sdg-dash/components/targets-select-modal/template", ["exports"], funct
           "loc": {
             "source": null,
             "start": {
-              "line": 28,
+              "line": 34,
               "column": 8
             },
             "end": {
-              "line": 47,
+              "line": 50,
               "column": 8
             }
           },
@@ -5991,7 +6186,7 @@ efineday("sdg-dash/components/targets-select-modal/template", ["exports"], funct
           dom.setAttribute(el4, "class", "glyphicon glyphicon-dashboard");
           dom.setAttribute(el4, "aria-hidden", "true");
           dom.appendChild(el3, el4);
-          var el4 = dom.createTextNode(" Dashboard\n              ");
+          var el4 = dom.createTextNode(" Set to Dashboard\n              ");
           dom.appendChild(el3, el4);
           dom.appendChild(el2, el3);
           var el3 = dom.createTextNode("\n              ");
@@ -6004,20 +6199,7 @@ efineday("sdg-dash/components/targets-select-modal/template", ["exports"], funct
           dom.setAttribute(el4, "class", "glyphicon glyphicon-flag");
           dom.setAttribute(el4, "aria-hidden", "true");
           dom.appendChild(el3, el4);
-          var el4 = dom.createTextNode(" Indicators\n              ");
-          dom.appendChild(el3, el4);
-          dom.appendChild(el2, el3);
-          var el3 = dom.createTextNode("\n              ");
-          dom.appendChild(el2, el3);
-          var el3 = dom.createElement("button");
-          dom.setAttribute(el3, "class", "btn btn-default btn-sm");
-          var el4 = dom.createTextNode("\n                ");
-          dom.appendChild(el3, el4);
-          var el4 = dom.createElement("span");
-          dom.setAttribute(el4, "class", "glyphicon glyphicon-th-list");
-          dom.setAttribute(el4, "aria-hidden", "true");
-          dom.appendChild(el3, el4);
-          var el4 = dom.createTextNode(" Datasets\n              ");
+          var el4 = dom.createTextNode(" View Indicators\n              ");
           dom.appendChild(el3, el4);
           dom.appendChild(el2, el3);
           var el3 = dom.createTextNode("\n            ");
@@ -6031,17 +6213,283 @@ efineday("sdg-dash/components/targets-select-modal/template", ["exports"], funct
           return el0;
         },
         buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var element0 = dom.childAt(fragment, [1]);
-          var element1 = dom.childAt(element0, [3]);
-          var element2 = dom.childAt(element1, [3]);
-          var morphs = new Array(3);
-          morphs[0] = dom.createMorphAt(dom.childAt(element0, [1, 1]), 0, 0);
-          morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
-          morphs[2] = dom.createElementMorph(element2);
+          var element5 = dom.childAt(fragment, [1]);
+          var element6 = dom.childAt(element5, [3]);
+          var element7 = dom.childAt(element6, [3]);
+          var element8 = dom.childAt(element6, [5]);
+          var morphs = new Array(4);
+          morphs[0] = dom.createMorphAt(dom.childAt(element5, [1, 1]), 0, 0);
+          morphs[1] = dom.createMorphAt(dom.childAt(element6, [1]), 0, 0);
+          morphs[2] = dom.createElementMorph(element7);
+          morphs[3] = dom.createElementMorph(element8);
           return morphs;
         },
-        statements: [["content", "target.id", ["loc", [null, [31, 36], [31, 49]]]], ["content", "target.title", ["loc", [null, [35, 53], [35, 69]]]], ["element", "action", ["setDashboardTarget", ["get", "target", ["loc", [null, [36, 52], [36, 58]]]]], [], ["loc", [null, [36, 22], [36, 60]]]]],
+        statements: [["content", "target.id", ["loc", [null, [37, 36], [37, 49]]]], ["content", "target.title", ["loc", [null, [41, 53], [41, 69]]]], ["element", "action", ["setDashboardTarget", ["get", "target", ["loc", [null, [42, 52], [42, 58]]]]], [], ["loc", [null, [42, 22], [42, 60]]]], ["element", "action", ["loadIndicatorSheet", ["get", "target", ["loc", [null, [45, 52], [45, 58]]]]], [], ["loc", [null, [45, 22], [45, 60]]]]],
         locals: ["target"],
+        templates: []
+      };
+    })();
+    var child1 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.3.0",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 67,
+                "column": 14
+              },
+              "end": {
+                "line": 71,
+                "column": 14
+              }
+            },
+            "moduleName": "sdg-dash/components/targets-select-modal/template.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("                ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("button");
+            dom.setAttribute(el1, "class", "btn btn-default btn-sm");
+            var el2 = dom.createTextNode("\n                  ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createElement("span");
+            dom.setAttribute(el2, "class", "glyphicon glyphicon-list-alt");
+            dom.setAttribute(el2, "aria-hidden", "true");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode(" View Metadata\n                ");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var element2 = dom.childAt(fragment, [1]);
+            var morphs = new Array(1);
+            morphs[0] = dom.createElementMorph(element2);
+            return morphs;
+          },
+          statements: [["element", "action", ["loadMetadata", ["get", "indicator", ["loc", [null, [68, 48], [68, 57]]]]], [], ["loc", [null, [68, 24], [68, 59]]]]],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child1 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.3.0",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 71,
+                "column": 14
+              },
+              "end": {
+                "line": 76,
+                "column": 14
+              }
+            },
+            "moduleName": "sdg-dash/components/targets-select-modal/template.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("                ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("button");
+            dom.setAttribute(el1, "class", "btn btn-default btn-sm disabled");
+            var el2 = dom.createTextNode("\n                  ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createElement("span");
+            dom.setAttribute(el2, "class", "glyphicon glyphicon-list-alt");
+            dom.setAttribute(el2, "aria-hidden", "true");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode(" No Metadata Available\n                ");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n                ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("a");
+            dom.setAttribute(el1, "target", "_blank");
+            var el2 = dom.createTextNode(" View Report ");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var element1 = dom.childAt(fragment, [3]);
+            var morphs = new Array(1);
+            morphs[0] = dom.createAttrMorph(element1, 'href');
+            return morphs;
+          },
+          statements: [["attribute", "href", ["concat", [["get", "indicator.goal_meta_link", ["loc", [null, [75, 27], [75, 51]]]], "#page=", ["get", "indicator.goal_meta_link_page", ["loc", [null, [75, 61], [75, 90]]]]]]]],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 59,
+              "column": 8
+            },
+            "end": {
+              "line": 79,
+              "column": 8
+            }
+          },
+          "moduleName": "sdg-dash/components/targets-select-modal/template.hbs"
+        },
+        isEmpty: false,
+        arity: 1,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("          ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("div");
+          dom.setAttribute(el1, "class", "row");
+          var el2 = dom.createTextNode("\n            ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("div");
+          dom.setAttribute(el2, "class", "col-xs-2 indicator-id-display");
+          var el3 = dom.createTextNode("\n              ");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createElement("h5");
+          dom.setAttribute(el3, "class", "target-id");
+          var el4 = dom.createComment("");
+          dom.appendChild(el3, el4);
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("\n              ");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createElement("div");
+          dom.setAttribute(el3, "class", "clearfix");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("\n            ");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n            ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("div");
+          dom.setAttribute(el2, "class", "col-xs-10 indicator-title-display pad-bottom-20");
+          var el3 = dom.createTextNode("\n              ");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createElement("div");
+          dom.setAttribute(el3, "class", "target-desc pad-bottom-10");
+          var el4 = dom.createComment("");
+          dom.appendChild(el3, el4);
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("\n");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("            ");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n          ");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var element3 = dom.childAt(fragment, [1]);
+          var element4 = dom.childAt(element3, [3]);
+          var morphs = new Array(3);
+          morphs[0] = dom.createMorphAt(dom.childAt(element3, [1, 1]), 0, 0);
+          morphs[1] = dom.createMorphAt(dom.childAt(element4, [1]), 0, 0);
+          morphs[2] = dom.createMorphAt(element4, 3, 3);
+          return morphs;
+        },
+        statements: [["content", "indicator.indicator_id", ["loc", [null, [62, 36], [62, 62]]]], ["content", "indicator.indicator", ["loc", [null, [66, 53], [66, 76]]]], ["block", "if", [["get", "indicator.has_metadata", ["loc", [null, [67, 20], [67, 42]]]]], [], 0, 1, ["loc", [null, [67, 14], [76, 21]]]]],
+        locals: ["indicator"],
+        templates: [child0, child1]
+      };
+    })();
+    var child2 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 91,
+              "column": 8
+            },
+            "end": {
+              "line": 98,
+              "column": 8
+            }
+          },
+          "moduleName": "sdg-dash/components/targets-select-modal/template.hbs"
+        },
+        isEmpty: false,
+        arity: 1,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("          ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("div");
+          dom.setAttribute(el1, "class", "row");
+          var el2 = dom.createTextNode("\n            ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("h5");
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n            ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("hr");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n            ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("p");
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n            ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("br");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n          ");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var element0 = dom.childAt(fragment, [1]);
+          var morphs = new Array(2);
+          morphs[0] = dom.createMorphAt(dom.childAt(element0, [1]), 0, 0);
+          morphs[1] = dom.createMorphAt(dom.childAt(element0, [5]), 0, 0);
+          return morphs;
+        },
+        statements: [["content", "item.header", ["loc", [null, [93, 16], [93, 31]]]], ["content", "item.text", ["loc", [null, [95, 15], [95, 28]]]]],
+        locals: ["item"],
         templates: []
       };
     })();
@@ -6058,7 +6506,7 @@ efineday("sdg-dash/components/targets-select-modal/template", ["exports"], funct
             "column": 0
           },
           "end": {
-            "line": 62,
+            "line": 106,
             "column": 6
           }
         },
@@ -6107,7 +6555,35 @@ efineday("sdg-dash/components/targets-select-modal/template", ["exports"], funct
         var el5 = dom.createElement("h4");
         dom.setAttribute(el5, "class", "modal-title");
         dom.setAttribute(el5, "id", "myModalLabel");
-        var el6 = dom.createTextNode("Targets");
+        var el6 = dom.createTextNode("\n          Targets \n          ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("span");
+        dom.setAttribute(el6, "class", "targ-sep");
+        var el7 = dom.createTextNode("/");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n          ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("span");
+        dom.setAttribute(el6, "class", "targ-display");
+        var el7 = dom.createComment("");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n          ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("span");
+        dom.setAttribute(el6, "class", "ind-sep");
+        var el7 = dom.createTextNode("/");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n          ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("span");
+        dom.setAttribute(el6, "class", "ind-display");
+        var el7 = dom.createComment("");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n        ");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n      ");
@@ -6116,7 +6592,7 @@ efineday("sdg-dash/components/targets-select-modal/template", ["exports"], funct
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "modal-body modal-body-container");
+        dom.setAttribute(el4, "class", "modal-body modal-body-container target-sheet");
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("div");
@@ -6183,19 +6659,95 @@ efineday("sdg-dash/components/targets-select-modal/template", ["exports"], funct
         var el5 = dom.createTextNode("      ");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
+        var el4 = dom.createTextNode("\n\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("div");
+        dom.setAttribute(el4, "class", "modal-body modal-body-container target-indicator-sheet");
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("button");
+        dom.setAttribute(el5, "type", "button");
+        dom.setAttribute(el5, "class", "btn btn-default btn-sm");
+        var el6 = dom.createTextNode("\n          ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("span");
+        dom.setAttribute(el6, "class", "glyphicon glyphicon glyphicon-menu-left");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode(" Back\n        ");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("h3");
+        dom.setAttribute(el5, "class", "text-center");
+        var el6 = dom.createTextNode("Indicators");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("br");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("      ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("div");
+        dom.setAttribute(el4, "class", "modal-body modal-body-container metadata-sheet");
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("button");
+        dom.setAttribute(el5, "type", "button");
+        dom.setAttribute(el5, "class", "btn btn-default btn-sm back-link");
+        var el6 = dom.createTextNode("\n          ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("span");
+        dom.setAttribute(el6, "class", "glyphicon glyphicon glyphicon-menu-left");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode(" Back\n        ");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("h3");
+        dom.setAttribute(el5, "class", "text-center");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("h6");
+        dom.setAttribute(el5, "class", "text-center");
+        var el6 = dom.createTextNode("\n          ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("a");
+        dom.setAttribute(el6, "target", "_blank");
+        var el7 = dom.createTextNode("View Full Report");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n        ");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("br");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("      ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
         dom.setAttribute(el4, "class", "modal-footer");
         var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createComment(" <div class=\"pull-left\">\n          <button {{action 'setToSdgIndex'}} type=\"button\" class=\"btn btn-info\">\n            <span class=\"glyphicon glyphicon-list-alt\"></span> Set Dashboard to SDG Index Score\n          </button>\n        </div> ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createComment(" <div class=\"pull-right\"> ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n          ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("button");
         dom.setAttribute(el5, "type", "button");
@@ -6203,14 +6755,6 @@ efineday("sdg-dash/components/targets-select-modal/template", ["exports"], funct
         dom.setAttribute(el5, "data-dismiss", "modal");
         var el6 = dom.createTextNode("Close");
         dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createComment(" </div> ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createComment(" <div class=\"clearfix\"></div> ");
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n      ");
         dom.appendChild(el4, el5);
@@ -6227,16 +6771,31 @@ efineday("sdg-dash/components/targets-select-modal/template", ["exports"], funct
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element3 = dom.childAt(fragment, [0, 1, 1, 3]);
-        var element4 = dom.childAt(element3, [1, 3, 3]);
-        var morphs = new Array(2);
-        morphs[0] = dom.createElementMorph(element4);
-        morphs[1] = dom.createMorphAt(element3, 3, 3);
+        var element9 = dom.childAt(fragment, [0, 1, 1]);
+        var element10 = dom.childAt(element9, [1, 3]);
+        var element11 = dom.childAt(element9, [3]);
+        var element12 = dom.childAt(element11, [1, 3, 3]);
+        var element13 = dom.childAt(element9, [5]);
+        var element14 = dom.childAt(element13, [1]);
+        var element15 = dom.childAt(element9, [7]);
+        var element16 = dom.childAt(element15, [1]);
+        var element17 = dom.childAt(element15, [5, 1]);
+        var morphs = new Array(10);
+        morphs[0] = dom.createMorphAt(dom.childAt(element10, [3]), 0, 0);
+        morphs[1] = dom.createMorphAt(dom.childAt(element10, [7]), 0, 0);
+        morphs[2] = dom.createElementMorph(element12);
+        morphs[3] = dom.createMorphAt(element11, 3, 3);
+        morphs[4] = dom.createElementMorph(element14);
+        morphs[5] = dom.createMorphAt(element13, 7, 7);
+        morphs[6] = dom.createElementMorph(element16);
+        morphs[7] = dom.createMorphAt(dom.childAt(element15, [3]), 0, 0);
+        morphs[8] = dom.createAttrMorph(element17, 'href');
+        morphs[9] = dom.createMorphAt(element15, 9, 9);
         return morphs;
       },
-      statements: [["element", "action", ["setToSdgIndex"], [], ["loc", [null, [17, 20], [17, 46]]]], ["block", "each", [["get", "session.selected_targets", ["loc", [null, [28, 16], [28, 40]]]]], [], 0, null, ["loc", [null, [28, 8], [47, 17]]]]],
+      statements: [["content", "session.target_display", ["loc", [null, [9, 37], [9, 63]]]], ["content", "session.indicator_display", ["loc", [null, [11, 36], [11, 65]]]], ["element", "action", ["setToSdgIndex"], [], ["loc", [null, [23, 20], [23, 46]]]], ["block", "each", [["get", "session.selected_targets", ["loc", [null, [34, 16], [34, 40]]]]], [], 0, null, ["loc", [null, [34, 8], [50, 17]]]], ["element", "action", ["backToTargets"], [], ["loc", [null, [54, 16], [54, 43]]]], ["block", "each", [["get", "session.current_indicators", ["loc", [null, [59, 16], [59, 42]]]]], [], 1, null, ["loc", [null, [59, 8], [79, 17]]]], ["element", "action", ["backToIndicators"], [], ["loc", [null, [83, 16], [83, 46]]]], ["content", "session.indicator_display_text", ["loc", [null, [86, 32], [86, 66]]]], ["attribute", "href", ["concat", [["get", "session.indicator_direct_link", ["loc", [null, [88, 21], [88, 50]]]]]]], ["block", "each", [["get", "session.metadata_display", ["loc", [null, [91, 16], [91, 40]]]]], [], 2, null, ["loc", [null, [91, 8], [98, 17]]]]],
       locals: [],
-      templates: [child0]
+      templates: [child0, child1, child2]
     };
   })());
 });
@@ -8971,6 +9530,31 @@ efineday('sdg-dash/session/service', ['exports', 'ember', 'ic-ajax', 'sdg-dash/c
         dataType: 'json'
       }).then(function (response) {
         return _ember['default'].RSVP.resolve(response);
+      });
+    },
+
+    getIndicatorsForTarget: function getIndicatorsForTarget(target_id, metadata) {
+      var data = {
+        targets: target_id,
+        includeMetadata: metadata || false
+      };
+
+      return (0, _icAjax['default'])({
+        url: _sdgDashConfigEnvironment['default'].sdgApi + 'indicators',
+        data: data,
+        dataType: 'json'
+      });
+    },
+
+    getMetadata: function getMetadata(indicator_id) {
+      var data = {
+        ids: indicator_id,
+        includeMetadata: true
+      };
+      return (0, _icAjax['default'])({
+        url: _sdgDashConfigEnvironment['default'].sdgApi + 'indicators',
+        data: data,
+        dataType: 'json'
       });
     },
 
@@ -12059,7 +12643,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+25b456f6"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+19824aa1"});
 }
 
 /* jshint ignore:end */
