@@ -195,10 +195,10 @@ efineday('sdg-dash/arcgis-map-sdg-index-service/service', ['exports', 'ember', '
         var optsArray = [];
         var drawingOptions = new _esriLayersLayerDrawingOptions['default']();
         drawingOptions.renderer = renderer;
-        optsArray[0] = drawingOptions;
+        optsArray[23] = drawingOptions;
 
         layer.setLayerDrawingOptions(optsArray);
-        layer.setVisibleLayers([0]);
+        layer.setVisibleLayers([23]);
         layer.show();
       }, function (error) {
         console.log('error generating renderer for sdg index map', error);
@@ -518,7 +518,7 @@ efineday('sdg-dash/components/arcgis-map-landing/component', ['exports', 'ember'
     didInsertElement: function didInsertElement() {
       var _this = this;
 
-      var webmapId = 'b663c29073f447c98b79c9b4455a4bb8';
+      var webmapId = '7aae45578d3143ffa92c2d89a1804f89';
       var options = {
         mapOptions: {
           slider: true,
@@ -530,9 +530,10 @@ efineday('sdg-dash/components/arcgis-map-landing/component', ['exports', 'ember'
 
       console.log('rendering Global SDG Index Map ..');
 
+      esri.config.defaults.io.corsEnabledServers.push('http://arcgis-sdgs-385255865.us-east-1.elb.amazonaws.com/');
       _esriArcgisUtils['default'].createMap(webmapId, this.element, options).then(function (response) {
         var map = response.map;
-        map.disableScrollWheelZoom();
+        // map.disableScrollWheelZoom();
         _this.set('map', map);
       });
     },
@@ -12643,7 +12644,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+19824aa1"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+5123a6fa"});
 }
 
 /* jshint ignore:end */

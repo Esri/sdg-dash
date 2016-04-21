@@ -76,7 +76,7 @@ efineday('sdg-dash/tests/components/arcgis-map-landing/component.jshint', ['expo
   QUnit.module('JSHint - components/arcgis-map-landing');
   QUnit.test('components/arcgis-map-landing/component.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'components/arcgis-map-landing/component.js should pass jshint.');
+    assert.ok(false, 'components/arcgis-map-landing/component.js should pass jshint.\ncomponents/arcgis-map-landing/component.js: line 21, col 5, \'esri\' is not defined.\n\n1 error');
   });
 });
 efineday('sdg-dash/tests/components/arcgis-map-sdg-index/component.jshint', ['exports'], function (exports) {
