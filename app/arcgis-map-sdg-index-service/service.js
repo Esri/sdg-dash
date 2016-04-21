@@ -54,10 +54,10 @@ export default Ember.Service.extend({
         let optsArray = [];
         let drawingOptions = new LayerDrawingOptions();
         drawingOptions.renderer = renderer;
-        optsArray[0] = drawingOptions;
+        optsArray[23] = drawingOptions;
 
         layer.setLayerDrawingOptions( optsArray );
-        layer.setVisibleLayers([0]);
+        layer.setVisibleLayers([23]);
         layer.show();
 
       }, function (error) {
