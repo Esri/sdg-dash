@@ -32,6 +32,12 @@ export default Ember.Component.extend({
     svc.createMap(webmap, this.element, options).then((response) => {
       this.map = response.map;
       this.map.disableScrollWheelZoom();
+
+      // add servers to cors config
+      // esri.config.defaults.io.corsEnabledServers
+      response.itemInfo.itemData.operationalLayers.forEach(function(layer) {
+        esri.config.defaults.io.corsEnabledServers.push(layer.url);
+      });
       
       this.itemInfo = response.itemInfo;
       if (response.clickEventHandle) {
