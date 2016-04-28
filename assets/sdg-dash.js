@@ -450,6 +450,12 @@ efineday('sdg-dash/components/arcgis-map/component', ['exports', 'ember'], funct
         _this.map = response.map;
         _this.map.disableScrollWheelZoom();
 
+        // add servers to cors config
+        // esri.config.defaults.io.corsEnabledServers
+        response.itemInfo.itemData.operationalLayers.forEach(function (layer) {
+          esri.config.defaults.io.corsEnabledServers.push(layer.url);
+        });
+
         _this.itemInfo = response.itemInfo;
         if (response.clickEventHandle) {
           _this.handlers.push(response.clickEventHandle);
@@ -12644,7 +12650,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+5123a6fa"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+df41ef3b"});
 }
 
 /* jshint ignore:end */
