@@ -1,10 +1,41 @@
 # sdg-dash
 
-A prototype web application for monitoring the progress of the SDGs.
+A prototype web application for exploring data and services related to the SDGs.
 
-[View it Live](http://sdg-splash.s3-website-us-east-1.amazonaws.com/) (testing)
+This dashboard-style application is built using EmberCLI. More instructions on setup & Ember are below.
 
-## Prerequisites
+## APIs setup
+
+![SDG APIs Overview](https://s3.amazonaws.com/sdg-dash-misc/sdg-apis-overview.jpg)
+
+This application is driven by two APIs. The first contains all metadata related to the SDGs and can be found here: [The SDG API](https://github.com/Esri/sdg-api). The second is an example API that gives the application JSON-structured data on how to lay out a set of "cards" in a dashboard for a specific geography and is found here: [Sample SDG Dashboards API](https://github.com/apfister/sdg-dashboard-api/). This Sample Dashboards API will eventually be deprecated in favor of a future, more stable framework built on [ArcGIS Open Data](http://opendata.arcgis.com/about).
+
+Once you have these APIs setup and running, in `config/environment.js` change the values any instance of `sdgApi` and `sdgDashboardsApi` to where you have hosted the respective APIs.
+
+Example: 
+```javascript
+module.exports = function(environment) {
+  var ENV = {
+    modulePrefix: 'sdg-dash',
+    environment: environment,
+    baseURL: '/',
+    locationType: 'auto',
+    EmberENV: {
+      FEATURES: {
+        // Here you can enable experimental features on an ember canary build
+        // e.g. 'with-controller': true
+      }
+    },
+
+    sdgApi: 'http://localhost:3000/',
+    sdgDashboardsApi: 'http://localhost:3100/'
+
+  };
+```
+
+[View it Live](http://esri.github.io/sdg-dash/)
+
+## Prerequisites to setup & run locally
 
 You will need the following things properly installed on your computer.
 
