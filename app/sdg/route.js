@@ -8,18 +8,63 @@
 // language governing permissions and limitations under the License.
 
 import Ember from 'ember';
+import ENV from 'sdg-dash/config/environment';
 import colorUtils from 'sdg-dash/utils/colors';
+import ajax from 'ic-ajax';
+import Cookies from 'npm:js-cookie';
 
 export default Ember.Route.extend({
   
+  i18n: Ember.inject.service(),
+
   queryParams: {
     target_id: {
       refreshModel: true
     }
   },
 
+  fetchGoal(id, locale) {
+    return ajax({
+      url: ENV.sdgApi + 'goals',
+      data: {
+        ids: id,
+        locale: locale
+      },
+      dataType: 'json'
+    });
+  },
+
+  i18nChanged: Ember.observer('i18n.locale', function () {
+    const locale = this.get('i18n.locale');
+    console.log('locale is now', locale);
+
+    const sel_sdg = this.get('session').get('selected_sdg')
+    if (!sel_sdg) {
+      return;
+    }
+    const id = sel_sdg.get('id');
+    this.fetchGoal(id, locale)
+      .then(function(response) {
+        const data = response.data;
+        const title = data[0].title;
+        const short = data[0].short;
+
+        this.modelFor('sdg').set('title', short);
+        this.modelFor('sdg').set('description', title);
+
+      }.bind(this))
+      .catch(function(error) {
+        console.log('error fetching words for locale', error);
+      });
+  }),
+
   model(params) {
+    let locale = Cookies.get('current_locale');
+    if (!locale) {
+      locale = this.get('i18n.locale');
+    }
     const queryParams = {
+      locale: locale,
       ids: params.goal_id,
       targets: true,
       indicators: true,

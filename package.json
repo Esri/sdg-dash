@@ -23,6 +23,7 @@
     "broccoli-asset-rev": "^2.2.0",
     "broccoli-funnel": "^1.0.1",
     "calcite-bootstrap": "esri/calcite-bootstrap#v0.2.6",
+    "ember-browserify": "1.1.9",
     "ember-cli": "^1.13.15",
     "ember-cli-amd": "0.4.6",
     "ember-cli-app-version": "1.0.0",
@@ -57,6 +58,7 @@
     "ember-wormhole": "^0.3.5",
     "font-awesome": "^4.5.0",
     "ivy-videojs": "0.6.2",
+    "js-cookie": "^2.1.2",
     "liquid-fire": "0.23.0",
     "torii": "0.6.1",
     "torii-provider-arcgis": "git+https://github.com/dbouwman/torii-provider-arcgis.git"

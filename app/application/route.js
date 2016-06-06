@@ -9,14 +9,36 @@
 
 import Ember from 'ember';
 import LoadingSliderMixin from '../mixins/loading-slider';
+import Cookies from 'npm:js-cookie';
 
 export default Ember.Route.extend(LoadingSliderMixin, {
   
-  i18n: Ember.inject.service(),
-  
-  beforeModel() {
+  beforeModel(transition) {
     let svc = this.get('i18n');
-    console.log(svc);
+    
+    console.log('current locale: ', this.get('i18n.locale'));
+    let current_locale = Cookies.get('current_locale');
+    if (current_locale) {
+      this.set('i18n.locale', current_locale);
+      let locale_label =  svc.t('application.languages.' + current_locale);
+      this.get('session').set('locale_label', locale_label);
+    }
+    
+    console.log('current locale: ', this.get('i18n.locale'));    
+  },
+
+  updateSDGText(goal_number) {
+    let svc = this.get('i18n');
+    let goal_locale = svc.t(`application.goal_info.goal`);
+    let title = svc.t(`application.goal_info.goals.${goal_number}.title`);
+    let description = svc.t(`application.goal_info.goals.${goal_number}.description`);
+    
+    let ses = this.get('session');
+    ses.setProperties({
+      goalLocale: goal_locale,
+      titleLocale: title,
+      descriptionLocale: description
+    });
   },
 
   actions: {
@@ -24,20 +46,12 @@ export default Ember.Route.extend(LoadingSliderMixin, {
       let svc = this.get('i18n');
       svc.set('locale', locale);
 
+      Cookies.set('current_locale', locale);
+
       let locale_label =  svc.t('application.languages.' + locale);
       this.get('session').set('locale_label', locale_label);
+
+      this.updateSDGText(this.get('session').get('selected_sdg').get('id'));
     }
-    // signin: function() {
-    //   this.get('authSession').open('arcgis-oauth-bearer')
-    //     .then((authorization) => {
-    //       Ember.debug('AUTH SUCCESS: ', authorization);
-    //     })
-    //     .catch((err)=>{
-    //       Ember.debug('AUTH ERROR: ', err);
-    //     });
-    // },
-    // signout: function() {
-    //   this.get('authSession').close();
-    // }
   }
 });

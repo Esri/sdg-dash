@@ -5,8 +5,10 @@ export default {
       "signIn" : "Sign In",
       "signOut" : "Sign Out",
       "sdghome" : "SDG Home Page",
-      "about" : "Contexte"
+      "about" : "Contexte",
+      "samples" : "Èchantillons"
     },
+    "goal_locale" : "Objectif",
     "languages" : {
       "en" : "English",
       "ar" : "العربية",
@@ -20,7 +22,7 @@ export default {
       "data_disclaimer" : "Avertissement de données",
       "data_disclaimer_text" : "La représentation et l'utilisation des limites , des noms géographiques et les données connexes figurant sur les cartes et incluses dans des listes , des tableaux , des documents et des bases de données sur ce site Web ne sont pas garantis sans erreur et n'impliquent nécessairement l'approbation ou acceptation officielle par Esri.",      
       "btn_close" : "Fermer"
-    }   
+    }
   }
 
   // "some.translation.key": "Text for some.translation.key",

@@ -11,26 +11,50 @@ import Ember from 'ember';
 import ajax from 'ic-ajax';
 import ENV from 'sdg-dash/config/environment';
 import colorUtils from 'sdg-dash/utils/colors';
+import Cookies from 'npm:js-cookie';
 
 export default Ember.Component.extend({
   classNames: ['btn'],
-  
-  didInsertElement() {
-    ajax({
-      url: ENV.sdgApi + 'goals',
-      dataType: 'json'
-    })
-      .then(function (response) {
-        var elId = '#sdg-selector';
-        response.data.forEach(function(goal) {
-          var short_name = goal.short;
-          this.$(elId).append(
-            '<option value="' + goal.goal + '">SDG ' + goal.goal.toString() + ': ' + short_name +'</option>'
-          );
-        }.bind(this));
 
-        // initialize the selectpicker plugin
-        this.$(elId).selectpicker({
+  // i18n: Ember.inject.service(),
+  
+  fetchGoals(locale) {    
+    return ajax({
+      url: ENV.sdgApi + 'goals',
+      data: {
+        locale: locale
+      },
+      dataType: 'json'
+    });
+  },
+
+  addDropDownItems(response) {
+    response.data.forEach(function(goal) {
+      const short_name = goal.short;
+      this.$(this.get('elId')).append(
+        '<option value="' + goal.goal + '">SDG ' + goal.goal.toString() + ': ' + short_name +'</option>'
+      );
+    }.bind(this));
+
+    return Ember.RSVP.Promise.resolve();
+  },
+
+  didInsertElement() {
+    this.set('elId', '#sdg-selector');
+
+    let locale = Cookies.get('current_locale');
+    if (!locale) {
+      locale = this.get('i18n.locale');
+    }
+
+    this.fetchGoals(locale)
+      
+      .then(this.addDropDownItems.bind(this))
+
+      .then(function () {
+
+         // initialize the selectpicker plugin
+        this.$(this.get('elId')).selectpicker({
           style: 'btn-default',
           liveSearch: false,
           selectOnTab: true
@@ -39,15 +63,14 @@ export default Ember.Component.extend({
         });
 
         // wire up change event
-        this.$(elId).change(function () {
-          var selected = this.$(elId).val();
+        this.$(this.get('elId')).change(function () {
+          const selected = this.$(this.get('elId')).val();
           this._changeDisplayName();
           this.get('changeSdg')(selected);
         }.bind(this));
 
-        var goal = this.get('container').lookup('router:main').router.state.params.sdg.goal_id;
-        this.$(elId).selectpicker('val', goal);
-      
+        const goal = this.get('container').lookup('router:main').router.state.params.sdg.goal_id;
+        this.$(this.get('elId')).selectpicker('val', goal);
         this._changeDisplayName();
         
         this._reTheme();
@@ -55,10 +78,42 @@ export default Ember.Component.extend({
       }.bind(this));
   },
 
+  i18nChanged: Ember.observer('i18n.locale', function () {
+    const locale = this.get('i18n.locale');
+    console.log('locale is now', locale);
+
+    this.$(this.get('elId')).empty();
+
+    this.fetchGoals(locale)
+      .then(this.addDropDownItems.bind(this))
+      .then(function () {
+        this.$(this.get('elId')).selectpicker('refresh');
+      }.bind(this));
+  }),
+
   sessionRouteChanged: Ember.observer('session.selected_sdg', function () {
+    // const id = this.get('session').get('selected_sdg').get('id');
+    // this.$(this.get('elId')).selectpicker('val', id);
+    // this._changeDisplayName();
+
+    // this.updateSDGi18nText(id);
     this._clearCustomClasses();
     this._reTheme();
   }),
+
+  updateSDGi18nText(goal_number) {
+    let svc = this.get('i18n');
+    let goal_locale = svc.t(`application.goal_info.goal`);
+    let title = svc.t(`application.goal_info.goals.${goal_number}.title`);
+    let description = svc.t(`application.goal_info.goals.${goal_number}.description`);
+    
+    let ses = this.get('session');
+    ses.setProperties({
+      goalLocale: goal_locale,
+      titleLocale: title,
+      descriptionLocale: description
+    });
+  },
 
   _clearCustomClasses() {
     this.$('.btn')
