@@ -61,14 +61,35 @@ efineday('sdg-dash/application/controller', ['exports', 'ember'], function (expo
 // Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
 // language governing permissions and limitations under the License.
-efineday('sdg-dash/application/route', ['exports', 'ember', 'sdg-dash/mixins/loading-slider'], function (exports, _ember, _sdgDashMixinsLoadingSlider) {
+efineday('sdg-dash/application/route', ['exports', 'ember', 'sdg-dash/mixins/loading-slider', 'npm:js-cookie'], function (exports, _ember, _sdgDashMixinsLoadingSlider, _npmJsCookie) {
   exports['default'] = _ember['default'].Route.extend(_sdgDashMixinsLoadingSlider['default'], {
 
-    i18n: _ember['default'].inject.service(),
-
-    beforeModel: function beforeModel() {
+    beforeModel: function beforeModel(transition) {
       var svc = this.get('i18n');
-      console.log(svc);
+
+      console.log('current locale: ', this.get('i18n.locale'));
+      var current_locale = _npmJsCookie['default'].get('current_locale');
+      if (current_locale) {
+        this.set('i18n.locale', current_locale);
+        var locale_label = svc.t('application.languages.' + current_locale);
+        this.get('session').set('locale_label', locale_label);
+      }
+
+      console.log('current locale: ', this.get('i18n.locale'));
+    },
+
+    updateSDGText: function updateSDGText(goal_number) {
+      var svc = this.get('i18n');
+      var goal_locale = svc.t('application.goal_info.goal');
+      var title = svc.t('application.goal_info.goals.' + goal_number + '.title');
+      var description = svc.t('application.goal_info.goals.' + goal_number + '.description');
+
+      var ses = this.get('session');
+      ses.setProperties({
+        goalLocale: goal_locale,
+        titleLocale: title,
+        descriptionLocale: description
+      });
     },
 
     actions: {
@@ -76,21 +97,13 @@ efineday('sdg-dash/application/route', ['exports', 'ember', 'sdg-dash/mixins/loa
         var svc = this.get('i18n');
         svc.set('locale', locale);
 
+        _npmJsCookie['default'].set('current_locale', locale);
+
         var locale_label = svc.t('application.languages.' + locale);
         this.get('session').set('locale_label', locale_label);
+
+        this.updateSDGText(this.get('session').get('selected_sdg').get('id'));
       }
-      // signin: function() {
-      //   this.get('authSession').open('arcgis-oauth-bearer')
-      //     .then((authorization) => {
-      //       Ember.debug('AUTH SUCCESS: ', authorization);
-      //     })
-      //     .catch((err)=>{
-      //       Ember.debug('AUTH ERROR: ', err);
-      //     });
-      // },
-      // signout: function() {
-      //   this.get('authSession').close();
-      // }
     }
   });
 });
@@ -5250,7 +5263,7 @@ efineday("sdg-dash/components/sdg-overview-collage/template", ["exports"], funct
           morphs[1] = dom.createElementMorph(element0);
           return morphs;
         },
-        statements: [["attribute", "src", ["concat", ["images/sdg/", ["get", "currentLocale", ["loc", [null, [5, 57], [5, 70]]]], "/TGG_Icon_Color_", ["get", "goal.displayNumber", ["loc", [null, [5, 90], [5, 108]]]], ".png"]]], ["element", "action", ["loadSDG", ["get", "goal", ["loc", [null, [5, 32], [5, 36]]]]], [], ["loc", [null, [5, 13], [5, 38]]]]],
+        statements: [["attribute", "src", ["concat", ["images/sdg/", ["get", "i18n.locale", ["loc", [null, [5, 57], [5, 68]]]], "/TGG_Icon_Color_", ["get", "goal.displayNumber", ["loc", [null, [5, 88], [5, 106]]]], ".png"]]], ["element", "action", ["loadSDG", ["get", "goal", ["loc", [null, [5, 32], [5, 36]]]]], [], ["loc", [null, [5, 13], [5, 38]]]]],
         locals: ["goal"],
         templates: []
       };
@@ -5268,7 +5281,7 @@ efineday("sdg-dash/components/sdg-overview-collage/template", ["exports"], funct
             "column": 0
           },
           "end": {
-            "line": 16,
+            "line": 11,
             "column": 6
           }
         },
@@ -5302,22 +5315,6 @@ efineday("sdg-dash/components/sdg-overview-collage/template", ["exports"], funct
         dom.setAttribute(el4, "height", "150");
         dom.setAttribute(el4, "width", "150");
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      \n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createComment(" Esri SDG Overview Story Map ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n     ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createComment(" <a href=\"http://story.maps.arcgis.com/apps/MapJournal/?appid=320279caa7f549678ba428f24a9f12ec\" style=\"opacity:1 !important\" target=\"_blank\"> ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n        ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createComment(" <img class=\"img-sm\" src=\"images/sdg/sdg-storymap-thumb.png\" height=\"150\" width=\"150\"> ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n     ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createComment(" </a> ");
-        dom.appendChild(el3, el4);
         var el4 = dom.createTextNode("\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
@@ -5340,23 +5337,43 @@ efineday("sdg-dash/components/sdg-overview-collage/template", ["exports"], funct
     };
   })());
 });
-efineday('sdg-dash/components/sdg-select-box/component', ['exports', 'ember', 'ic-ajax', 'sdg-dash/config/environment', 'sdg-dash/utils/colors'], function (exports, _ember, _icAjax, _sdgDashConfigEnvironment, _sdgDashUtilsColors) {
+efineday('sdg-dash/components/sdg-select-box/component', ['exports', 'ember', 'ic-ajax', 'sdg-dash/config/environment', 'sdg-dash/utils/colors', 'npm:js-cookie'], function (exports, _ember, _icAjax, _sdgDashConfigEnvironment, _sdgDashUtilsColors, _npmJsCookie) {
   exports['default'] = _ember['default'].Component.extend({
     classNames: ['btn'],
 
-    didInsertElement: function didInsertElement() {
-      (0, _icAjax['default'])({
+    // i18n: Ember.inject.service(),
+
+    fetchGoals: function fetchGoals(locale) {
+      return (0, _icAjax['default'])({
         url: _sdgDashConfigEnvironment['default'].sdgApi + 'goals',
+        data: {
+          locale: locale
+        },
         dataType: 'json'
-      }).then((function (response) {
-        var elId = '#sdg-selector';
-        response.data.forEach((function (goal) {
-          var short_name = goal.short;
-          this.$(elId).append('<option value="' + goal.goal + '">SDG ' + goal.goal.toString() + ': ' + short_name + '</option>');
-        }).bind(this));
+      });
+    },
+
+    addDropDownItems: function addDropDownItems(response) {
+      response.data.forEach((function (goal) {
+        var short_name = goal.short;
+        this.$(this.get('elId')).append('<option value="' + goal.goal + '">SDG ' + goal.goal.toString() + ': ' + short_name + '</option>');
+      }).bind(this));
+
+      return _ember['default'].RSVP.Promise.resolve();
+    },
+
+    didInsertElement: function didInsertElement() {
+      this.set('elId', '#sdg-selector');
+
+      var locale = _npmJsCookie['default'].get('current_locale');
+      if (!locale) {
+        locale = this.get('i18n.locale');
+      }
+
+      this.fetchGoals(locale).then(this.addDropDownItems.bind(this)).then((function () {
 
         // initialize the selectpicker plugin
-        this.$(elId).selectpicker({
+        this.$(this.get('elId')).selectpicker({
           style: 'btn-default',
           liveSearch: false,
           selectOnTab: true,
@@ -5365,25 +5382,54 @@ efineday('sdg-dash/components/sdg-select-box/component', ['exports', 'ember', 'i
         });
 
         // wire up change event
-        this.$(elId).change((function () {
-          var selected = this.$(elId).val();
+        this.$(this.get('elId')).change((function () {
+          var selected = this.$(this.get('elId')).val();
           this._changeDisplayName();
           this.get('changeSdg')(selected);
         }).bind(this));
 
         var goal = this.get('container').lookup('router:main').router.state.params.sdg.goal_id;
-        this.$(elId).selectpicker('val', goal);
-
+        this.$(this.get('elId')).selectpicker('val', goal);
         this._changeDisplayName();
 
         this._reTheme();
       }).bind(this));
     },
 
+    i18nChanged: _ember['default'].observer('i18n.locale', function () {
+      var locale = this.get('i18n.locale');
+      console.log('locale is now', locale);
+
+      this.$(this.get('elId')).empty();
+
+      this.fetchGoals(locale).then(this.addDropDownItems.bind(this)).then((function () {
+        this.$(this.get('elId')).selectpicker('refresh');
+      }).bind(this));
+    }),
+
     sessionRouteChanged: _ember['default'].observer('session.selected_sdg', function () {
+      // const id = this.get('session').get('selected_sdg').get('id');
+      // this.$(this.get('elId')).selectpicker('val', id);
+      // this._changeDisplayName();
+
+      // this.updateSDGi18nText(id);
       this._clearCustomClasses();
       this._reTheme();
     }),
+
+    updateSDGi18nText: function updateSDGi18nText(goal_number) {
+      var svc = this.get('i18n');
+      var goal_locale = svc.t('application.goal_info.goal');
+      var title = svc.t('application.goal_info.goals.' + goal_number + '.title');
+      var description = svc.t('application.goal_info.goals.' + goal_number + '.description');
+
+      var ses = this.get('session');
+      ses.setProperties({
+        goalLocale: goal_locale,
+        titleLocale: title,
+        descriptionLocale: description
+      });
+    },
 
     _clearCustomClasses: function _clearCustomClasses() {
       this.$('.btn').removeClass().addClass('btn dropdown-toggle btn-default');
@@ -7244,6 +7290,20 @@ efineday('sdg-dash/initializers/export-application-global', ['exports', 'ember',
     initialize: initialize
   };
 });
+efineday('sdg-dash/initializers/i18n', ['exports'], function (exports) {
+  exports.initialize = initialize;
+
+  function initialize(application) {
+    application.inject('route', 'i18n', 'service:i18n');
+    application.inject('controller', 'i18n', 'service:i18n');
+    application.inject('component', 'i18n', 'service:i18n');
+  }
+
+  exports['default'] = {
+    name: 'i18n',
+    initialize: initialize
+  };
+});
 efineday('sdg-dash/initializers/initialize-torii-callback', ['exports', 'torii/redirect-handler'], function (exports, _toriiRedirectHandler) {
   exports['default'] = {
     name: 'torii-callback',
@@ -7771,8 +7831,10 @@ efineday("sdg-dash/locales/en/translations", ["exports"], function (exports) {
         "signIn": "Sign In",
         "signOut": "Sign Out",
         "sdghome": "SDG Home Page",
-        "about": "About"
+        "about": "About",
+        "samples": "Samples"
       },
+      "goal_locale": "Goal",
       "languages": {
         "en": "English",
         "ar": "العربية",
@@ -7827,8 +7889,10 @@ efineday("sdg-dash/locales/es/translations", ["exports"], function (exports) {
         "signIn": "Sign In",
         "signOut": "Sign Out",
         "sdghome": "SDG Home Page",
-        "about": "Acerca"
+        "about": "Acerca",
+        "samples": "Las muestras"
       },
+      "goal_locale": "Objectivo",
       "languages": {
         "en": "English",
         "ar": "العربية",
@@ -7882,8 +7946,10 @@ efineday("sdg-dash/locales/fr/translations", ["exports"], function (exports) {
         "signIn": "Sign In",
         "signOut": "Sign Out",
         "sdghome": "SDG Home Page",
-        "about": "Contexte"
+        "about": "Contexte",
+        "samples": "Èchantillons"
       },
+      "goal_locale": "Objectif",
       "languages": {
         "en": "English",
         "ar": "العربية",
@@ -7937,8 +8003,10 @@ efineday("sdg-dash/locales/ru/translations", ["exports"], function (exports) {
         "signIn": "Sign In",
         "signOut": "Sign Out",
         "sdghome": "SDG Home Page",
-        "about": "ОСНОВНЫЕ СВЕДЕНИЯ"
+        "about": "ОСНОВНЫЕ СВЕДЕНИЯ",
+        "samples": "Образцы"
       },
+      "goal_locale": "Цель",
       "languages": {
         "en": "English",
         "ar": "العربية",
@@ -7948,9 +8016,9 @@ efineday("sdg-dash/locales/ru/translations", ["exports"], function (exports) {
       },
       "about": {
         "title": "ОСНОВНЫЕ СВЕДЕНИЯ",
-        "text": "Это концептуальный веб-приложение, которое может быть использовано для обнаружения, использования и обмена данными, услуги & контент, связанных с устойчивым целей развития.",
+        "text": "Это концептуальный вебприложение, которое может быть использовано для обнаружения, использования и обмена данными, услуги & контент, связанных с устойчивым целей развития.",
         "data_disclaimer": "Отказ от данных",
-        "data_disclaimer_text": "описание и использование границ, географических названий и связанных с ними данных, представленных на картах и включенных в списки, таблицы, документы и базы данных на данном веб-сайте, не гарантируется отсутствие ошибок и они не обязательно означают официального одобрения или признания со стороны Esri.",
+        "data_disclaimer_text": "описание и использование границ, географических названий и связанных с ними данных, представленных на картах и включенных в списки, таблицы, документы и базы данных на данном вебсайте, не гарантируется отсутствие ошибок и они не обязательно означают официального одобрения или признания со стороны Esri.",
         "btn_close": "Закрыть"
       }
     }
@@ -8396,8 +8464,10 @@ efineday('sdg-dash/sdg/model', ['exports', 'ember-data'], function (exports, _em
 // Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
 // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
 // language governing permissions and limitations under the License.
-efineday('sdg-dash/sdg/route', ['exports', 'ember', 'sdg-dash/utils/colors'], function (exports, _ember, _sdgDashUtilsColors) {
+efineday('sdg-dash/sdg/route', ['exports', 'ember', 'sdg-dash/config/environment', 'sdg-dash/utils/colors', 'ic-ajax', 'npm:js-cookie'], function (exports, _ember, _sdgDashConfigEnvironment, _sdgDashUtilsColors, _icAjax, _npmJsCookie) {
   exports['default'] = _ember['default'].Route.extend({
+
+    i18n: _ember['default'].inject.service(),
 
     queryParams: {
       target_id: {
@@ -8405,8 +8475,45 @@ efineday('sdg-dash/sdg/route', ['exports', 'ember', 'sdg-dash/utils/colors'], fu
       }
     },
 
+    fetchGoal: function fetchGoal(id, locale) {
+      return (0, _icAjax['default'])({
+        url: _sdgDashConfigEnvironment['default'].sdgApi + 'goals',
+        data: {
+          ids: id,
+          locale: locale
+        },
+        dataType: 'json'
+      });
+    },
+
+    i18nChanged: _ember['default'].observer('i18n.locale', function () {
+      var locale = this.get('i18n.locale');
+      console.log('locale is now', locale);
+
+      var sel_sdg = this.get('session').get('selected_sdg');
+      if (!sel_sdg) {
+        return;
+      }
+      var id = sel_sdg.get('id');
+      this.fetchGoal(id, locale).then((function (response) {
+        var data = response.data;
+        var title = data[0].title;
+        var short = data[0].short;
+
+        this.modelFor('sdg').set('title', short);
+        this.modelFor('sdg').set('description', title);
+      }).bind(this))['catch'](function (error) {
+        console.log('error fetching words for locale', error);
+      });
+    }),
+
     model: function model(params) {
+      var locale = _npmJsCookie['default'].get('current_locale');
+      if (!locale) {
+        locale = this.get('i18n.locale');
+      }
       var queryParams = {
+        locale: locale,
         ids: params.goal_id,
         targets: true,
         indicators: true,
@@ -8561,11 +8668,11 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 77,
+              "line": 79,
               "column": 4
             },
             "end": {
-              "line": 88,
+              "line": 90,
               "column": 4
             }
           },
@@ -8626,7 +8733,7 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           morphs[1] = dom.createMorphAt(dom.childAt(element0, [3, 1]), 0, 0);
           return morphs;
         },
-        statements: [["content", "model.selected_target.id", ["loc", [null, [81, 35], [81, 63]]]], ["content", "model.selected_target.title", ["loc", [null, [84, 12], [84, 43]]]]],
+        statements: [["content", "model.selected_target.id", ["loc", [null, [83, 35], [83, 63]]]], ["content", "model.selected_target.title", ["loc", [null, [86, 12], [86, 43]]]]],
         locals: [],
         templates: []
       };
@@ -8639,11 +8746,11 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 90,
+              "line": 92,
               "column": 4
             },
             "end": {
-              "line": 92,
+              "line": 94,
               "column": 4
             }
           },
@@ -8668,7 +8775,7 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["inline", "grid-layout", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [91, 26], [91, 31]]]]], [], []], "cards", ["subexpr", "@mut", [["get", "session.cards", ["loc", [null, [91, 38], [91, 51]]]]], [], []], "action", "noOp"], ["loc", [null, [91, 6], [91, 67]]]]],
+        statements: [["inline", "grid-layout", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [93, 26], [93, 31]]]]], [], []], "cards", ["subexpr", "@mut", [["get", "session.cards", ["loc", [null, [93, 38], [93, 51]]]]], [], []], "action", "noOp"], ["loc", [null, [93, 6], [93, 67]]]]],
         locals: [],
         templates: []
       };
@@ -8682,11 +8789,11 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 93,
+                "line": 95,
                 "column": 6
               },
               "end": {
-                "line": 98,
+                "line": 100,
                 "column": 6
               }
             },
@@ -8738,11 +8845,11 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 98,
+                "line": 100,
                 "column": 6
               },
               "end": {
-                "line": 100,
+                "line": 102,
                 "column": 6
               }
             },
@@ -8767,7 +8874,7 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
             morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
             return morphs;
           },
-          statements: [["content", "no-data-card", ["loc", [null, [99, 8], [99, 24]]]]],
+          statements: [["content", "no-data-card", ["loc", [null, [101, 8], [101, 24]]]]],
           locals: [],
           templates: []
         };
@@ -8779,11 +8886,11 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 92,
+              "line": 94,
               "column": 4
             },
             "end": {
-              "line": 102,
+              "line": 104,
               "column": 4
             }
           },
@@ -8807,7 +8914,7 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           dom.insertBoundary(fragment, 0);
           return morphs;
         },
-        statements: [["block", "if", [["get", "session.isLoadingCards", ["loc", [null, [93, 12], [93, 34]]]]], [], 0, 1, ["loc", [null, [93, 6], [100, 13]]]]],
+        statements: [["block", "if", [["get", "session.isLoadingCards", ["loc", [null, [95, 12], [95, 34]]]]], [], 0, 1, ["loc", [null, [95, 6], [102, 13]]]]],
         locals: [],
         templates: [child0, child1]
       };
@@ -8820,11 +8927,11 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 107,
+              "line": 109,
               "column": 0
             },
             "end": {
-              "line": 109,
+              "line": 111,
               "column": 0
             }
           },
@@ -8849,7 +8956,7 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["inline", "targets-select-modal", [], ["changeTarget", ["subexpr", "action", ["changeTarget"], [], ["loc", [null, [108, 38], [108, 61]]]]], ["loc", [null, [108, 2], [108, 63]]]]],
+        statements: [["inline", "targets-select-modal", [], ["changeTarget", ["subexpr", "action", ["changeTarget"], [], ["loc", [null, [110, 38], [110, 61]]]]], ["loc", [null, [110, 2], [110, 63]]]]],
         locals: [],
         templates: []
       };
@@ -8862,11 +8969,11 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 111,
+              "line": 113,
               "column": 0
             },
             "end": {
-              "line": 113,
+              "line": 115,
               "column": 0
             }
           },
@@ -8891,7 +8998,7 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["content", "contribute-modal", ["loc", [null, [112, 2], [112, 22]]]]],
+        statements: [["content", "contribute-modal", ["loc", [null, [114, 2], [114, 22]]]]],
         locals: [],
         templates: []
       };
@@ -8910,7 +9017,7 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 113,
+            "line": 115,
             "column": 19
           }
         },
@@ -8961,7 +9068,9 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
         var el7 = dom.createTextNode("\n            ");
         dom.appendChild(el6, el7);
         var el7 = dom.createElement("h1");
-        var el8 = dom.createTextNode("Goal ");
+        var el8 = dom.createComment("");
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode(" ");
         dom.appendChild(el7, el8);
         var el8 = dom.createComment("");
         dom.appendChild(el7, el8);
@@ -8969,6 +9078,10 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
         dom.appendChild(el7, el8);
         var el8 = dom.createComment("");
         dom.appendChild(el7, el8);
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("\n            ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createComment(" <h1>{{session.goalLocale}} {{model.displayNumber}}: {{session.titleLocale}}</h1> ");
         dom.appendChild(el6, el7);
         var el7 = dom.createTextNode("\n          ");
         dom.appendChild(el6, el7);
@@ -8989,6 +9102,10 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
         var el7 = dom.createElement("p");
         var el8 = dom.createComment("");
         dom.appendChild(el7, el8);
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("\n            ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createComment(" <p>{{session.descriptionLocale}}</p> ");
         dom.appendChild(el6, el7);
         var el7 = dom.createTextNode("\n          ");
         dom.appendChild(el6, el7);
@@ -9209,26 +9326,27 @@ efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
         var element7 = dom.childAt(element2, [5]);
         var element8 = dom.childAt(element7, [5]);
         var element9 = dom.childAt(fragment, [2, 1]);
-        var morphs = new Array(15);
+        var morphs = new Array(16);
         morphs[0] = dom.createAttrMorph(element1, 'style');
         morphs[1] = dom.createAttrMorph(element2, 'style');
         morphs[2] = dom.createAttrMorph(element4, 'src');
-        morphs[3] = dom.createMorphAt(element6, 1, 1);
-        morphs[4] = dom.createMorphAt(element6, 3, 3);
-        morphs[5] = dom.createMorphAt(dom.childAt(element5, [3, 1, 1]), 0, 0);
-        morphs[6] = dom.createAttrMorph(element7, 'style');
-        morphs[7] = dom.createMorphAt(element8, 1, 1);
-        morphs[8] = dom.createMorphAt(element8, 5, 5);
-        morphs[9] = dom.createMorphAt(element8, 11, 11);
-        morphs[10] = dom.createMorphAt(element8, 15, 15);
-        morphs[11] = dom.createMorphAt(element9, 1, 1);
-        morphs[12] = dom.createMorphAt(element9, 3, 3);
-        morphs[13] = dom.createMorphAt(fragment, 4, 4, contextualElement);
-        morphs[14] = dom.createMorphAt(fragment, 6, 6, contextualElement);
+        morphs[3] = dom.createMorphAt(element6, 0, 0);
+        morphs[4] = dom.createMorphAt(element6, 2, 2);
+        morphs[5] = dom.createMorphAt(element6, 4, 4);
+        morphs[6] = dom.createMorphAt(dom.childAt(element5, [3, 1, 1]), 0, 0);
+        morphs[7] = dom.createAttrMorph(element7, 'style');
+        morphs[8] = dom.createMorphAt(element8, 1, 1);
+        morphs[9] = dom.createMorphAt(element8, 5, 5);
+        morphs[10] = dom.createMorphAt(element8, 11, 11);
+        morphs[11] = dom.createMorphAt(element8, 15, 15);
+        morphs[12] = dom.createMorphAt(element9, 1, 1);
+        morphs[13] = dom.createMorphAt(element9, 3, 3);
+        morphs[14] = dom.createMorphAt(fragment, 4, 4, contextualElement);
+        morphs[15] = dom.createMorphAt(fragment, 6, 6, contextualElement);
         dom.insertBoundary(fragment, null);
         return morphs;
       },
-      statements: [["attribute", "style", ["concat", ["background-color:", ["get", "model.colorHex", ["loc", [null, [1, 66], [1, 80]]]], ";"]]], ["attribute", "style", ["concat", ["background-color:", ["get", "model.colorHex", ["loc", [null, [2, 51], [2, 65]]]], ";color:white;"]]], ["attribute", "src", ["concat", ["images/sdg/TGG_Icon_Only_Color_", ["get", "model.displayNumber", ["loc", [null, [5, 69], [5, 88]]]], ".gif"]]], ["content", "model.displayNumber", ["loc", [null, [10, 21], [10, 44]]]], ["content", "model.title", ["loc", [null, [10, 46], [10, 61]]]], ["content", "model.description", ["loc", [null, [15, 15], [15, 36]]]], ["attribute", "style", ["concat", ["background-color:rgba(", ["get", "model.colorRgb", ["loc", [null, [31, 98], [31, 112]]]], ", 0.75);"]]], ["inline", "sdg-select-box", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [47, 35], [47, 40]]]]], [], []], "changeSdg", ["subexpr", "action", ["changeSdg"], [], ["loc", [null, [47, 51], [47, 71]]]]], ["loc", [null, [47, 12], [47, 74]]]], ["inline", "targets-select-button", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [53, 42], [53, 47]]]]], [], []]], ["loc", [null, [53, 12], [53, 50]]]], ["inline", "country-select-box", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [60, 39], [60, 44]]]]], [], []], "goToGeography", ["subexpr", "action", ["goToGeography"], [], ["loc", [null, [60, 59], [60, 83]]]]], ["loc", [null, [60, 12], [60, 85]]]], ["inline", "geo-levels-select-box", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [66, 42], [66, 47]]]]], [], []], "goToGeoLevel", "goToGeoLevel"], ["loc", [null, [66, 12], [66, 78]]]], ["block", "unless", [["subexpr", "eq", [["get", "model.selected_target.id", ["loc", [null, [77, 18], [77, 42]]]], "SDG Index"], [], ["loc", [null, [77, 14], [77, 55]]]]], [], 0, null, ["loc", [null, [77, 4], [88, 15]]]], ["block", "if", [["get", "session.cards.length", ["loc", [null, [90, 10], [90, 30]]]]], [], 1, 2, ["loc", [null, [90, 4], [102, 11]]]], ["block", "ember-wormhole", [], ["to", "targets-modal-destination"], 3, null, ["loc", [null, [107, 0], [109, 19]]]], ["block", "ember-wormhole", [], ["to", "contribute-modal-destination"], 4, null, ["loc", [null, [111, 0], [113, 19]]]]],
+      statements: [["attribute", "style", ["concat", ["background-color:", ["get", "model.colorHex", ["loc", [null, [1, 66], [1, 80]]]], ";"]]], ["attribute", "style", ["concat", ["background-color:", ["get", "model.colorHex", ["loc", [null, [2, 51], [2, 65]]]], ";color:white;"]]], ["attribute", "src", ["concat", ["images/sdg/TGG_Icon_Only_Color_", ["get", "model.displayNumber", ["loc", [null, [5, 69], [5, 88]]]], ".gif"]]], ["inline", "t", ["application.goal_locale"], [], ["loc", [null, [10, 16], [10, 47]]]], ["content", "model.displayNumber", ["loc", [null, [10, 48], [10, 71]]]], ["content", "model.title", ["loc", [null, [10, 73], [10, 88]]]], ["content", "model.description", ["loc", [null, [16, 15], [16, 36]]]], ["attribute", "style", ["concat", ["background-color:rgba(", ["get", "model.colorRgb", ["loc", [null, [33, 98], [33, 112]]]], ", 0.75);"]]], ["inline", "sdg-select-box", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [49, 35], [49, 40]]]]], [], []], "changeSdg", ["subexpr", "action", ["changeSdg"], [], ["loc", [null, [49, 51], [49, 71]]]]], ["loc", [null, [49, 12], [49, 74]]]], ["inline", "targets-select-button", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [55, 42], [55, 47]]]]], [], []]], ["loc", [null, [55, 12], [55, 50]]]], ["inline", "country-select-box", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [62, 39], [62, 44]]]]], [], []], "goToGeography", ["subexpr", "action", ["goToGeography"], [], ["loc", [null, [62, 59], [62, 83]]]]], ["loc", [null, [62, 12], [62, 85]]]], ["inline", "geo-levels-select-box", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [68, 42], [68, 47]]]]], [], []], "goToGeoLevel", "goToGeoLevel"], ["loc", [null, [68, 12], [68, 78]]]], ["block", "unless", [["subexpr", "eq", [["get", "model.selected_target.id", ["loc", [null, [79, 18], [79, 42]]]], "SDG Index"], [], ["loc", [null, [79, 14], [79, 55]]]]], [], 0, null, ["loc", [null, [79, 4], [90, 15]]]], ["block", "if", [["get", "session.cards.length", ["loc", [null, [92, 10], [92, 30]]]]], [], 1, 2, ["loc", [null, [92, 4], [104, 11]]]], ["block", "ember-wormhole", [], ["to", "targets-modal-destination"], 3, null, ["loc", [null, [109, 0], [111, 19]]]], ["block", "ember-wormhole", [], ["to", "contribute-modal-destination"], 4, null, ["loc", [null, [113, 0], [115, 19]]]]],
       locals: [],
       templates: [child0, child1, child2, child3, child4]
     };
@@ -9273,6 +9391,7 @@ efineday('sdg-dash/sdg-overview/model', ['exports', 'ember-data'], function (exp
 // language governing permissions and limitations under the License.
 efineday('sdg-dash/sdg-overview/route', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Route.extend({
+
     actions: {
       routeToSDG: function routeToSDG(goal) {
         console.log(goal);
@@ -9280,12 +9399,7 @@ efineday('sdg-dash/sdg-overview/route', ['exports', 'ember'], function (exports,
       }
     },
 
-    beforeModel: function beforeModel() {
-      console.log('beforeModel');
-    },
-
     model: function model() {
-      // return this.store.query('sdg', {});
       return this.store.query('sdg-overview', {});
     }
   });
@@ -9899,6 +10013,46 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             },
             "end": {
               "line": 16,
+              "column": 159
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 15 Life on Land");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Global (Target 15.1)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child7 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 17,
+              "column": 12
+            },
+            "end": {
+              "line": 17,
               "column": 155
             }
           },
@@ -9939,7 +10093,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 52,
+            "line": 53,
             "column": 5
           }
         },
@@ -9981,7 +10135,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         dom.setAttribute(el4, "role", "button");
         dom.setAttribute(el4, "aria-haspopup", "true");
         dom.setAttribute(el4, "aria-expanded", "false");
-        var el5 = dom.createTextNode("\n      Samples ");
+        var el5 = dom.createTextNode("\n      ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode(" ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("span");
         dom.setAttribute(el5, "class", "caret");
@@ -9991,6 +10149,12 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("ul");
         dom.setAttribute(el4, "class", "dropdown-menu");
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("li");
@@ -10137,36 +10301,39 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [0]);
         var element1 = dom.childAt(element0, [3]);
-        var element2 = dom.childAt(element1, [1, 3]);
-        var element3 = dom.childAt(element1, [3]);
-        var element4 = dom.childAt(element3, [3]);
-        var element5 = dom.childAt(element4, [1, 0]);
-        var element6 = dom.childAt(element4, [3, 0]);
-        var element7 = dom.childAt(element4, [7, 0]);
-        var element8 = dom.childAt(element4, [9, 0]);
-        var morphs = new Array(17);
+        var element2 = dom.childAt(element1, [1]);
+        var element3 = dom.childAt(element2, [3]);
+        var element4 = dom.childAt(element1, [3]);
+        var element5 = dom.childAt(element4, [3]);
+        var element6 = dom.childAt(element5, [1, 0]);
+        var element7 = dom.childAt(element5, [3, 0]);
+        var element8 = dom.childAt(element5, [7, 0]);
+        var element9 = dom.childAt(element5, [9, 0]);
+        var morphs = new Array(19);
         morphs[0] = dom.createMorphAt(dom.childAt(element0, [1, 0]), 0, 0);
-        morphs[1] = dom.createMorphAt(dom.childAt(element2, [1]), 0, 0);
-        morphs[2] = dom.createMorphAt(dom.childAt(element2, [3]), 0, 0);
-        morphs[3] = dom.createMorphAt(dom.childAt(element2, [5]), 0, 0);
-        morphs[4] = dom.createMorphAt(dom.childAt(element2, [7]), 0, 0);
-        morphs[5] = dom.createMorphAt(dom.childAt(element2, [9]), 0, 0);
-        morphs[6] = dom.createMorphAt(dom.childAt(element2, [11]), 0, 0);
-        morphs[7] = dom.createMorphAt(dom.childAt(element2, [13]), 0, 0);
-        morphs[8] = dom.createMorphAt(dom.childAt(element3, [1]), 1, 1);
-        morphs[9] = dom.createElementMorph(element5);
-        morphs[10] = dom.createMorphAt(element5, 0, 0);
+        morphs[1] = dom.createMorphAt(dom.childAt(element2, [1]), 1, 1);
+        morphs[2] = dom.createMorphAt(dom.childAt(element3, [1]), 0, 0);
+        morphs[3] = dom.createMorphAt(dom.childAt(element3, [3]), 0, 0);
+        morphs[4] = dom.createMorphAt(dom.childAt(element3, [5]), 0, 0);
+        morphs[5] = dom.createMorphAt(dom.childAt(element3, [7]), 0, 0);
+        morphs[6] = dom.createMorphAt(dom.childAt(element3, [9]), 0, 0);
+        morphs[7] = dom.createMorphAt(dom.childAt(element3, [11]), 0, 0);
+        morphs[8] = dom.createMorphAt(dom.childAt(element3, [13]), 0, 0);
+        morphs[9] = dom.createMorphAt(dom.childAt(element3, [15]), 0, 0);
+        morphs[10] = dom.createMorphAt(dom.childAt(element4, [1]), 1, 1);
         morphs[11] = dom.createElementMorph(element6);
         morphs[12] = dom.createMorphAt(element6, 0, 0);
         morphs[13] = dom.createElementMorph(element7);
         morphs[14] = dom.createMorphAt(element7, 0, 0);
         morphs[15] = dom.createElementMorph(element8);
         morphs[16] = dom.createMorphAt(element8, 0, 0);
+        morphs[17] = dom.createElementMorph(element9);
+        morphs[18] = dom.createMorphAt(element9, 0, 0);
         return morphs;
       },
-      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [10, 33], [10, 100]]]]], [], 0, null, ["loc", [null, [10, 12], [10, 162]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [11, 33], [11, 104]]]]], [], 1, null, ["loc", [null, [11, 12], [11, 184]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [12, 33], [12, 100]]]]], [], 2, null, ["loc", [null, [12, 12], [12, 182]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [13, 33], [13, 104]]]]], [], 3, null, ["loc", [null, [13, 12], [13, 180]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [14, 34], [14, 110]]]]], [], 4, null, ["loc", [null, [14, 12], [14, 199]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [15, 34], [15, 108]]]]], [], 5, null, ["loc", [null, [15, 12], [15, 197]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [16, 38], [16, 64]]]]], [], 6, null, ["loc", [null, [16, 12], [16, 167]]]], ["content", "session.locale_label", ["loc", [null, [22, 6], [22, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [24, 16], [24, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [24, 49], [24, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [25, 16], [25, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [25, 49], [25, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [27, 16], [27, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [27, 49], [27, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [28, 16], [28, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [28, 49], [28, 81]]]]],
+      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["inline", "t", ["application.header.samples"], [], ["loc", [null, [8, 6], [8, 42]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [10, 33], [10, 100]]]]], [], 0, null, ["loc", [null, [10, 12], [10, 162]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [11, 33], [11, 104]]]]], [], 1, null, ["loc", [null, [11, 12], [11, 184]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [12, 33], [12, 100]]]]], [], 2, null, ["loc", [null, [12, 12], [12, 182]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [13, 33], [13, 104]]]]], [], 3, null, ["loc", [null, [13, 12], [13, 180]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [14, 34], [14, 110]]]]], [], 4, null, ["loc", [null, [14, 12], [14, 199]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [15, 34], [15, 108]]]]], [], 5, null, ["loc", [null, [15, 12], [15, 197]]]], ["block", "link-to", ["sdg", "15", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "15.1"], ["loc", [null, [16, 34], [16, 106]]]]], [], 6, null, ["loc", [null, [16, 12], [16, 171]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [17, 38], [17, 64]]]]], [], 7, null, ["loc", [null, [17, 12], [17, 167]]]], ["content", "session.locale_label", ["loc", [null, [23, 6], [23, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [25, 16], [25, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [25, 49], [25, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [26, 16], [26, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [26, 49], [26, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [28, 16], [28, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [28, 49], [28, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [29, 16], [29, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [29, 49], [29, 81]]]]],
       locals: [],
-      templates: [child0, child1, child2, child3, child4, child5, child6]
+      templates: [child0, child1, child2, child3, child4, child5, child6, child7]
     };
   })());
 });
@@ -13054,7 +13221,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+f6216a2f"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+168461cb"});
 }
 
 /* jshint ignore:end */

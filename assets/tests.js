@@ -31,7 +31,7 @@ efineday('sdg-dash/tests/application/route.jshint', ['exports'], function (expor
   QUnit.module('JSHint - application');
   QUnit.test('application/route.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'application/route.js should pass jshint.');
+    assert.ok(false, 'application/route.js should pass jshint.\napplication/route.js: line 16, col 15, \'transition\' is defined but never used.\n\n1 error');
   });
 });
 efineday('sdg-dash/tests/arcgis-map-sdg-index-service/service.jshint', ['exports'], function (exports) {
@@ -220,7 +220,7 @@ efineday('sdg-dash/tests/components/sdg-select-box/component.jshint', ['exports'
   QUnit.module('JSHint - components/sdg-select-box');
   QUnit.test('components/sdg-select-box/component.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/sdg-select-box/component.js should pass jshint.\ncomponents/sdg-select-box/component.js: line 37, col 11, Comma warnings can be turned off with \'laxcomma\'.\ncomponents/sdg-select-box/component.js: line 36, col 24, Bad line breaking before \',\'.\ncomponents/sdg-select-box/component.js: line 37, col 18, Bad line breaking before \',\'.\n\n3 errors');
+    assert.ok(false, 'components/sdg-select-box/component.js should pass jshint.\ncomponents/sdg-select-box/component.js: line 61, col 11, Comma warnings can be turned off with \'laxcomma\'.\ncomponents/sdg-select-box/component.js: line 60, col 24, Bad line breaking before \',\'.\ncomponents/sdg-select-box/component.js: line 61, col 18, Bad line breaking before \',\'.\n\n3 errors');
   });
 });
 efineday('sdg-dash/tests/components/storymap-card/component.jshint', ['exports'], function (exports) {
@@ -423,6 +423,15 @@ efineday('sdg-dash/tests/home/route.jshint', ['exports'], function (exports) {
   QUnit.test('home/route.js should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'home/route.js should pass jshint.');
+  });
+});
+efineday('sdg-dash/tests/initializers/i18n.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - initializers');
+  QUnit.test('initializers/i18n.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'initializers/i18n.js should pass jshint.');
   });
 });
 efineday('sdg-dash/tests/initializers/session.jshint', ['exports'], function (exports) {
@@ -2852,7 +2861,7 @@ efineday('sdg-dash/tests/sdg/route.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - sdg');
   QUnit.test('sdg/route.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'sdg/route.js should pass jshint.');
+    assert.ok(false, 'sdg/route.js should pass jshint.\nsdg/route.js: line 41, col 60, Missing semicolon.\n\n1 error');
   });
 });
 efineday('sdg-dash/tests/sdg/serializer.jshint', ['exports'], function (exports) {
@@ -3023,6 +3032,36 @@ efineday('sdg-dash/tests/unit/helpers/eq-test.jshint', ['exports'], function (ex
   QUnit.test('unit/helpers/eq-test.js should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/helpers/eq-test.js should pass jshint.');
+  });
+});
+efineday('sdg-dash/tests/unit/initializers/i18n-test', ['exports', 'ember', 'sdg-dash/initializers/i18n', 'qunit'], function (exports, _ember, _sdgDashInitializersI18n, _qunit) {
+
+  var application = undefined;
+
+  (0, _qunit.module)('Unit | Initializer | i18n', {
+    beforeEach: function beforeEach() {
+      _ember['default'].run(function () {
+        application = _ember['default'].Application.create();
+        application.deferReadiness();
+      });
+    }
+  });
+
+  // Replace this with your real tests.
+  (0, _qunit.test)('it works', function (assert) {
+    _sdgDashInitializersI18n['default'].initialize(application);
+
+    // you would normally confirm the results of the initializer here
+    assert.ok(true);
+  });
+});
+efineday('sdg-dash/tests/unit/initializers/i18n-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/initializers');
+  QUnit.test('unit/initializers/i18n-test.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/initializers/i18n-test.js should pass jshint.');
   });
 });
 efineday('sdg-dash/tests/unit/sdg/adapter-test', ['exports', 'ember-qunit'], function (exports, _emberQunit) {
