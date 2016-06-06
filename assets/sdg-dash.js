@@ -19,9 +19,25 @@ efineday('sdg-dash/app', ['exports', 'ember', 'ember/resolver', 'ember/load-init
 
   exports['default'] = App;
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/application/adapter', ['exports', 'ember-data'], function (exports, _emberData) {
   exports['default'] = _emberData['default'].RESTAdapter.extend({});
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/application/controller', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller.extend({
 
@@ -37,6 +53,14 @@ efineday('sdg-dash/application/controller', ['exports', 'ember'], function (expo
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/application/route', ['exports', 'ember', 'sdg-dash/mixins/loading-slider'], function (exports, _ember, _sdgDashMixinsLoadingSlider) {
   exports['default'] = _ember['default'].Route.extend(_sdgDashMixinsLoadingSlider['default'], {
 
@@ -70,6 +94,14 @@ efineday('sdg-dash/application/route', ['exports', 'ember', 'sdg-dash/mixins/loa
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/application/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -227,6 +259,14 @@ efineday('sdg-dash/arcgis-map-sdg-index-service/service', ['exports', 'ember', '
 
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/arcgis-map-service/service', ['exports', 'ember', 'esri/arcgis/utils', 'esri/basemaps'], function (exports, _ember, _esriArcgisUtils, _esriBasemaps) {
   exports['default'] = _ember['default'].Service.extend({
     createMap: function createMap(webMap, elem, options) {
@@ -262,9 +302,25 @@ efineday('sdg-dash/arcgis-map-service/service', ['exports', 'ember', 'esri/arcgi
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/components/about-modal/component', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Component.extend({});
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/about-modal/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -470,6 +526,14 @@ efineday('sdg-dash/components/arcgis-map/component', ['exports', 'ember'], funct
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/arcgis-map/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -539,7 +603,7 @@ efineday('sdg-dash/components/arcgis-map-landing/component', ['exports', 'ember'
       esri.config.defaults.io.corsEnabledServers.push('http://arcgis-sdgs-385255865.us-east-1.elb.amazonaws.com/');
       _esriArcgisUtils['default'].createMap(webmapId, this.element, options).then(function (response) {
         var map = response.map;
-        // map.disableScrollWheelZoom();
+        map.disableScrollWheelZoom();
         _this.set('map', map);
       });
     },
@@ -552,6 +616,14 @@ efineday('sdg-dash/components/arcgis-map-landing/component', ['exports', 'ember'
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/arcgis-map-landing/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -651,6 +723,14 @@ efineday('sdg-dash/components/arcgis-map-sdg-index/component', ['exports', 'embe
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/arcgis-map-sdg-index/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -718,6 +798,14 @@ efineday('sdg-dash/components/contribute-button/component', ['exports', 'ember']
     btn_size: 'btn-lg'
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/contribute-button/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -774,6 +862,14 @@ efineday("sdg-dash/components/contribute-button/template", ["exports"], function
 efineday('sdg-dash/components/contribute-modal/component', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Component.extend({});
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/contribute-modal/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -995,6 +1091,14 @@ efineday('sdg-dash/components/country-select-box/component', ['exports', 'ember'
 
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/country-select-box/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -2645,6 +2749,14 @@ efineday('sdg-dash/components/data-info-popover/component', ['exports', 'ember']
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/data-info-popover/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -2794,6 +2906,14 @@ efineday('sdg-dash/components/geo-levels-select-box/component', ['exports', 'emb
 
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/geo-levels-select-box/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -3005,6 +3125,14 @@ efineday('sdg-dash/components/geography-search-box/component', ['exports', 'embe
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/geography-search-box/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -3059,11 +3187,16 @@ efineday('sdg-dash/components/grid-layout/component', ['exports', 'ember-cli-ope
   });
 });
 efineday('sdg-dash/components/indicator-sheet/component', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({
-
-    didInsertElement: function didInsertElement() {}
-  });
+  exports['default'] = _ember['default'].Component.extend({});
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/indicator-sheet/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -3936,6 +4069,15 @@ efineday('sdg-dash/components/login-button/component', ['exports', 'ember'], fun
     text: 'Connect using Facebook or Google+'
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
+
 // authSession: Ember.inject.service('authSession'),
 
 // click() {
@@ -4012,10 +4154,16 @@ efineday("sdg-dash/components/login-button/template", ["exports"], function (exp
   })());
 });
 efineday('sdg-dash/components/map-card/component', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({
-    didInsertElement: function didInsertElement() {}
-  });
+  exports['default'] = _ember['default'].Component.extend({});
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/map-card/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -4256,6 +4404,14 @@ efineday('sdg-dash/components/markdown-card/component', ['exports', 'ember-cli-o
 efineday('sdg-dash/components/no-data-card/component', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Component.extend({});
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/no-data-card/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -4489,6 +4645,14 @@ efineday('sdg-dash/components/placeholder-card/component', ['exports', 'ember-cl
 efineday('sdg-dash/components/ranking-bar/component', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Component.extend({});
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/ranking-bar/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -4538,6 +4702,14 @@ efineday("sdg-dash/components/ranking-bar/template", ["exports"], function (expo
 efineday('sdg-dash/components/ranking-card/component', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Component.extend({});
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/ranking-card/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -4828,6 +5000,14 @@ efineday('sdg-dash/components/ranking-component/component', ['exports', 'ember',
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/ranking-component/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -5019,6 +5199,14 @@ efineday('sdg-dash/components/sdg-overview-collage/component', ['exports', 'embe
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/sdg-overview-collage/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -5238,6 +5426,14 @@ efineday('sdg-dash/components/sdg-select-box/component', ['exports', 'ember', 'i
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/sdg-select-box/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -5303,6 +5499,14 @@ efineday('sdg-dash/components/storymap-card/component', ['exports', 'ember'], fu
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/storymap-card/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -5594,6 +5798,14 @@ efineday('sdg-dash/components/summary-stat-card/component', ['exports', 'ember',
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/summary-stat-card/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -5766,6 +5978,14 @@ efineday('sdg-dash/components/target-select-box/component', ['exports', 'ember']
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/target-select-box/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -5907,6 +6127,14 @@ efineday('sdg-dash/components/targets-select-button/component', ['exports', 'emb
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/targets-select-button/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -6123,6 +6351,14 @@ efineday("sdg-dash/components/targets-select-modal/component", ["exports", "embe
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/components/targets-select-modal/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -6820,6 +7056,14 @@ efineday('sdg-dash/helpers/eq', ['exports', 'ember'], function (exports, _ember)
 
   exports['default'] = _ember['default'].Helper.helper(eq);
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/helpers/pluralize', ['exports', 'ember-inflector/lib/helpers/pluralize'], function (exports, _emberInflectorLibHelpersPluralize) {
   exports['default'] = _emberInflectorLibHelpersPluralize['default'];
 });
@@ -6835,12 +7079,16 @@ efineday('sdg-dash/helpers/t', ['exports', 'ember-i18n/helper'], function (expor
   });
 });
 efineday('sdg-dash/home/route', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Route.extend({
-    beforeModel: function beforeModel() {
-      // this.transitionTo('sdg-overview');
-    }
-  });
+  exports['default'] = _ember['default'].Route.extend({});
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/home/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -7078,6 +7326,14 @@ efineday("sdg-dash/initializers/liquid-fire", ["exports", "liquid-fire/router-ds
 // imports happen before the app boots.
 efineday('sdg-dash/initializers/session', ['exports'], function (exports) {
   exports.initialize = initialize;
+  // Copyright 2016 Esri.
+  //
+  // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+  // You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+  //
+  // Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+  // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+  // language governing permissions and limitations under the License.
 
   function initialize(application) {
     // application.inject('route', 'foo', 'service:foo');
@@ -7203,6 +7459,14 @@ efineday('sdg-dash/landing/controller', ['exports', 'ember'], function (exports,
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/landing/route', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Route.extend({
 
@@ -7229,6 +7493,14 @@ efineday('sdg-dash/landing/route', ['exports', 'ember'], function (exports, _emb
 
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/landing/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -7696,6 +7968,14 @@ efineday("sdg-dash/locales/ru/translations", ["exports"], function (exports) {
 efineday('sdg-dash/map-overview/route', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Route.extend({});
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/map-overview/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -7924,6 +8204,14 @@ efineday('sdg-dash/map-service/service', ['exports', 'ember'], function (exports
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/mixins/loading-slider', ['exports', 'ember'], function (exports, _ember) {
   var Mixin = _ember['default'].Mixin;
   var inject = _ember['default'].inject;
@@ -7970,6 +8258,14 @@ efineday('sdg-dash/router', ['exports', 'ember', 'sdg-dash/config/environment'],
 
   exports['default'] = Router;
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/sdg/adapter', ['exports', 'ember-data', 'sdg-dash/config/environment'], function (exports, _emberData, _sdgDashConfigEnvironment) {
   exports['default'] = _emberData['default'].JSONAPIAdapter.extend({
     urlForQuery: function urlForQuery() {
@@ -7980,6 +8276,14 @@ efineday('sdg-dash/sdg/adapter', ['exports', 'ember-data', 'sdg-dash/config/envi
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/sdg/controller', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller.extend({
     queryParams: ['geo_group', 'geo_value', 'geo_level', 'target_id'],
@@ -8065,6 +8369,14 @@ efineday('sdg-dash/sdg/controller', ['exports', 'ember'], function (exports, _em
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/sdg/model', ['exports', 'ember-data'], function (exports, _emberData) {
   exports['default'] = _emberData['default'].Model.extend({
     title: _emberData['default'].attr('string'),
@@ -8076,6 +8388,14 @@ efineday('sdg-dash/sdg/model', ['exports', 'ember-data'], function (exports, _em
     targets: _emberData['default'].attr()
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/sdg/route', ['exports', 'ember', 'sdg-dash/utils/colors'], function (exports, _ember, _sdgDashUtilsColors) {
   exports['default'] = _ember['default'].Route.extend({
 
@@ -8165,6 +8485,14 @@ efineday('sdg-dash/sdg/route', ['exports', 'ember', 'sdg-dash/utils/colors'], fu
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/sdg/serializer', ['exports', 'ember-data'], function (exports, _emberData) {
   exports['default'] = _emberData['default'].JSONAPISerializer.extend({
 
@@ -8215,6 +8543,14 @@ efineday('sdg-dash/sdg/serializer', ['exports', 'ember-data'], function (exports
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/sdg/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -8905,12 +9241,36 @@ efineday('sdg-dash/sdg-overview/adapter', ['exports', 'ember-data', 'sdg-dash/co
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/sdg-overview/controller', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller.extend({});
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/sdg-overview/model', ['exports', 'ember-data'], function (exports, _emberData) {
   exports['default'] = _emberData['default'].Model.extend({});
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/sdg-overview/route', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Route.extend({
     actions: {
@@ -8930,6 +9290,14 @@ efineday('sdg-dash/sdg-overview/route', ['exports', 'ember'], function (exports,
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/sdg-overview/serializer', ['exports', 'ember-data'], function (exports, _emberData) {
   exports['default'] = _emberData['default'].JSONAPISerializer.extend({
 
@@ -8980,288 +9348,16 @@ efineday('sdg-dash/sdg-overview/serializer', ['exports', 'ember-data'], function
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/sdg-overview/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
-    var child0 = (function () {
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.3.0",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 28,
-              "column": 10
-            },
-            "end": {
-              "line": 28,
-              "column": 148
-            }
-          },
-          "moduleName": "sdg-dash/sdg-overview/template.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 02 Zero Hunger");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Kenya (Target 2.1)");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes() {
-          return [];
-        },
-        statements: [],
-        locals: [],
-        templates: []
-      };
-    })();
-    var child1 = (function () {
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.3.0",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 29,
-              "column": 10
-            },
-            "end": {
-              "line": 29,
-              "column": 170
-            }
-          },
-          "moduleName": "sdg-dash/sdg-overview/template.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 03 Good Health & Well-Being");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Global (Target 3.3)");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes() {
-          return [];
-        },
-        statements: [],
-        locals: [],
-        templates: []
-      };
-    })();
-    var child2 = (function () {
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.3.0",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 30,
-              "column": 10
-            },
-            "end": {
-              "line": 30,
-              "column": 168
-            }
-          },
-          "moduleName": "sdg-dash/sdg-overview/template.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 03 Good Health & Well-Being");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Thailand (Target 3.3)");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes() {
-          return [];
-        },
-        statements: [],
-        locals: [],
-        templates: []
-      };
-    })();
-    var child3 = (function () {
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.3.0",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 31,
-              "column": 10
-            },
-            "end": {
-              "line": 31,
-              "column": 166
-            }
-          },
-          "moduleName": "sdg-dash/sdg-overview/template.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 05 Gender Equality");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Global Progress (Target 5.5)");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes() {
-          return [];
-        },
-        statements: [],
-        locals: [],
-        templates: []
-      };
-    })();
-    var child4 = (function () {
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.3.0",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 32,
-              "column": 10
-            },
-            "end": {
-              "line": 32,
-              "column": 185
-            }
-          },
-          "moduleName": "sdg-dash/sdg-overview/template.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 11 Sustainable Cities & Communities");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Global (Target 11.1)");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes() {
-          return [];
-        },
-        statements: [],
-        locals: [],
-        templates: []
-      };
-    })();
-    var child5 = (function () {
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.3.0",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 33,
-              "column": 10
-            },
-            "end": {
-              "line": 33,
-              "column": 183
-            }
-          },
-          "moduleName": "sdg-dash/sdg-overview/template.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 11 Sustainable Cities & Communities");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Bogota (Target 11.1)");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes() {
-          return [];
-        },
-        statements: [],
-        locals: [],
-        templates: []
-      };
-    })();
-    var child6 = (function () {
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.3.0",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 34,
-              "column": 10
-            },
-            "end": {
-              "line": 34,
-              "column": 153
-            }
-          },
-          "moduleName": "sdg-dash/sdg-overview/template.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 03 Good Health and Well-Being");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Access to Health Care Web Application (video)");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes() {
-          return [];
-        },
-        statements: [],
-        locals: [],
-        templates: []
-      };
-    })();
     return {
       meta: {
         "fragmentReason": {
@@ -9276,8 +9372,8 @@ efineday("sdg-dash/sdg-overview/template", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 43,
-            "column": 23
+            "line": 21,
+            "column": 10
           }
         },
         "moduleName": "sdg-dash/sdg-overview/template.hbs"
@@ -9292,17 +9388,9 @@ efineday("sdg-dash/sdg-overview/template", ["exports"], function (exports) {
         dom.setAttribute(el1, "class", "container-fluid no-padding");
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
-        var el2 = dom.createComment(" SDGs logo ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment(" <div class=\"landing-map-top-overlay\">\n    <div class=\"pull-left\">\n      <img class=\"landing-sdg-logo\" src='images/landing/sdg-logo-only.png'>\n      <span class=\"glyphicon glyphicon-info-sign glyph-about\" data-toggle=\"modal\" data-target=\"#aboutModal\"></span>\n    </div>\n    <div class=\"pull-right landing-text-div\">\n      <span class=\"landing-title\">\n        <h3>{{t 'application.title'}}</h3>\n        <p class=\"text-success\">current sdg index (% complete)</p>\n        <p class=\"text-danger\">% missing values</p>\n      </span>\n    </div>\n    <div class=\"clearfix\"></div>\n  </div> ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n  \n  ");
-        dom.appendChild(el1, el2);
         var el2 = dom.createComment("");
         dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n\n  ");
+        var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createComment("");
         dom.appendChild(el1, el2);
@@ -9311,127 +9399,20 @@ efineday("sdg-dash/sdg-overview/template", ["exports"], function (exports) {
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n\n");
         dom.appendChild(el0, el1);
-        var el1 = dom.createElement("div");
-        dom.setAttribute(el1, "class", "container");
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("p");
-        dom.setAttribute(el2, "class", "bg-info");
-        dom.setAttribute(el2, "style", "margin-top: 20px;padding:20px;");
-        var el3 = dom.createTextNode("Hello! Welcome to a Prototype/POC Dashboard that lets you explore the Sustainable Development Goals. At this point in time, the application is ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("b");
-        var el4 = dom.createTextNode("in development");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode(" and data is sparse so we would recommend using the following link(s) that we'll do our best to keep stable, ok? \n  ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("br");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("br");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode(" Thanks & enjoy!\n  ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("br");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("br");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("ul");
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("li");
-        var el5 = dom.createComment("");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("li");
-        var el5 = dom.createComment("");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("li");
-        var el5 = dom.createComment("");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("li");
-        var el5 = dom.createComment("");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("li");
-        var el5 = dom.createComment("");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("li");
-        var el5 = dom.createComment("");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("li");
-        var el5 = dom.createComment("");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("li");
-        var el5 = dom.createElement("a");
-        dom.setAttribute(el5, "href", "http://dtc-sci01.esri.com/MultidimensionalTemplate/index.html?appid=d73011dceb0e41d0af334912355bddd5");
-        dom.setAttribute(el5, "target", "_blank");
-        var el6 = dom.createElement("b");
-        var el7 = dom.createTextNode("Goal 13 Climate Action");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode(" - World Soil Moisture Application");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createComment(" <li class=\"text-muted disabled\"><b>Goal 04 - Quality Education</b> for Colombia (coming soon)</li> ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n    ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n\n");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createComment(" {{#ember-wormhole to=\"about-modal-destination\"}}\n  {{about-modal}}\n{{/ember-wormhole}} ");
+        var el1 = dom.createComment(" <div class=\"container\">\n  <p class=\"bg-info\" style=\"margin-top: 20px;padding:20px;\">Hello! Welcome to a Prototype/POC Dashboard that lets you explore the Sustainable Development Goals. At this point in time, the application is <b>in development</b> and data is sparse so we would recommend using the following link(s) that we'll do our best to keep stable, ok? \n  <br><br> Thanks &amp; enjoy!\n  <br><br>\n    <ul>\n      <li>{{#link-to 'sdg' '2' (query-params geo_group=\"countries\" geo_value=\"KE\" target_id=\"2.1\") }}<b>Goal 02 Zero Hunger</b> - Kenya (Target 2.1){{/link-to}}</li>\n      <li>{{#link-to 'sdg' '3' (query-params geo_group=\"countries\" geo_value=\"GLOBAL\" target_id=\"3.3\") }}<b>Goal 03 Good Health &amp; Well-Being</b> - Global (Target 3.3){{/link-to}}</li>\n      <li>{{#link-to 'sdg' '3' (query-params geo_group=\"countries\" geo_value=\"TH\" target_id=\"3.3\") }}<b>Goal 03 Good Health &amp; Well-Being</b> - Thailand (Target 3.3){{/link-to}}</li>\n      <li>{{#link-to 'sdg' '5' (query-params geo_group=\"countries\" geo_value=\"GLOBAL\" target_id=\"5.5\") }}<b>Goal 05 Gender Equality</b> - Global Progress (Target 5.5){{/link-to}}</li>\n      <li>{{#link-to 'sdg' '11' (query-params geo_group=\"cities\" geo_value=\"GLOBAL_CITIES\" target_id=\"11.1\") }}<b>Goal 11 Sustainable Cities &amp; Communities</b> - Global (Target 11.1){{/link-to}}</li>\n      <li>{{#link-to 'sdg' '11' (query-params geo_group=\"cities\" geo_value=\"city_BOGOTA\" target_id=\"11.1\") }}<b>Goal 11 Sustainable Cities &amp; Communities</b> - Bogota (Target 11.1){{/link-to}}</li>\n      <li>{{#link-to 'video-player' (query-params src='aehin')}}<b>Goal 03 Good Health and Well-Being</b> - Access to Health Care Web Application (video){{/link-to}}</li>\n      <li><a href=\"http://dtc-sci01.esri.com/MultidimensionalTemplate/index.html?appid=d73011dceb0e41d0af334912355bddd5\" target=\"_blank\"><b>Goal 13 Climate Action</b> - World Soil Moisture Application</a></li>\n    </ul>\n  </p>\n</div> ");
         dom.appendChild(el0, el1);
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [0]);
-        var element1 = dom.childAt(fragment, [2, 1, 9]);
-        var morphs = new Array(9);
-        morphs[0] = dom.createMorphAt(element0, 5, 5);
-        morphs[1] = dom.createMorphAt(element0, 7, 7);
-        morphs[2] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
-        morphs[3] = dom.createMorphAt(dom.childAt(element1, [3]), 0, 0);
-        morphs[4] = dom.createMorphAt(dom.childAt(element1, [5]), 0, 0);
-        morphs[5] = dom.createMorphAt(dom.childAt(element1, [7]), 0, 0);
-        morphs[6] = dom.createMorphAt(dom.childAt(element1, [9]), 0, 0);
-        morphs[7] = dom.createMorphAt(dom.childAt(element1, [11]), 0, 0);
-        morphs[8] = dom.createMorphAt(dom.childAt(element1, [13]), 0, 0);
+        var morphs = new Array(2);
+        morphs[0] = dom.createMorphAt(element0, 1, 1);
+        morphs[1] = dom.createMorphAt(element0, 3, 3);
         return morphs;
       },
-      statements: [["inline", "arcgis-map-landing", [], ["class", "landing-map"], ["loc", [null, [18, 2], [18, 46]]]], ["inline", "sdg-overview-collage", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [20, 32], [20, 37]]]]], [], []], "loadSDG", "routeToSDG", "class", "marg-top-neg-50"], ["loc", [null, [20, 2], [20, 85]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [28, 31], [28, 98]]]]], [], 0, null, ["loc", [null, [28, 10], [28, 160]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [29, 31], [29, 102]]]]], [], 1, null, ["loc", [null, [29, 10], [29, 182]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [30, 31], [30, 98]]]]], [], 2, null, ["loc", [null, [30, 10], [30, 180]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [31, 31], [31, 102]]]]], [], 3, null, ["loc", [null, [31, 10], [31, 178]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [32, 32], [32, 108]]]]], [], 4, null, ["loc", [null, [32, 10], [32, 197]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [33, 32], [33, 106]]]]], [], 5, null, ["loc", [null, [33, 10], [33, 195]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [34, 36], [34, 62]]]]], [], 6, null, ["loc", [null, [34, 10], [34, 165]]]]],
+      statements: [["inline", "arcgis-map-landing", [], ["class", "landing-map"], ["loc", [null, [2, 2], [2, 46]]]], ["inline", "sdg-overview-collage", [], ["model", ["subexpr", "@mut", [["get", "model", ["loc", [null, [3, 32], [3, 37]]]]], [], []], "loadSDG", "routeToSDG", "class", "marg-top-neg-50"], ["loc", [null, [3, 2], [3, 85]]]]],
       locals: [],
-      templates: [child0, child1, child2, child3, child4, child5, child6]
+      templates: []
     };
   })());
 });
@@ -9612,6 +9593,14 @@ efineday('sdg-dash/session/service', ['exports', 'ember', 'ic-ajax', 'sdg-dash/c
     }
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/templates/-footer", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -9657,6 +9646,286 @@ efineday("sdg-dash/templates/-footer", ["exports"], function (exports) {
 });
 efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 10,
+              "column": 12
+            },
+            "end": {
+              "line": 10,
+              "column": 150
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 02 Zero Hunger");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Kenya (Target 2.1)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child1 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 11,
+              "column": 12
+            },
+            "end": {
+              "line": 11,
+              "column": 172
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 03 Good Health & Well-Being");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Global (Target 3.3)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child2 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 12,
+              "column": 12
+            },
+            "end": {
+              "line": 12,
+              "column": 170
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 03 Good Health & Well-Being");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Thailand (Target 3.3)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child3 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 13,
+              "column": 12
+            },
+            "end": {
+              "line": 13,
+              "column": 168
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 05 Gender Equality");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Global Progress (Target 5.5)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child4 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 14,
+              "column": 12
+            },
+            "end": {
+              "line": 14,
+              "column": 187
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 11 Sustainable Cities & Communities");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Global (Target 11.1)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child5 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 15,
+              "column": 12
+            },
+            "end": {
+              "line": 15,
+              "column": 185
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 11 Sustainable Cities & Communities");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Bogota (Target 11.1)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child6 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 16,
+              "column": 12
+            },
+            "end": {
+              "line": 16,
+              "column": 155
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 03 Good Health and Well-Being");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Access to Health Care Web Application (video)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
     return {
       meta: {
         "fragmentReason": {
@@ -9670,7 +9939,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 38,
+            "line": 52,
             "column": 5
           }
         },
@@ -9700,6 +9969,91 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         var el2 = dom.createElement("ul");
         dom.setAttribute(el2, "class", "nav navbar-nav navbar-right");
         var el3 = dom.createTextNode("      \n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("li");
+        dom.setAttribute(el3, "class", "dropdown");
+        var el4 = dom.createTextNode("\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("a");
+        dom.setAttribute(el4, "href", "#");
+        dom.setAttribute(el4, "class", "dropdown-toggle");
+        dom.setAttribute(el4, "data-toggle", "dropdown");
+        dom.setAttribute(el4, "role", "button");
+        dom.setAttribute(el4, "aria-haspopup", "true");
+        dom.setAttribute(el4, "aria-expanded", "false");
+        var el5 = dom.createTextNode("\n      Samples ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("span");
+        dom.setAttribute(el5, "class", "caret");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("ul");
+        dom.setAttribute(el4, "class", "dropdown-menu");
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createElement("a");
+        dom.setAttribute(el6, "href", "http://dtc-sci01.esri.com/MultidimensionalTemplate/index.html?appid=d73011dceb0e41d0af334912355bddd5");
+        dom.setAttribute(el6, "target", "_blank");
+        var el7 = dom.createElement("b");
+        var el8 = dom.createTextNode("Goal 13 Climate Action");
+        dom.appendChild(el7, el8);
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode(" - World Soil Moisture Application");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n      ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("li");
         dom.setAttribute(el3, "class", "dropdown");
@@ -9782,28 +10136,37 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [0]);
-        var element1 = dom.childAt(element0, [3, 1]);
-        var element2 = dom.childAt(element1, [3]);
-        var element3 = dom.childAt(element2, [1, 0]);
-        var element4 = dom.childAt(element2, [3, 0]);
-        var element5 = dom.childAt(element2, [7, 0]);
-        var element6 = dom.childAt(element2, [9, 0]);
-        var morphs = new Array(10);
+        var element1 = dom.childAt(element0, [3]);
+        var element2 = dom.childAt(element1, [1, 3]);
+        var element3 = dom.childAt(element1, [3]);
+        var element4 = dom.childAt(element3, [3]);
+        var element5 = dom.childAt(element4, [1, 0]);
+        var element6 = dom.childAt(element4, [3, 0]);
+        var element7 = dom.childAt(element4, [7, 0]);
+        var element8 = dom.childAt(element4, [9, 0]);
+        var morphs = new Array(17);
         morphs[0] = dom.createMorphAt(dom.childAt(element0, [1, 0]), 0, 0);
-        morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]), 1, 1);
-        morphs[2] = dom.createElementMorph(element3);
-        morphs[3] = dom.createMorphAt(element3, 0, 0);
-        morphs[4] = dom.createElementMorph(element4);
-        morphs[5] = dom.createMorphAt(element4, 0, 0);
-        morphs[6] = dom.createElementMorph(element5);
-        morphs[7] = dom.createMorphAt(element5, 0, 0);
-        morphs[8] = dom.createElementMorph(element6);
-        morphs[9] = dom.createMorphAt(element6, 0, 0);
+        morphs[1] = dom.createMorphAt(dom.childAt(element2, [1]), 0, 0);
+        morphs[2] = dom.createMorphAt(dom.childAt(element2, [3]), 0, 0);
+        morphs[3] = dom.createMorphAt(dom.childAt(element2, [5]), 0, 0);
+        morphs[4] = dom.createMorphAt(dom.childAt(element2, [7]), 0, 0);
+        morphs[5] = dom.createMorphAt(dom.childAt(element2, [9]), 0, 0);
+        morphs[6] = dom.createMorphAt(dom.childAt(element2, [11]), 0, 0);
+        morphs[7] = dom.createMorphAt(dom.childAt(element2, [13]), 0, 0);
+        morphs[8] = dom.createMorphAt(dom.childAt(element3, [1]), 1, 1);
+        morphs[9] = dom.createElementMorph(element5);
+        morphs[10] = dom.createMorphAt(element5, 0, 0);
+        morphs[11] = dom.createElementMorph(element6);
+        morphs[12] = dom.createMorphAt(element6, 0, 0);
+        morphs[13] = dom.createElementMorph(element7);
+        morphs[14] = dom.createMorphAt(element7, 0, 0);
+        morphs[15] = dom.createElementMorph(element8);
+        morphs[16] = dom.createMorphAt(element8, 0, 0);
         return morphs;
       },
-      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["content", "session.locale_label", ["loc", [null, [8, 6], [8, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [10, 16], [10, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [10, 49], [10, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [11, 16], [11, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [11, 49], [11, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [13, 16], [13, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [13, 49], [13, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [14, 16], [14, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [14, 49], [14, 81]]]]],
+      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [10, 33], [10, 100]]]]], [], 0, null, ["loc", [null, [10, 12], [10, 162]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [11, 33], [11, 104]]]]], [], 1, null, ["loc", [null, [11, 12], [11, 184]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [12, 33], [12, 100]]]]], [], 2, null, ["loc", [null, [12, 12], [12, 182]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [13, 33], [13, 104]]]]], [], 3, null, ["loc", [null, [13, 12], [13, 180]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [14, 34], [14, 110]]]]], [], 4, null, ["loc", [null, [14, 12], [14, 199]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [15, 34], [15, 108]]]]], [], 5, null, ["loc", [null, [15, 12], [15, 197]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [16, 38], [16, 64]]]]], [], 6, null, ["loc", [null, [16, 12], [16, 167]]]], ["content", "session.locale_label", ["loc", [null, [22, 6], [22, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [24, 16], [24, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [24, 49], [24, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [25, 16], [25, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [25, 49], [25, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [27, 16], [27, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [27, 49], [27, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [28, 16], [28, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [28, 49], [28, 81]]]]],
       locals: [],
-      templates: []
+      templates: [child0, child1, child2, child3, child4, child5, child6]
     };
   })());
 });
@@ -12429,6 +12792,15 @@ efineday('sdg-dash/transitions/wait', ['exports', 'ember'], function (exports, _
   };
 });
 efineday('sdg-dash/transitions', ['exports'], function (exports) {
+  // Copyright 2016 Esri.
+  //
+  // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+  // You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+  //
+  // Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+  // "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+  // language governing permissions and limitations under the License.
+
   exports['default'] = function () {
     this.transition(this.fromRoute('landing'), this.toRoute('sdg-overview'), this.use('fade'), this.reverse('fade'));
 
@@ -12480,6 +12852,14 @@ efineday('sdg-dash/utils/arcgis-map-utils', ['exports', 'ember'], function (expo
     });
   }
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/utils/colors", ["exports", "ember"], function (exports, _ember) {
   exports.shadeColor = shadeColor;
   exports.hex_to_rgb = hex_to_rgb;
@@ -12534,6 +12914,14 @@ efineday("sdg-dash/utils/colors", ["exports", "ember"], function (exports, _embe
     return [h * 100 + 0.5 | 0, s * 100 + 0.5 | 0, l * 100 + 0.5 | 0];
   }
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/utils/i18n/compile-template', ['exports', 'ember-i18n/utils/i18n/compile-template'], function (exports, _emberI18nUtilsI18nCompileTemplate) {
   Object.defineProperty(exports, 'default', {
     enumerable: true,
@@ -12556,6 +12944,14 @@ efineday('sdg-dash/video-player/controller', ['exports', 'ember'], function (exp
     src: null
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday('sdg-dash/video-player/route', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Route.extend({
 
@@ -12575,6 +12971,14 @@ efineday('sdg-dash/video-player/route', ['exports', 'ember'], function (exports,
 
   });
 });
+// Copyright 2016 Esri.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 efineday("sdg-dash/video-player/template", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -12650,7 +13054,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+df41ef3b"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+f6216a2f"});
 }
 
 /* jshint ignore:end */
