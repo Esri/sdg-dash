@@ -31,7 +31,7 @@ export default Ember.Component.extend({
     arcgisUtils.createMap(webmapId, this.element, options)
       .then( (response) => {
         let map = response.map;
-        // map.disableScrollWheelZoom();
+        map.disableScrollWheelZoom();
         this.set('map', map);
       });
   },  
