@@ -18,6 +18,15 @@ export default Ember.Route.extend({
   i18n: Ember.inject.service(),
 
   queryParams: {
+    geo_group: {
+      refreshModel: true
+    },
+    geo_value: {
+      refreshModel: true
+    },
+    geo_level: {
+      refreshModel: true
+    },
     target_id: {
       refreshModel: true
     }
