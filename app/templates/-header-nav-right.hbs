@@ -7,6 +7,7 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
       {{ t 'application.header.samples' }} <span class="caret"></span></a>
       <ul class="dropdown-menu">
+        <li>{{#link-to 'sdg' '1' (query-params geo_group="countries" geo_value="GLOBAL" target_id="1.1") }}<b>Goal 01 No Poverty</b> - Global (Target 1.1){{/link-to}}</li>
         <li>{{#link-to 'sdg' '2' (query-params geo_group="countries" geo_value="KE" target_id="2.1") }}<b>Goal 02 Zero Hunger</b> - Kenya (Target 2.1){{/link-to}}</li>
         <li>{{#link-to 'sdg' '3' (query-params geo_group="countries" geo_value="GLOBAL" target_id="3.3") }}<b>Goal 03 Good Health &amp; Well-Being</b> - Global (Target 3.3){{/link-to}}</li>
         <li>{{#link-to 'sdg' '3' (query-params geo_group="countries" geo_value="TH" target_id="3.3") }}<b>Goal 03 Good Health &amp; Well-Being</b> - Thailand (Target 3.3){{/link-to}}</li>
