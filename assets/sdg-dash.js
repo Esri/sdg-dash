@@ -9773,6 +9773,46 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             },
             "end": {
               "line": 10,
+              "column": 154
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 01 No Poverty");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Global (Target 1.1)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child1 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 11,
+              "column": 12
+            },
+            "end": {
+              "line": 11,
               "column": 150
             }
           },
@@ -9800,7 +9840,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child1 = (function () {
+    var child2 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -9808,11 +9848,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 11,
+              "line": 12,
               "column": 12
             },
             "end": {
-              "line": 11,
+              "line": 12,
               "column": 172
             }
           },
@@ -9840,7 +9880,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child2 = (function () {
+    var child3 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -9848,11 +9888,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 12,
+              "line": 13,
               "column": 12
             },
             "end": {
-              "line": 12,
+              "line": 13,
               "column": 170
             }
           },
@@ -9880,7 +9920,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child3 = (function () {
+    var child4 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -9888,11 +9928,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 13,
+              "line": 14,
               "column": 12
             },
             "end": {
-              "line": 13,
+              "line": 14,
               "column": 168
             }
           },
@@ -9920,7 +9960,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child4 = (function () {
+    var child5 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -9928,11 +9968,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 14,
+              "line": 15,
               "column": 12
             },
             "end": {
-              "line": 14,
+              "line": 15,
               "column": 187
             }
           },
@@ -9960,7 +10000,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child5 = (function () {
+    var child6 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -9968,11 +10008,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 15,
+              "line": 16,
               "column": 12
             },
             "end": {
-              "line": 15,
+              "line": 16,
               "column": 185
             }
           },
@@ -10000,7 +10040,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child6 = (function () {
+    var child7 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10008,11 +10048,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 16,
+              "line": 17,
               "column": 12
             },
             "end": {
-              "line": 16,
+              "line": 17,
               "column": 159
             }
           },
@@ -10040,7 +10080,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child7 = (function () {
+    var child8 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10048,11 +10088,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 17,
+              "line": 18,
               "column": 12
             },
             "end": {
-              "line": 17,
+              "line": 18,
               "column": 155
             }
           },
@@ -10093,7 +10133,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 53,
+            "line": 54,
             "column": 5
           }
         },
@@ -10149,6 +10189,12 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("ul");
         dom.setAttribute(el4, "class", "dropdown-menu");
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("li");
@@ -10309,7 +10355,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         var element7 = dom.childAt(element5, [3, 0]);
         var element8 = dom.childAt(element5, [7, 0]);
         var element9 = dom.childAt(element5, [9, 0]);
-        var morphs = new Array(19);
+        var morphs = new Array(20);
         morphs[0] = dom.createMorphAt(dom.childAt(element0, [1, 0]), 0, 0);
         morphs[1] = dom.createMorphAt(dom.childAt(element2, [1]), 1, 1);
         morphs[2] = dom.createMorphAt(dom.childAt(element3, [1]), 0, 0);
@@ -10320,20 +10366,21 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         morphs[7] = dom.createMorphAt(dom.childAt(element3, [11]), 0, 0);
         morphs[8] = dom.createMorphAt(dom.childAt(element3, [13]), 0, 0);
         morphs[9] = dom.createMorphAt(dom.childAt(element3, [15]), 0, 0);
-        morphs[10] = dom.createMorphAt(dom.childAt(element4, [1]), 1, 1);
-        morphs[11] = dom.createElementMorph(element6);
-        morphs[12] = dom.createMorphAt(element6, 0, 0);
-        morphs[13] = dom.createElementMorph(element7);
-        morphs[14] = dom.createMorphAt(element7, 0, 0);
-        morphs[15] = dom.createElementMorph(element8);
-        morphs[16] = dom.createMorphAt(element8, 0, 0);
-        morphs[17] = dom.createElementMorph(element9);
-        morphs[18] = dom.createMorphAt(element9, 0, 0);
+        morphs[10] = dom.createMorphAt(dom.childAt(element3, [17]), 0, 0);
+        morphs[11] = dom.createMorphAt(dom.childAt(element4, [1]), 1, 1);
+        morphs[12] = dom.createElementMorph(element6);
+        morphs[13] = dom.createMorphAt(element6, 0, 0);
+        morphs[14] = dom.createElementMorph(element7);
+        morphs[15] = dom.createMorphAt(element7, 0, 0);
+        morphs[16] = dom.createElementMorph(element8);
+        morphs[17] = dom.createMorphAt(element8, 0, 0);
+        morphs[18] = dom.createElementMorph(element9);
+        morphs[19] = dom.createMorphAt(element9, 0, 0);
         return morphs;
       },
-      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["inline", "t", ["application.header.samples"], [], ["loc", [null, [8, 6], [8, 42]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [10, 33], [10, 100]]]]], [], 0, null, ["loc", [null, [10, 12], [10, 162]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [11, 33], [11, 104]]]]], [], 1, null, ["loc", [null, [11, 12], [11, 184]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [12, 33], [12, 100]]]]], [], 2, null, ["loc", [null, [12, 12], [12, 182]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [13, 33], [13, 104]]]]], [], 3, null, ["loc", [null, [13, 12], [13, 180]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [14, 34], [14, 110]]]]], [], 4, null, ["loc", [null, [14, 12], [14, 199]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [15, 34], [15, 108]]]]], [], 5, null, ["loc", [null, [15, 12], [15, 197]]]], ["block", "link-to", ["sdg", "15", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "15.1"], ["loc", [null, [16, 34], [16, 106]]]]], [], 6, null, ["loc", [null, [16, 12], [16, 171]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [17, 38], [17, 64]]]]], [], 7, null, ["loc", [null, [17, 12], [17, 167]]]], ["content", "session.locale_label", ["loc", [null, [23, 6], [23, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [25, 16], [25, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [25, 49], [25, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [26, 16], [26, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [26, 49], [26, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [28, 16], [28, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [28, 49], [28, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [29, 16], [29, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [29, 49], [29, 81]]]]],
+      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["inline", "t", ["application.header.samples"], [], ["loc", [null, [8, 6], [8, 42]]]], ["block", "link-to", ["sdg", "1", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "1.1"], ["loc", [null, [10, 33], [10, 104]]]]], [], 0, null, ["loc", [null, [10, 12], [10, 166]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [11, 33], [11, 100]]]]], [], 1, null, ["loc", [null, [11, 12], [11, 162]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [12, 33], [12, 104]]]]], [], 2, null, ["loc", [null, [12, 12], [12, 184]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [13, 33], [13, 100]]]]], [], 3, null, ["loc", [null, [13, 12], [13, 182]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [14, 33], [14, 104]]]]], [], 4, null, ["loc", [null, [14, 12], [14, 180]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [15, 34], [15, 110]]]]], [], 5, null, ["loc", [null, [15, 12], [15, 199]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [16, 34], [16, 108]]]]], [], 6, null, ["loc", [null, [16, 12], [16, 197]]]], ["block", "link-to", ["sdg", "15", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "15.1"], ["loc", [null, [17, 34], [17, 106]]]]], [], 7, null, ["loc", [null, [17, 12], [17, 171]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [18, 38], [18, 64]]]]], [], 8, null, ["loc", [null, [18, 12], [18, 167]]]], ["content", "session.locale_label", ["loc", [null, [24, 6], [24, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [26, 16], [26, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [26, 49], [26, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [27, 16], [27, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [27, 49], [27, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [29, 16], [29, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [29, 49], [29, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [30, 16], [30, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [30, 49], [30, 81]]]]],
       locals: [],
-      templates: [child0, child1, child2, child3, child4, child5, child6, child7]
+      templates: [child0, child1, child2, child3, child4, child5, child6, child7, child8]
     };
   })());
 });
@@ -13221,7 +13268,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+168461cb"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+21578c97"});
 }
 
 /* jshint ignore:end */
