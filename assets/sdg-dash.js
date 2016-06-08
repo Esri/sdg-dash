@@ -8470,6 +8470,15 @@ efineday('sdg-dash/sdg/route', ['exports', 'ember', 'sdg-dash/config/environment
     i18n: _ember['default'].inject.service(),
 
     queryParams: {
+      geo_group: {
+        refreshModel: true
+      },
+      geo_value: {
+        refreshModel: true
+      },
+      geo_level: {
+        refreshModel: true
+      },
       target_id: {
         refreshModel: true
       }
@@ -13268,7 +13277,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+21578c97"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+7d18f198"});
 }
 
 /* jshint ignore:end */

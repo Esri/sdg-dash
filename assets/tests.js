@@ -2861,7 +2861,7 @@ efineday('sdg-dash/tests/sdg/route.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - sdg');
   QUnit.test('sdg/route.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'sdg/route.js should pass jshint.\nsdg/route.js: line 41, col 60, Missing semicolon.\n\n1 error');
+    assert.ok(false, 'sdg/route.js should pass jshint.\nsdg/route.js: line 50, col 60, Missing semicolon.\n\n1 error');
   });
 });
 efineday('sdg-dash/tests/sdg/serializer.jshint', ['exports'], function (exports) {
