@@ -9982,6 +9982,86 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             },
             "end": {
               "line": 15,
+              "column": 179
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 06 Clean Water and Sanitation");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Global Progress (Target 6.1)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child6 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 16,
+              "column": 12
+            },
+            "end": {
+              "line": 16,
+              "column": 180
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 07 Affordable and Clean Energy");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Global Progress (Target 7.1)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child7 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 17,
+              "column": 12
+            },
+            "end": {
+              "line": 17,
               "column": 187
             }
           },
@@ -10009,7 +10089,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child6 = (function () {
+    var child8 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10017,11 +10097,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 16,
+              "line": 18,
               "column": 12
             },
             "end": {
-              "line": 16,
+              "line": 18,
               "column": 185
             }
           },
@@ -10049,7 +10129,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child7 = (function () {
+    var child9 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10057,11 +10137,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 17,
+              "line": 19,
               "column": 12
             },
             "end": {
-              "line": 17,
+              "line": 19,
               "column": 159
             }
           },
@@ -10089,7 +10169,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child8 = (function () {
+    var child10 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10097,12 +10177,12 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 18,
+              "line": 21,
               "column": 12
             },
             "end": {
-              "line": 18,
-              "column": 155
+              "line": 21,
+              "column": 143
             }
           },
           "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
@@ -10117,7 +10197,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           var el2 = dom.createTextNode("Goal 03 Good Health and Well-Being");
           dom.appendChild(el1, el2);
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Access to Health Care Web Application (video)");
+          var el1 = dom.createTextNode(" - Access to Health Care Web (Video)");
           dom.appendChild(el0, el1);
           return el0;
         },
@@ -10142,7 +10222,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 54,
+            "line": 36,
             "column": 5
           }
         },
@@ -10255,6 +10335,24 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        dom.setAttribute(el5, "role", "separator");
+        dom.setAttribute(el5, "class", "divider");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
         var el6 = dom.createElement("a");
         dom.setAttribute(el6, "href", "http://dtc-sci01.esri.com/MultidimensionalTemplate/index.html?appid=d73011dceb0e41d0af334912355bddd5");
         dom.setAttribute(el6, "target", "_blank");
@@ -10262,7 +10360,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         var el8 = dom.createTextNode("Goal 13 Climate Action");
         dom.appendChild(el7, el8);
         dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode(" - World Soil Moisture Application");
+        var el7 = dom.createTextNode(" - World Soil Moisture (Application)");
         dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
@@ -10317,10 +10415,6 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createComment(" <li><a  {{action 'changeLocale' 'ar' }} >{{t 'application.languages.arabic'}}</a></li> ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
         var el5 = dom.createElement("li");
         var el6 = dom.createElement("a");
         var el7 = dom.createComment("");
@@ -10344,11 +10438,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         var el3 = dom.createTextNode("\n  ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n\n");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment("   {{#if session.isAuthenticated}}\n    <li><img src={{session.userThumbnail}} class='user-thumbnail hidden-xs' /></li>\n    <ul class=\"nav navbar-nav navbar-right\">      \n      <li class=\"dropdown\">\n        <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        {{ session.user.firstName }} <span class=\"caret\"></span></a>\n        <ul class=\"dropdown-menu\">\n          \n          <li><a href=\"http://www.un.org/sustainabledevelopment/sustainable-development-goals/\" target=\"_blank\" >{{t 'application.header.sdghome' }}</a></li>\n          <li class=\"divider\"></li>\n          <li class=\"user-sign-inout\"><a {{action 'invalidateSession'}} >{{t 'application.header.signOut' }}</a></li>\n        </ul>\n      </li>\n    </ul>\n\n  {{else}}\n    <li class=\"user-sign-inout\"><a {{action 'authOrLoad' 'doAuthenticate' }} >{{t 'application.header.signIn'}}</a></li>\n  {{/if}} ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n\n");
+        var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         return el0;
@@ -10362,9 +10452,9 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         var element5 = dom.childAt(element4, [3]);
         var element6 = dom.childAt(element5, [1, 0]);
         var element7 = dom.childAt(element5, [3, 0]);
-        var element8 = dom.childAt(element5, [7, 0]);
-        var element9 = dom.childAt(element5, [9, 0]);
-        var morphs = new Array(20);
+        var element8 = dom.childAt(element5, [5, 0]);
+        var element9 = dom.childAt(element5, [7, 0]);
+        var morphs = new Array(22);
         morphs[0] = dom.createMorphAt(dom.childAt(element0, [1, 0]), 0, 0);
         morphs[1] = dom.createMorphAt(dom.childAt(element2, [1]), 1, 1);
         morphs[2] = dom.createMorphAt(dom.childAt(element3, [1]), 0, 0);
@@ -10376,20 +10466,22 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         morphs[8] = dom.createMorphAt(dom.childAt(element3, [13]), 0, 0);
         morphs[9] = dom.createMorphAt(dom.childAt(element3, [15]), 0, 0);
         morphs[10] = dom.createMorphAt(dom.childAt(element3, [17]), 0, 0);
-        morphs[11] = dom.createMorphAt(dom.childAt(element4, [1]), 1, 1);
-        morphs[12] = dom.createElementMorph(element6);
-        morphs[13] = dom.createMorphAt(element6, 0, 0);
-        morphs[14] = dom.createElementMorph(element7);
-        morphs[15] = dom.createMorphAt(element7, 0, 0);
-        morphs[16] = dom.createElementMorph(element8);
-        morphs[17] = dom.createMorphAt(element8, 0, 0);
-        morphs[18] = dom.createElementMorph(element9);
-        morphs[19] = dom.createMorphAt(element9, 0, 0);
+        morphs[11] = dom.createMorphAt(dom.childAt(element3, [19]), 0, 0);
+        morphs[12] = dom.createMorphAt(dom.childAt(element3, [23]), 0, 0);
+        morphs[13] = dom.createMorphAt(dom.childAt(element4, [1]), 1, 1);
+        morphs[14] = dom.createElementMorph(element6);
+        morphs[15] = dom.createMorphAt(element6, 0, 0);
+        morphs[16] = dom.createElementMorph(element7);
+        morphs[17] = dom.createMorphAt(element7, 0, 0);
+        morphs[18] = dom.createElementMorph(element8);
+        morphs[19] = dom.createMorphAt(element8, 0, 0);
+        morphs[20] = dom.createElementMorph(element9);
+        morphs[21] = dom.createMorphAt(element9, 0, 0);
         return morphs;
       },
-      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["inline", "t", ["application.header.samples"], [], ["loc", [null, [8, 6], [8, 42]]]], ["block", "link-to", ["sdg", "1", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "1.1"], ["loc", [null, [10, 33], [10, 104]]]]], [], 0, null, ["loc", [null, [10, 12], [10, 166]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [11, 33], [11, 100]]]]], [], 1, null, ["loc", [null, [11, 12], [11, 162]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [12, 33], [12, 104]]]]], [], 2, null, ["loc", [null, [12, 12], [12, 184]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [13, 33], [13, 100]]]]], [], 3, null, ["loc", [null, [13, 12], [13, 182]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [14, 33], [14, 104]]]]], [], 4, null, ["loc", [null, [14, 12], [14, 180]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [15, 34], [15, 110]]]]], [], 5, null, ["loc", [null, [15, 12], [15, 199]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [16, 34], [16, 108]]]]], [], 6, null, ["loc", [null, [16, 12], [16, 197]]]], ["block", "link-to", ["sdg", "15", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "15.1"], ["loc", [null, [17, 34], [17, 106]]]]], [], 7, null, ["loc", [null, [17, 12], [17, 171]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [18, 38], [18, 64]]]]], [], 8, null, ["loc", [null, [18, 12], [18, 167]]]], ["content", "session.locale_label", ["loc", [null, [24, 6], [24, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [26, 16], [26, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [26, 49], [26, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [27, 16], [27, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [27, 49], [27, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [29, 16], [29, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [29, 49], [29, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [30, 16], [30, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [30, 49], [30, 81]]]]],
+      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["inline", "t", ["application.header.samples"], [], ["loc", [null, [8, 6], [8, 42]]]], ["block", "link-to", ["sdg", "1", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "1.1"], ["loc", [null, [10, 33], [10, 104]]]]], [], 0, null, ["loc", [null, [10, 12], [10, 166]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [11, 33], [11, 100]]]]], [], 1, null, ["loc", [null, [11, 12], [11, 162]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [12, 33], [12, 104]]]]], [], 2, null, ["loc", [null, [12, 12], [12, 184]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [13, 33], [13, 100]]]]], [], 3, null, ["loc", [null, [13, 12], [13, 182]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [14, 33], [14, 104]]]]], [], 4, null, ["loc", [null, [14, 12], [14, 180]]]], ["block", "link-to", ["sdg", "6", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "6.1"], ["loc", [null, [15, 33], [15, 104]]]]], [], 5, null, ["loc", [null, [15, 12], [15, 191]]]], ["block", "link-to", ["sdg", "7", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "7.1"], ["loc", [null, [16, 33], [16, 104]]]]], [], 6, null, ["loc", [null, [16, 12], [16, 192]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [17, 34], [17, 110]]]]], [], 7, null, ["loc", [null, [17, 12], [17, 199]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [18, 34], [18, 108]]]]], [], 8, null, ["loc", [null, [18, 12], [18, 197]]]], ["block", "link-to", ["sdg", "15", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "15.1"], ["loc", [null, [19, 34], [19, 106]]]]], [], 9, null, ["loc", [null, [19, 12], [19, 171]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [21, 38], [21, 64]]]]], [], 10, null, ["loc", [null, [21, 12], [21, 155]]]], ["content", "session.locale_label", ["loc", [null, [27, 6], [27, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [29, 16], [29, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [29, 49], [29, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [30, 16], [30, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [30, 49], [30, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [31, 16], [31, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [31, 49], [31, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [32, 16], [32, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [32, 49], [32, 81]]]]],
       locals: [],
-      templates: [child0, child1, child2, child3, child4, child5, child6, child7, child8]
+      templates: [child0, child1, child2, child3, child4, child5, child6, child7, child8, child9, child10]
     };
   })());
 });
@@ -13277,7 +13369,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+7d18f198"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+032ec098"});
 }
 
 /* jshint ignore:end */
