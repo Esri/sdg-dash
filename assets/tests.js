@@ -220,7 +220,7 @@ efineday('sdg-dash/tests/components/sdg-select-box/component.jshint', ['exports'
   QUnit.module('JSHint - components/sdg-select-box');
   QUnit.test('components/sdg-select-box/component.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(false, 'components/sdg-select-box/component.js should pass jshint.\ncomponents/sdg-select-box/component.js: line 61, col 11, Comma warnings can be turned off with \'laxcomma\'.\ncomponents/sdg-select-box/component.js: line 60, col 24, Bad line breaking before \',\'.\ncomponents/sdg-select-box/component.js: line 61, col 18, Bad line breaking before \',\'.\n\n3 errors');
+    assert.ok(false, 'components/sdg-select-box/component.js should pass jshint.\ncomponents/sdg-select-box/component.js: line 59, col 11, Comma warnings can be turned off with \'laxcomma\'.\ncomponents/sdg-select-box/component.js: line 58, col 24, Bad line breaking before \',\'.\ncomponents/sdg-select-box/component.js: line 59, col 18, Bad line breaking before \',\'.\n\n3 errors');
   });
 });
 efineday('sdg-dash/tests/components/storymap-card/component.jshint', ['exports'], function (exports) {
