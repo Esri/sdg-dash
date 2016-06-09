@@ -16,8 +16,6 @@ import Cookies from 'npm:js-cookie';
 export default Ember.Component.extend({
   classNames: ['btn'],
 
-  // i18n: Ember.inject.service(),
-  
   fetchGoals(locale) {    
     return ajax({
       url: ENV.sdgApi + 'goals',
@@ -92,9 +90,9 @@ export default Ember.Component.extend({
   }),
 
   sessionRouteChanged: Ember.observer('session.selected_sdg', function () {
-    // const id = this.get('session').get('selected_sdg').get('id');
-    // this.$(this.get('elId')).selectpicker('val', id);
-    // this._changeDisplayName();
+    const id = this.get('session').get('selected_sdg').get('id');
+    this.$(this.get('elId')).selectpicker('val', id);
+    this._changeDisplayName();
 
     // this.updateSDGi18nText(id);
     this._clearCustomClasses();

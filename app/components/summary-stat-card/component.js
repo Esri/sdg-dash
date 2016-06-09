@@ -61,6 +61,14 @@ export default Ember.Component.extend({
         stat_value = parseFloat(stat_value);
       }
 
+      if (settings.post_process) {
+        if (settings.post_process.operation === 'multiply') {
+          stat_value = stat_value * settings.post_process.value;
+        } else if (settings.post_process.operation === 'divide') {
+          stat_value = stat_value / settings.post_process.value;
+        }
+      }
+
       if (settings.display_format) {
         if (!Ember.isNone(settings.display_format.decimal_places)) {
           stat_value = this._formatAsNumber( stat_value.toFixed(settings.display_format.decimal_places) );
