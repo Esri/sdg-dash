@@ -10188,7 +10188,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             },
             "end": {
               "line": 20,
-              "column": 182
+              "column": 185
             }
           },
           "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
@@ -10388,7 +10388,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 41,
+            "line": 40,
             "column": 5
           }
         },
@@ -10540,20 +10540,6 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         var el6 = dom.createComment("");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("li");
-        var el6 = dom.createElement("a");
-        dom.setAttribute(el6, "href", "http://dtc-sci01.esri.com/MultidimensionalTemplate/index.html?appid=d73011dceb0e41d0af334912355bddd5");
-        dom.setAttribute(el6, "target", "_blank");
-        var el7 = dom.createElement("b");
-        var el8 = dom.createTextNode("Goal 13 Climate Action");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode(" - World Soil Moisture (Application)");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n      ");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
@@ -10673,7 +10659,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         morphs[25] = dom.createMorphAt(element9, 0, 0);
         return morphs;
       },
-      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["inline", "t", ["application.header.samples"], [], ["loc", [null, [8, 6], [8, 42]]]], ["block", "link-to", ["sdg", "1", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "1.1"], ["loc", [null, [10, 33], [10, 104]]]]], [], 0, null, ["loc", [null, [10, 12], [10, 166]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [11, 33], [11, 100]]]]], [], 1, null, ["loc", [null, [11, 12], [11, 162]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [12, 33], [12, 104]]]]], [], 2, null, ["loc", [null, [12, 12], [12, 182]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [13, 33], [13, 100]]]]], [], 3, null, ["loc", [null, [13, 12], [13, 180]]]], ["block", "link-to", ["sdg", "4", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "4.c"], ["loc", [null, [14, 33], [14, 104]]]]], [], 4, null, ["loc", [null, [14, 12], [14, 173]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [15, 33], [15, 104]]]]], [], 5, null, ["loc", [null, [15, 12], [15, 171]]]], ["block", "link-to", ["sdg", "6", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "6.1"], ["loc", [null, [16, 33], [16, 104]]]]], [], 6, null, ["loc", [null, [16, 12], [16, 182]]]], ["block", "link-to", ["sdg", "7", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "7.1"], ["loc", [null, [17, 33], [17, 104]]]]], [], 7, null, ["loc", [null, [17, 12], [17, 183]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [18, 34], [18, 110]]]]], [], 8, null, ["loc", [null, [18, 12], [18, 197]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [19, 34], [19, 108]]]]], [], 9, null, ["loc", [null, [19, 12], [19, 195]]]], ["block", "link-to", ["sdg", "12", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL", "target_id", "12.2"], ["loc", [null, [20, 34], [20, 103]]]]], [], 10, null, ["loc", [null, [20, 12], [20, 194]]]], ["block", "link-to", ["sdg", "15", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "15.1"], ["loc", [null, [21, 34], [21, 106]]]]], [], 11, null, ["loc", [null, [21, 12], [21, 171]]]], ["block", "link-to", ["sdg", "16", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "16.1"], ["loc", [null, [22, 34], [22, 106]]]]], [], 12, null, ["loc", [null, [22, 12], [22, 198]]]], ["block", "link-to", ["sdg", "17", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "17.2"], ["loc", [null, [23, 34], [23, 106]]]]], [], 13, null, ["loc", [null, [23, 12], [23, 185]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [26, 38], [26, 64]]]]], [], 14, null, ["loc", [null, [26, 12], [26, 155]]]], ["content", "session.locale_label", ["loc", [null, [32, 6], [32, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [34, 16], [34, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [34, 49], [34, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [35, 16], [35, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [35, 49], [35, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [36, 16], [36, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [36, 49], [36, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [37, 16], [37, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [37, 49], [37, 81]]]]],
+      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["inline", "t", ["application.header.samples"], [], ["loc", [null, [8, 6], [8, 42]]]], ["block", "link-to", ["sdg", "1", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "1.1"], ["loc", [null, [10, 33], [10, 104]]]]], [], 0, null, ["loc", [null, [10, 12], [10, 166]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [11, 33], [11, 100]]]]], [], 1, null, ["loc", [null, [11, 12], [11, 162]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [12, 33], [12, 104]]]]], [], 2, null, ["loc", [null, [12, 12], [12, 182]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [13, 33], [13, 100]]]]], [], 3, null, ["loc", [null, [13, 12], [13, 180]]]], ["block", "link-to", ["sdg", "4", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "4.c"], ["loc", [null, [14, 33], [14, 104]]]]], [], 4, null, ["loc", [null, [14, 12], [14, 173]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [15, 33], [15, 104]]]]], [], 5, null, ["loc", [null, [15, 12], [15, 171]]]], ["block", "link-to", ["sdg", "6", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "6.1"], ["loc", [null, [16, 33], [16, 104]]]]], [], 6, null, ["loc", [null, [16, 12], [16, 182]]]], ["block", "link-to", ["sdg", "7", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "7.1"], ["loc", [null, [17, 33], [17, 104]]]]], [], 7, null, ["loc", [null, [17, 12], [17, 183]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [18, 34], [18, 110]]]]], [], 8, null, ["loc", [null, [18, 12], [18, 197]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [19, 34], [19, 108]]]]], [], 9, null, ["loc", [null, [19, 12], [19, 195]]]], ["block", "link-to", ["sdg", "12", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "12.2"], ["loc", [null, [20, 34], [20, 106]]]]], [], 10, null, ["loc", [null, [20, 12], [20, 197]]]], ["block", "link-to", ["sdg", "15", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "15.1"], ["loc", [null, [21, 34], [21, 106]]]]], [], 11, null, ["loc", [null, [21, 12], [21, 171]]]], ["block", "link-to", ["sdg", "16", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "16.1"], ["loc", [null, [22, 34], [22, 106]]]]], [], 12, null, ["loc", [null, [22, 12], [22, 198]]]], ["block", "link-to", ["sdg", "17", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "17.2"], ["loc", [null, [23, 34], [23, 106]]]]], [], 13, null, ["loc", [null, [23, 12], [23, 185]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [26, 38], [26, 64]]]]], [], 14, null, ["loc", [null, [26, 12], [26, 155]]]], ["content", "session.locale_label", ["loc", [null, [31, 6], [31, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [33, 16], [33, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [33, 49], [33, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [34, 16], [34, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [34, 49], [34, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [35, 16], [35, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [35, 49], [35, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [36, 16], [36, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [36, 49], [36, 81]]]]],
       locals: [],
       templates: [child0, child1, child2, child3, child4, child5, child6, child7, child8, child9, child10, child11, child12, child13, child14]
     };
@@ -13563,7 +13549,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+43ff0ad4"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+75fcbd21"});
 }
 
 /* jshint ignore:end */
