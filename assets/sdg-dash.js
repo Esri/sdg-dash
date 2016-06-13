@@ -9788,7 +9788,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             },
             "end": {
               "line": 10,
-              "column": 154
+              "column": 153
             }
           },
           "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
@@ -9800,7 +9800,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
           var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 01 No Poverty");
+          var el2 = dom.createTextNode("Goal 1 No Poverty");
           dom.appendChild(el1, el2);
           dom.appendChild(el0, el1);
           var el1 = dom.createTextNode(" - Global (Target 1.1)");
@@ -9828,7 +9828,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             },
             "end": {
               "line": 11,
-              "column": 150
+              "column": 154
             }
           },
           "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
@@ -9840,10 +9840,10 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
           var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 02 Zero Hunger");
+          var el2 = dom.createTextNode("Goal 2 Zero Hunger");
           dom.appendChild(el1, el2);
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Kenya (Target 2.1)");
+          var el1 = dom.createTextNode(" - Global (Target 2.1)");
           dom.appendChild(el0, el1);
           return el0;
         },
@@ -9868,7 +9868,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             },
             "end": {
               "line": 12,
-              "column": 170
+              "column": 149
             }
           },
           "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
@@ -9880,10 +9880,10 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
           var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 03 Good Health and Well-Being");
+          var el2 = dom.createTextNode("Goal 2 Zero Hunger");
           dom.appendChild(el1, el2);
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Global (Target 3.3)");
+          var el1 = dom.createTextNode(" - Kenya (Target 2.1)");
           dom.appendChild(el0, el1);
           return el0;
         },
@@ -9908,7 +9908,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             },
             "end": {
               "line": 13,
-              "column": 168
+              "column": 169
             }
           },
           "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
@@ -9920,10 +9920,10 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
           var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 03 Good Health and Well-Being");
+          var el2 = dom.createTextNode("Goal 3 Good Health and Well-Being");
           dom.appendChild(el1, el2);
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Thailand (Target 3.3)");
+          var el1 = dom.createTextNode(" - Global (Target 3.3)");
           dom.appendChild(el0, el1);
           return el0;
         },
@@ -9948,7 +9948,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             },
             "end": {
               "line": 14,
-              "column": 161
+              "column": 167
             }
           },
           "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
@@ -9960,10 +9960,10 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
           var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 04 Quality Education");
+          var el2 = dom.createTextNode("Goal 3 Good Health and Well-Being");
           dom.appendChild(el1, el2);
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Global (Target 4.c)");
+          var el1 = dom.createTextNode(" - Thailand (Target 3.3)");
           dom.appendChild(el0, el1);
           return el0;
         },
@@ -9988,7 +9988,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             },
             "end": {
               "line": 15,
-              "column": 159
+              "column": 160
             }
           },
           "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
@@ -10000,10 +10000,10 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
           var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 05 Gender Equality");
+          var el2 = dom.createTextNode("Goal 4 Quality Education");
           dom.appendChild(el1, el2);
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Global (Target 5.5)");
+          var el1 = dom.createTextNode(" - Global (Target 4.c)");
           dom.appendChild(el0, el1);
           return el0;
         },
@@ -10028,7 +10028,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             },
             "end": {
               "line": 16,
-              "column": 170
+              "column": 158
             }
           },
           "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
@@ -10040,10 +10040,10 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
           var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 06 Clean Water and Sanitation");
+          var el2 = dom.createTextNode("Goal 5 Gender Equality");
           dom.appendChild(el1, el2);
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Global (Target 6.1)");
+          var el1 = dom.createTextNode(" - Global (Target 5.5)");
           dom.appendChild(el0, el1);
           return el0;
         },
@@ -10068,7 +10068,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             },
             "end": {
               "line": 17,
-              "column": 171
+              "column": 169
             }
           },
           "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
@@ -10080,10 +10080,10 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
           var el1 = dom.createElement("b");
-          var el2 = dom.createTextNode("Goal 07 Affordable and Clean Energy");
+          var el2 = dom.createTextNode("Goal 6 Clean Water and Sanitation");
           dom.appendChild(el1, el2);
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode(" - Global (Target 7.1)");
+          var el1 = dom.createTextNode(" - Global (Target 6.1)");
           dom.appendChild(el0, el1);
           return el0;
         },
@@ -10108,6 +10108,126 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             },
             "end": {
               "line": 18,
+              "column": 170
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 7 Affordable and Clean Energy");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Global (Target 7.1)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child9 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 19,
+              "column": 12
+            },
+            "end": {
+              "line": 19,
+              "column": 182
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 9 Industry, Innovation and Infrastructure");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Global (Target 9.c)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child10 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 20,
+              "column": 12
+            },
+            "end": {
+              "line": 20,
+              "column": 167
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 10 Reduced Inequalities");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Global (Target 10.1)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child11 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 21,
+              "column": 12
+            },
+            "end": {
+              "line": 21,
               "column": 185
             }
           },
@@ -10135,7 +10255,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child9 = (function () {
+    var child12 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10143,11 +10263,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 19,
+              "line": 22,
               "column": 12
             },
             "end": {
-              "line": 19,
+              "line": 22,
               "column": 183
             }
           },
@@ -10175,7 +10295,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child10 = (function () {
+    var child13 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10183,11 +10303,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 20,
+              "line": 23,
               "column": 12
             },
             "end": {
-              "line": 20,
+              "line": 23,
               "column": 185
             }
           },
@@ -10215,7 +10335,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child11 = (function () {
+    var child14 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10223,11 +10343,51 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 21,
+              "line": 24,
               "column": 12
             },
             "end": {
-              "line": 21,
+              "line": 24,
+              "column": 163
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 14 Life Below Water");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Global (Target 14.1)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child15 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 25,
+              "column": 12
+            },
+            "end": {
+              "line": 25,
               "column": 159
             }
           },
@@ -10255,7 +10415,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child12 = (function () {
+    var child16 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10263,11 +10423,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 22,
+              "line": 26,
               "column": 12
             },
             "end": {
-              "line": 22,
+              "line": 26,
               "column": 186
             }
           },
@@ -10295,7 +10455,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child13 = (function () {
+    var child17 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10303,11 +10463,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 23,
+              "line": 27,
               "column": 12
             },
             "end": {
-              "line": 23,
+              "line": 27,
               "column": 173
             }
           },
@@ -10335,7 +10495,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child14 = (function () {
+    var child18 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10343,11 +10503,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 26,
+              "line": 30,
               "column": 12
             },
             "end": {
-              "line": 26,
+              "line": 30,
               "column": 143
             }
           },
@@ -10388,7 +10548,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 40,
+            "line": 44,
             "column": 5
           }
         },
@@ -10444,6 +10604,30 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("ul");
         dom.setAttribute(el4, "class", "dropdown-menu");
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("li");
@@ -10630,7 +10814,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         var element7 = dom.childAt(element5, [3, 0]);
         var element8 = dom.childAt(element5, [5, 0]);
         var element9 = dom.childAt(element5, [7, 0]);
-        var morphs = new Array(26);
+        var morphs = new Array(30);
         morphs[0] = dom.createMorphAt(dom.childAt(element0, [1, 0]), 0, 0);
         morphs[1] = dom.createMorphAt(dom.childAt(element2, [1]), 1, 1);
         morphs[2] = dom.createMorphAt(dom.childAt(element3, [1]), 0, 0);
@@ -10647,21 +10831,25 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         morphs[13] = dom.createMorphAt(dom.childAt(element3, [23]), 0, 0);
         morphs[14] = dom.createMorphAt(dom.childAt(element3, [25]), 0, 0);
         morphs[15] = dom.createMorphAt(dom.childAt(element3, [27]), 0, 0);
-        morphs[16] = dom.createMorphAt(dom.childAt(element3, [31]), 0, 0);
-        morphs[17] = dom.createMorphAt(dom.childAt(element4, [1]), 1, 1);
-        morphs[18] = dom.createElementMorph(element6);
-        morphs[19] = dom.createMorphAt(element6, 0, 0);
-        morphs[20] = dom.createElementMorph(element7);
-        morphs[21] = dom.createMorphAt(element7, 0, 0);
-        morphs[22] = dom.createElementMorph(element8);
-        morphs[23] = dom.createMorphAt(element8, 0, 0);
-        morphs[24] = dom.createElementMorph(element9);
-        morphs[25] = dom.createMorphAt(element9, 0, 0);
+        morphs[16] = dom.createMorphAt(dom.childAt(element3, [29]), 0, 0);
+        morphs[17] = dom.createMorphAt(dom.childAt(element3, [31]), 0, 0);
+        morphs[18] = dom.createMorphAt(dom.childAt(element3, [33]), 0, 0);
+        morphs[19] = dom.createMorphAt(dom.childAt(element3, [35]), 0, 0);
+        morphs[20] = dom.createMorphAt(dom.childAt(element3, [39]), 0, 0);
+        morphs[21] = dom.createMorphAt(dom.childAt(element4, [1]), 1, 1);
+        morphs[22] = dom.createElementMorph(element6);
+        morphs[23] = dom.createMorphAt(element6, 0, 0);
+        morphs[24] = dom.createElementMorph(element7);
+        morphs[25] = dom.createMorphAt(element7, 0, 0);
+        morphs[26] = dom.createElementMorph(element8);
+        morphs[27] = dom.createMorphAt(element8, 0, 0);
+        morphs[28] = dom.createElementMorph(element9);
+        morphs[29] = dom.createMorphAt(element9, 0, 0);
         return morphs;
       },
-      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["inline", "t", ["application.header.samples"], [], ["loc", [null, [8, 6], [8, 42]]]], ["block", "link-to", ["sdg", "1", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "1.1"], ["loc", [null, [10, 33], [10, 104]]]]], [], 0, null, ["loc", [null, [10, 12], [10, 166]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [11, 33], [11, 100]]]]], [], 1, null, ["loc", [null, [11, 12], [11, 162]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [12, 33], [12, 104]]]]], [], 2, null, ["loc", [null, [12, 12], [12, 182]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [13, 33], [13, 100]]]]], [], 3, null, ["loc", [null, [13, 12], [13, 180]]]], ["block", "link-to", ["sdg", "4", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "4.c"], ["loc", [null, [14, 33], [14, 104]]]]], [], 4, null, ["loc", [null, [14, 12], [14, 173]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [15, 33], [15, 104]]]]], [], 5, null, ["loc", [null, [15, 12], [15, 171]]]], ["block", "link-to", ["sdg", "6", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "6.1"], ["loc", [null, [16, 33], [16, 104]]]]], [], 6, null, ["loc", [null, [16, 12], [16, 182]]]], ["block", "link-to", ["sdg", "7", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "7.1"], ["loc", [null, [17, 33], [17, 104]]]]], [], 7, null, ["loc", [null, [17, 12], [17, 183]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [18, 34], [18, 110]]]]], [], 8, null, ["loc", [null, [18, 12], [18, 197]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [19, 34], [19, 108]]]]], [], 9, null, ["loc", [null, [19, 12], [19, 195]]]], ["block", "link-to", ["sdg", "12", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "12.2"], ["loc", [null, [20, 34], [20, 106]]]]], [], 10, null, ["loc", [null, [20, 12], [20, 197]]]], ["block", "link-to", ["sdg", "15", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "15.1"], ["loc", [null, [21, 34], [21, 106]]]]], [], 11, null, ["loc", [null, [21, 12], [21, 171]]]], ["block", "link-to", ["sdg", "16", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "16.1"], ["loc", [null, [22, 34], [22, 106]]]]], [], 12, null, ["loc", [null, [22, 12], [22, 198]]]], ["block", "link-to", ["sdg", "17", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "17.2"], ["loc", [null, [23, 34], [23, 106]]]]], [], 13, null, ["loc", [null, [23, 12], [23, 185]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [26, 38], [26, 64]]]]], [], 14, null, ["loc", [null, [26, 12], [26, 155]]]], ["content", "session.locale_label", ["loc", [null, [31, 6], [31, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [33, 16], [33, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [33, 49], [33, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [34, 16], [34, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [34, 49], [34, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [35, 16], [35, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [35, 49], [35, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [36, 16], [36, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [36, 49], [36, 81]]]]],
+      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["inline", "t", ["application.header.samples"], [], ["loc", [null, [8, 6], [8, 42]]]], ["block", "link-to", ["sdg", "1", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "1.1"], ["loc", [null, [10, 33], [10, 104]]]]], [], 0, null, ["loc", [null, [10, 12], [10, 165]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "2.1"], ["loc", [null, [11, 33], [11, 104]]]]], [], 1, null, ["loc", [null, [11, 12], [11, 166]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [12, 33], [12, 100]]]]], [], 2, null, ["loc", [null, [12, 12], [12, 161]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [13, 33], [13, 104]]]]], [], 3, null, ["loc", [null, [13, 12], [13, 181]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [14, 33], [14, 100]]]]], [], 4, null, ["loc", [null, [14, 12], [14, 179]]]], ["block", "link-to", ["sdg", "4", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "4.c"], ["loc", [null, [15, 33], [15, 104]]]]], [], 5, null, ["loc", [null, [15, 12], [15, 172]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [16, 33], [16, 104]]]]], [], 6, null, ["loc", [null, [16, 12], [16, 170]]]], ["block", "link-to", ["sdg", "6", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "6.1"], ["loc", [null, [17, 33], [17, 104]]]]], [], 7, null, ["loc", [null, [17, 12], [17, 181]]]], ["block", "link-to", ["sdg", "7", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "7.1"], ["loc", [null, [18, 33], [18, 104]]]]], [], 8, null, ["loc", [null, [18, 12], [18, 182]]]], ["block", "link-to", ["sdg", "9", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "9.c"], ["loc", [null, [19, 33], [19, 104]]]]], [], 9, null, ["loc", [null, [19, 12], [19, 194]]]], ["block", "link-to", ["sdg", "10", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "10.1"], ["loc", [null, [20, 34], [20, 106]]]]], [], 10, null, ["loc", [null, [20, 12], [20, 179]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [21, 34], [21, 110]]]]], [], 11, null, ["loc", [null, [21, 12], [21, 197]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [22, 34], [22, 108]]]]], [], 12, null, ["loc", [null, [22, 12], [22, 195]]]], ["block", "link-to", ["sdg", "12", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "12.2"], ["loc", [null, [23, 34], [23, 106]]]]], [], 13, null, ["loc", [null, [23, 12], [23, 197]]]], ["block", "link-to", ["sdg", "14", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "14.1"], ["loc", [null, [24, 34], [24, 106]]]]], [], 14, null, ["loc", [null, [24, 12], [24, 175]]]], ["block", "link-to", ["sdg", "15", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "15.1"], ["loc", [null, [25, 34], [25, 106]]]]], [], 15, null, ["loc", [null, [25, 12], [25, 171]]]], ["block", "link-to", ["sdg", "16", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "16.1"], ["loc", [null, [26, 34], [26, 106]]]]], [], 16, null, ["loc", [null, [26, 12], [26, 198]]]], ["block", "link-to", ["sdg", "17", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "17.2"], ["loc", [null, [27, 34], [27, 106]]]]], [], 17, null, ["loc", [null, [27, 12], [27, 185]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [30, 38], [30, 64]]]]], [], 18, null, ["loc", [null, [30, 12], [30, 155]]]], ["content", "session.locale_label", ["loc", [null, [35, 6], [35, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [37, 16], [37, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [37, 49], [37, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [38, 16], [38, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [38, 49], [38, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [39, 16], [39, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [39, 49], [39, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [40, 16], [40, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [40, 49], [40, 81]]]]],
       locals: [],
-      templates: [child0, child1, child2, child3, child4, child5, child6, child7, child8, child9, child10, child11, child12, child13, child14]
+      templates: [child0, child1, child2, child3, child4, child5, child6, child7, child8, child9, child10, child11, child12, child13, child14, child15, child16, child17, child18]
     };
   })());
 });
@@ -13549,7 +13737,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+75fcbd21"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+202dff5e"});
 }
 
 /* jshint ignore:end */
