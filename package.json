@@ -23,6 +23,7 @@
     "broccoli-asset-rev": "^2.2.0",
     "broccoli-funnel": "^1.0.1",
     "calcite-bootstrap": "esri/calcite-bootstrap#v0.2.6",
+    "d3-format": "^0.6.0",
     "ember-browserify": "1.1.9",
     "ember-cli": "^1.13.15",
     "ember-cli-amd": "0.4.6",

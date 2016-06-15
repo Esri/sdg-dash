@@ -9,6 +9,7 @@
 
 import Ember from 'ember';
 import ajax from 'ic-ajax';
+import d3Format from 'npm:d3-format';
 
 export default Ember.Component.extend({
 
@@ -70,9 +71,16 @@ export default Ember.Component.extend({
       }
 
       if (settings.display_format) {
-        if (!Ember.isNone(settings.display_format.decimal_places)) {
-          stat_value = this._formatAsNumber( stat_value.toFixed(settings.display_format.decimal_places) );
-        }
+        // if (!Ember.isNone(settings.display_format.decimal_places)) {
+          if (settings.display_format.d3format) {
+            stat_value = d3Format.format(settings.display_format.d3format)(stat_value);
+            if (stat_value.charAt(stat_value.length-1) === 'G') {
+              stat_value = stat_value.substr(0, stat_value.length-1) + 'B'
+            }
+          } else {
+            stat_value = this._formatAsNumber( stat_value.toFixed(settings.display_format.decimal_places) );
+          }
+        // }
 
         if (settings.display_format.suffix) {
           this.set('stat_suffix', Ember.String.htmlSafe(settings.display_format.suffix));  
