@@ -238,7 +238,7 @@ efineday('sdg-dash/tests/components/summary-stat-card/component.jshint', ['expor
   QUnit.module('JSHint - components/summary-stat-card');
   QUnit.test('components/summary-stat-card/component.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'components/summary-stat-card/component.js should pass jshint.');
+    assert.ok(false, 'components/summary-stat-card/component.js should pass jshint.\ncomponents/summary-stat-card/component.js: line 78, col 75, Missing semicolon.\n\n1 error');
   });
 });
 efineday('sdg-dash/tests/components/target-select-box/component.jshint', ['exports'], function (exports) {

@@ -5773,7 +5773,7 @@ efineday("sdg-dash/components/storymap-card/template", ["exports"], function (ex
     };
   })());
 });
-efineday('sdg-dash/components/summary-stat-card/component', ['exports', 'ember', 'ic-ajax'], function (exports, _ember, _icAjax) {
+efineday('sdg-dash/components/summary-stat-card/component', ['exports', 'ember', 'ic-ajax', 'npm:d3-format'], function (exports, _ember, _icAjax, _npmD3Format) {
   exports['default'] = _ember['default'].Component.extend({
 
     didInsertElement: function didInsertElement() {
@@ -5832,9 +5832,16 @@ efineday('sdg-dash/components/summary-stat-card/component', ['exports', 'ember',
         }
 
         if (settings.display_format) {
-          if (!_ember['default'].isNone(settings.display_format.decimal_places)) {
+          // if (!Ember.isNone(settings.display_format.decimal_places)) {
+          if (settings.display_format.d3format) {
+            stat_value = _npmD3Format['default'].format(settings.display_format.d3format)(stat_value);
+            if (stat_value.charAt(stat_value.length - 1) === 'G') {
+              stat_value = stat_value.substr(0, stat_value.length - 1) + 'B';
+            }
+          } else {
             stat_value = this._formatAsNumber(stat_value.toFixed(settings.display_format.decimal_places));
           }
+          // }
 
           if (settings.display_format.suffix) {
             this.set('stat_suffix', _ember['default'].String.htmlSafe(settings.display_format.suffix));
@@ -10148,6 +10155,46 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             },
             "end": {
               "line": 19,
+              "column": 174
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 8 Decent Jobs and Economic Growth");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Global (Target 8.8)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child10 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 20,
+              "column": 12
+            },
+            "end": {
+              "line": 20,
               "column": 182
             }
           },
@@ -10175,7 +10222,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child10 = (function () {
+    var child11 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10183,11 +10230,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 20,
+              "line": 21,
               "column": 12
             },
             "end": {
-              "line": 20,
+              "line": 21,
               "column": 167
             }
           },
@@ -10215,7 +10262,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child11 = (function () {
+    var child12 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10223,11 +10270,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 21,
+              "line": 22,
               "column": 12
             },
             "end": {
-              "line": 21,
+              "line": 22,
               "column": 185
             }
           },
@@ -10255,7 +10302,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child12 = (function () {
+    var child13 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10263,11 +10310,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 22,
+              "line": 23,
               "column": 12
             },
             "end": {
-              "line": 22,
+              "line": 23,
               "column": 183
             }
           },
@@ -10295,7 +10342,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child13 = (function () {
+    var child14 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10303,11 +10350,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 23,
+              "line": 24,
               "column": 12
             },
             "end": {
-              "line": 23,
+              "line": 24,
               "column": 185
             }
           },
@@ -10335,7 +10382,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child14 = (function () {
+    var child15 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10343,11 +10390,51 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 24,
+              "line": 25,
               "column": 12
             },
             "end": {
-              "line": 24,
+              "line": 25,
+              "column": 161
+            }
+          },
+          "moduleName": "sdg-dash/templates/-header-nav-right.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createElement("b");
+          var el2 = dom.createTextNode("Goal 13 Climate Action");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode(" - Global (Target 13.1)");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes() {
+          return [];
+        },
+        statements: [],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child16 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.3.0",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 26,
+              "column": 12
+            },
+            "end": {
+              "line": 26,
               "column": 163
             }
           },
@@ -10375,7 +10462,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child15 = (function () {
+    var child17 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10383,11 +10470,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 25,
+              "line": 27,
               "column": 12
             },
             "end": {
-              "line": 25,
+              "line": 27,
               "column": 159
             }
           },
@@ -10415,7 +10502,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child16 = (function () {
+    var child18 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10423,11 +10510,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 26,
+              "line": 28,
               "column": 12
             },
             "end": {
-              "line": 26,
+              "line": 28,
               "column": 186
             }
           },
@@ -10455,7 +10542,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child17 = (function () {
+    var child19 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10463,11 +10550,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 27,
+              "line": 29,
               "column": 12
             },
             "end": {
-              "line": 27,
+              "line": 29,
               "column": 173
             }
           },
@@ -10495,7 +10582,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         templates: []
       };
     })();
-    var child18 = (function () {
+    var child20 = (function () {
       return {
         meta: {
           "fragmentReason": false,
@@ -10503,11 +10590,11 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 30,
+              "line": 32,
               "column": 12
             },
             "end": {
-              "line": 30,
+              "line": 32,
               "column": 143
             }
           },
@@ -10548,7 +10635,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 44,
+            "line": 46,
             "column": 5
           }
         },
@@ -10604,6 +10691,18 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("ul");
         dom.setAttribute(el4, "class", "dropdown-menu");
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createComment("");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("li");
@@ -10814,7 +10913,7 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         var element7 = dom.childAt(element5, [3, 0]);
         var element8 = dom.childAt(element5, [5, 0]);
         var element9 = dom.childAt(element5, [7, 0]);
-        var morphs = new Array(30);
+        var morphs = new Array(32);
         morphs[0] = dom.createMorphAt(dom.childAt(element0, [1, 0]), 0, 0);
         morphs[1] = dom.createMorphAt(dom.childAt(element2, [1]), 1, 1);
         morphs[2] = dom.createMorphAt(dom.childAt(element3, [1]), 0, 0);
@@ -10835,21 +10934,23 @@ efineday("sdg-dash/templates/-header-nav-right", ["exports"], function (exports)
         morphs[17] = dom.createMorphAt(dom.childAt(element3, [31]), 0, 0);
         morphs[18] = dom.createMorphAt(dom.childAt(element3, [33]), 0, 0);
         morphs[19] = dom.createMorphAt(dom.childAt(element3, [35]), 0, 0);
-        morphs[20] = dom.createMorphAt(dom.childAt(element3, [39]), 0, 0);
-        morphs[21] = dom.createMorphAt(dom.childAt(element4, [1]), 1, 1);
-        morphs[22] = dom.createElementMorph(element6);
-        morphs[23] = dom.createMorphAt(element6, 0, 0);
-        morphs[24] = dom.createElementMorph(element7);
-        morphs[25] = dom.createMorphAt(element7, 0, 0);
-        morphs[26] = dom.createElementMorph(element8);
-        morphs[27] = dom.createMorphAt(element8, 0, 0);
-        morphs[28] = dom.createElementMorph(element9);
-        morphs[29] = dom.createMorphAt(element9, 0, 0);
+        morphs[20] = dom.createMorphAt(dom.childAt(element3, [37]), 0, 0);
+        morphs[21] = dom.createMorphAt(dom.childAt(element3, [39]), 0, 0);
+        morphs[22] = dom.createMorphAt(dom.childAt(element3, [43]), 0, 0);
+        morphs[23] = dom.createMorphAt(dom.childAt(element4, [1]), 1, 1);
+        morphs[24] = dom.createElementMorph(element6);
+        morphs[25] = dom.createMorphAt(element6, 0, 0);
+        morphs[26] = dom.createElementMorph(element7);
+        morphs[27] = dom.createMorphAt(element7, 0, 0);
+        morphs[28] = dom.createElementMorph(element8);
+        morphs[29] = dom.createMorphAt(element8, 0, 0);
+        morphs[30] = dom.createElementMorph(element9);
+        morphs[31] = dom.createMorphAt(element9, 0, 0);
         return morphs;
       },
-      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["inline", "t", ["application.header.samples"], [], ["loc", [null, [8, 6], [8, 42]]]], ["block", "link-to", ["sdg", "1", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "1.1"], ["loc", [null, [10, 33], [10, 104]]]]], [], 0, null, ["loc", [null, [10, 12], [10, 165]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "2.1"], ["loc", [null, [11, 33], [11, 104]]]]], [], 1, null, ["loc", [null, [11, 12], [11, 166]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [12, 33], [12, 100]]]]], [], 2, null, ["loc", [null, [12, 12], [12, 161]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [13, 33], [13, 104]]]]], [], 3, null, ["loc", [null, [13, 12], [13, 181]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [14, 33], [14, 100]]]]], [], 4, null, ["loc", [null, [14, 12], [14, 179]]]], ["block", "link-to", ["sdg", "4", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "4.c"], ["loc", [null, [15, 33], [15, 104]]]]], [], 5, null, ["loc", [null, [15, 12], [15, 172]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [16, 33], [16, 104]]]]], [], 6, null, ["loc", [null, [16, 12], [16, 170]]]], ["block", "link-to", ["sdg", "6", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "6.1"], ["loc", [null, [17, 33], [17, 104]]]]], [], 7, null, ["loc", [null, [17, 12], [17, 181]]]], ["block", "link-to", ["sdg", "7", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "7.1"], ["loc", [null, [18, 33], [18, 104]]]]], [], 8, null, ["loc", [null, [18, 12], [18, 182]]]], ["block", "link-to", ["sdg", "9", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "9.c"], ["loc", [null, [19, 33], [19, 104]]]]], [], 9, null, ["loc", [null, [19, 12], [19, 194]]]], ["block", "link-to", ["sdg", "10", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "10.1"], ["loc", [null, [20, 34], [20, 106]]]]], [], 10, null, ["loc", [null, [20, 12], [20, 179]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [21, 34], [21, 110]]]]], [], 11, null, ["loc", [null, [21, 12], [21, 197]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [22, 34], [22, 108]]]]], [], 12, null, ["loc", [null, [22, 12], [22, 195]]]], ["block", "link-to", ["sdg", "12", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "12.2"], ["loc", [null, [23, 34], [23, 106]]]]], [], 13, null, ["loc", [null, [23, 12], [23, 197]]]], ["block", "link-to", ["sdg", "14", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "14.1"], ["loc", [null, [24, 34], [24, 106]]]]], [], 14, null, ["loc", [null, [24, 12], [24, 175]]]], ["block", "link-to", ["sdg", "15", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "15.1"], ["loc", [null, [25, 34], [25, 106]]]]], [], 15, null, ["loc", [null, [25, 12], [25, 171]]]], ["block", "link-to", ["sdg", "16", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "16.1"], ["loc", [null, [26, 34], [26, 106]]]]], [], 16, null, ["loc", [null, [26, 12], [26, 198]]]], ["block", "link-to", ["sdg", "17", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "17.2"], ["loc", [null, [27, 34], [27, 106]]]]], [], 17, null, ["loc", [null, [27, 12], [27, 185]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [30, 38], [30, 64]]]]], [], 18, null, ["loc", [null, [30, 12], [30, 155]]]], ["content", "session.locale_label", ["loc", [null, [35, 6], [35, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [37, 16], [37, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [37, 49], [37, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [38, 16], [38, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [38, 49], [38, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [39, 16], [39, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [39, 49], [39, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [40, 16], [40, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [40, 49], [40, 81]]]]],
+      statements: [["inline", "t", ["application.header.about"], [], ["loc", [null, [3, 64], [3, 98]]]], ["inline", "t", ["application.header.samples"], [], ["loc", [null, [8, 6], [8, 42]]]], ["block", "link-to", ["sdg", "1", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "1.1"], ["loc", [null, [10, 33], [10, 104]]]]], [], 0, null, ["loc", [null, [10, 12], [10, 165]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "2.1"], ["loc", [null, [11, 33], [11, 104]]]]], [], 1, null, ["loc", [null, [11, 12], [11, 166]]]], ["block", "link-to", ["sdg", "2", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "KE", "target_id", "2.1"], ["loc", [null, [12, 33], [12, 100]]]]], [], 2, null, ["loc", [null, [12, 12], [12, 161]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "3.3"], ["loc", [null, [13, 33], [13, 104]]]]], [], 3, null, ["loc", [null, [13, 12], [13, 181]]]], ["block", "link-to", ["sdg", "3", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "TH", "target_id", "3.3"], ["loc", [null, [14, 33], [14, 100]]]]], [], 4, null, ["loc", [null, [14, 12], [14, 179]]]], ["block", "link-to", ["sdg", "4", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "4.c"], ["loc", [null, [15, 33], [15, 104]]]]], [], 5, null, ["loc", [null, [15, 12], [15, 172]]]], ["block", "link-to", ["sdg", "5", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "5.5"], ["loc", [null, [16, 33], [16, 104]]]]], [], 6, null, ["loc", [null, [16, 12], [16, 170]]]], ["block", "link-to", ["sdg", "6", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "6.1"], ["loc", [null, [17, 33], [17, 104]]]]], [], 7, null, ["loc", [null, [17, 12], [17, 181]]]], ["block", "link-to", ["sdg", "7", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "7.1"], ["loc", [null, [18, 33], [18, 104]]]]], [], 8, null, ["loc", [null, [18, 12], [18, 182]]]], ["block", "link-to", ["sdg", "8", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "8.8"], ["loc", [null, [19, 33], [19, 104]]]]], [], 9, null, ["loc", [null, [19, 12], [19, 186]]]], ["block", "link-to", ["sdg", "9", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "9.c"], ["loc", [null, [20, 33], [20, 104]]]]], [], 10, null, ["loc", [null, [20, 12], [20, 194]]]], ["block", "link-to", ["sdg", "10", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "10.1"], ["loc", [null, [21, 34], [21, 106]]]]], [], 11, null, ["loc", [null, [21, 12], [21, 179]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "GLOBAL_CITIES", "target_id", "11.1"], ["loc", [null, [22, 34], [22, 110]]]]], [], 12, null, ["loc", [null, [22, 12], [22, 197]]]], ["block", "link-to", ["sdg", "11", ["subexpr", "query-params", [], ["geo_group", "cities", "geo_value", "city_BOGOTA", "target_id", "11.1"], ["loc", [null, [23, 34], [23, 108]]]]], [], 13, null, ["loc", [null, [23, 12], [23, 195]]]], ["block", "link-to", ["sdg", "12", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "12.2"], ["loc", [null, [24, 34], [24, 106]]]]], [], 14, null, ["loc", [null, [24, 12], [24, 197]]]], ["block", "link-to", ["sdg", "13", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "13.1"], ["loc", [null, [25, 34], [25, 106]]]]], [], 15, null, ["loc", [null, [25, 12], [25, 173]]]], ["block", "link-to", ["sdg", "14", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "14.1"], ["loc", [null, [26, 34], [26, 106]]]]], [], 16, null, ["loc", [null, [26, 12], [26, 175]]]], ["block", "link-to", ["sdg", "15", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "15.1"], ["loc", [null, [27, 34], [27, 106]]]]], [], 17, null, ["loc", [null, [27, 12], [27, 171]]]], ["block", "link-to", ["sdg", "16", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "16.1"], ["loc", [null, [28, 34], [28, 106]]]]], [], 18, null, ["loc", [null, [28, 12], [28, 198]]]], ["block", "link-to", ["sdg", "17", ["subexpr", "query-params", [], ["geo_group", "countries", "geo_value", "GLOBAL", "target_id", "17.2"], ["loc", [null, [29, 34], [29, 106]]]]], [], 19, null, ["loc", [null, [29, 12], [29, 185]]]], ["block", "link-to", ["video-player", ["subexpr", "query-params", [], ["src", "aehin"], ["loc", [null, [32, 38], [32, 64]]]]], [], 20, null, ["loc", [null, [32, 12], [32, 155]]]], ["content", "session.locale_label", ["loc", [null, [37, 6], [37, 30]]]], ["element", "action", ["changeLocale", "en"], [], ["loc", [null, [39, 16], [39, 47]]]], ["inline", "t", ["application.languages.en"], [], ["loc", [null, [39, 49], [39, 81]]]], ["element", "action", ["changeLocale", "es"], [], ["loc", [null, [40, 16], [40, 47]]]], ["inline", "t", ["application.languages.es"], [], ["loc", [null, [40, 49], [40, 81]]]], ["element", "action", ["changeLocale", "fr"], [], ["loc", [null, [41, 16], [41, 47]]]], ["inline", "t", ["application.languages.fr"], [], ["loc", [null, [41, 49], [41, 81]]]], ["element", "action", ["changeLocale", "ru"], [], ["loc", [null, [42, 16], [42, 47]]]], ["inline", "t", ["application.languages.ru"], [], ["loc", [null, [42, 49], [42, 81]]]]],
       locals: [],
-      templates: [child0, child1, child2, child3, child4, child5, child6, child7, child8, child9, child10, child11, child12, child13, child14, child15, child16, child17, child18]
+      templates: [child0, child1, child2, child3, child4, child5, child6, child7, child8, child9, child10, child11, child12, child13, child14, child15, child16, child17, child18, child19, child20]
     };
   })());
 });
@@ -13737,7 +13838,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+202dff5e"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+6eafe593"});
 }
 
 /* jshint ignore:end */
