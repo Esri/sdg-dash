@@ -601,7 +601,7 @@ efineday('sdg-dash/components/arcgis-map-landing/component', ['exports', 'ember'
     didInsertElement: function didInsertElement() {
       var _this = this;
 
-      var webmapId = '7aae45578d3143ffa92c2d89a1804f89';
+      var webmapId = 'cae2a169acfc4263ad66bebc2a1b9c7e';
       var options = {
         mapOptions: {
           slider: true,
@@ -611,7 +611,7 @@ efineday('sdg-dash/components/arcgis-map-landing/component', ['exports', 'ember'
         }
       };
 
-      console.log('rendering Global SDG Index Map ..');
+      console.log('rendering landing page Map ..');
 
       esri.config.defaults.io.corsEnabledServers.push('http://arcgis-sdgs-385255865.us-east-1.elb.amazonaws.com/');
       _esriArcgisUtils['default'].createMap(webmapId, this.element, options).then(function (response) {
@@ -9507,8 +9507,8 @@ efineday("sdg-dash/sdg-overview/template", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 4,
-            "column": 6
+            "line": 5,
+            "column": 0
           }
         },
         "moduleName": "sdg-dash/sdg-overview/template.hbs"
@@ -9531,6 +9531,8 @@ efineday("sdg-dash/sdg-overview/template", ["exports"], function (exports) {
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
         return el0;
       },
@@ -13880,7 +13882,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+e2f9b2d9"});
+  equireray("sdg-dash/app")["default"].create({"name":"sdg-dash","version":"0.0.0+21b9cd77"});
 }
 
 /* jshint ignore:end */
