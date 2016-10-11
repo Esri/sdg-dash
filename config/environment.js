@@ -110,6 +110,14 @@ module.exports = function(environment) {
     ENV.sdgDashboardsApi = 'https://sdg-dashboard-api.herokuapp.com/';
   }
 
+  if (environment === 'production-esri-com') {
+    console.log('generating build for sdg.esri.com ..');
+    ENV.baseURL = '/dashboard';
+    ENV.locationType = 'hash';
+    ENV.sdgApi = 'https://sdg-api.herokuapp.com/';
+    ENV.sdgDashboardsApi = 'https://sdg-dashboard-api.herokuapp.com/';
+  }
+
   if (environment === 'production') {
 
   }
